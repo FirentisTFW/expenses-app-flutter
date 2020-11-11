@@ -33,4 +33,10 @@ class StorageApi extends Api {
     // TODO: implement getExpendituresInTimeSpan
     throw UnimplementedError();
   }
+
+  @override
+  Future<List<Expenditure>> getLastExpenditures({int howMany}) {
+    // TODO: implement getLastExpenditures
+    throw UnimplementedError();
+  }
 }

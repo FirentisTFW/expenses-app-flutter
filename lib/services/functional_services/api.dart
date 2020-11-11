@@ -11,6 +11,8 @@ abstract class Api {
 
   Future<void> addExpenditure(Expenditure expenditure);
 
+  Future<List<Expenditure>> getLastExpenditures({int howMany});
+
   // END - EXPENDITURES
 
   // CAEGORIES

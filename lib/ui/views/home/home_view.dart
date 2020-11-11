@@ -11,7 +11,23 @@ class HomeView extends StatelessWidget {
     return ViewModelBuilder<HomeViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
         body: Center(
-          child: Text(model.title),
+          child: model.getViewForIndex(),
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: Colors.grey[800],
+          currentIndex: model.currentIndex,
+          onTap: model.setIndex,
+          items: [
+            BottomNavigationBarItem(
+              title: Text('Home'),
+              icon: Icon(Icons.home),
+            ),
+            BottomNavigationBarItem(
+              title: Text('Expenses'),
+              icon: Icon(Icons.list),
+            ),
+          ],
         ),
       ),
       viewModelBuilder: () => HomeViewModel(),
