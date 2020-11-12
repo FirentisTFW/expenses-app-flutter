@@ -1,4 +1,5 @@
 import 'package:Expenses_app/app/locator.dart';
+import 'package:Expenses_app/services/functional_services/icons_service.dart';
 import 'package:Expenses_app/ui/views/list_of_expenses/list_of_expenses_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
@@ -46,7 +47,7 @@ class ListOfExpenses extends StatelessWidget {
                   ExpenditureItem(
                     title: 'Rent',
                     value: 1600.00,
-                    categoryId: 3,
+                    categoryId: 0,
                   ),
                   ExpenditureItem(
                     title: 'Bills',
@@ -56,12 +57,12 @@ class ListOfExpenses extends StatelessWidget {
                   ExpenditureItem(
                     title: 'Clothes',
                     value: 256.57,
-                    categoryId: 2,
+                    categoryId: 6,
                   ),
                   ExpenditureItem(
                     title: 'Groceries',
                     value: 142.22,
-                    categoryId: 6,
+                    categoryId: 13,
                   ),
                 ],
               ),
@@ -107,25 +108,32 @@ class ExpenditureItem extends StatelessWidget {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Container(
-                width: 40,
-                child: CircleAvatar(
-                  maxRadius: 20,
-                  backgroundColor: Colors.yellow[400],
-                  child: Icon(Icons.home),
+              Expanded(
+                flex: 1,
+                child: Container(
+                  child: CircleAvatar(
+                    maxRadius: 20,
+                    backgroundColor: Colors.yellow[400],
+                    child: IconsService.getIconForCategory(categoryId),
+                  ),
                 ),
               ),
-              Container(
-                width: 100,
+              Expanded(
+                flex: 2,
+                child: Container(
+                  padding: const EdgeInsets.only(right: 16),
+                  child: Text(
+                    title,
+                    style: TextStyle(fontSize: 18),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
+              Expanded(
                 child: Text(
-                  title,
-                  style: TextStyle(fontSize: 18),
-                  textAlign: TextAlign.center,
+                  value.toStringAsFixed(2),
+                  style: TextStyle(fontSize: 20, color: Colors.green[600]),
                 ),
-              ),
-              Text(
-                value.toStringAsFixed(2),
-                style: TextStyle(fontSize: 20, color: Colors.green[600]),
               ),
             ],
           ),
