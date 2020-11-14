@@ -11,7 +11,7 @@ class IconsService {
       case 2: // bills
         return Icon(FontAwesome.question);
       case 3: // books
-        return Icon(MaterialCommunityIcons.book);
+        return Icon(FontAwesome.book);
       case 4: // car
         return Icon(MaterialCommunityIcons.car);
       case 5: // cigarettes
