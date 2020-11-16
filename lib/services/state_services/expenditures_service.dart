@@ -10,6 +10,11 @@ class ExpendituresService {
 
   Future<List<Expenditure>> getLastExpenditures(int howMany) async {
     _expenditures = await _api.getLastExpenditures(howMany: 10);
-    return _expenditures;
+    return _expenditures.reversed.toList();
+  }
+
+  Future<List<Expenditure>> getAllExpenditures() async {
+    _expenditures = await _api.getAllExpenditures();
+    return _expenditures.reversed.toList();
   }
 }

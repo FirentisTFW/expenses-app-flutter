@@ -1,4 +1,4 @@
-import 'package:Expenses_app/ui/views/list_of_expenses/list_of_expenses_view.dart';
+import 'package:Expenses_app/ui/views/last_expenditures/last_expenditures_view.dart';
 import 'package:Expenses_app/ui/views/this_month_chart/this_month_chart_view.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
@@ -12,7 +12,7 @@ class HomeViewModel extends IndexTrackingViewModel {
       case 0:
         return ThisMonthChartView();
       case 1:
-        return ListOfExpensesView();
+        return LastExpendituresView();
       default:
         return ThisMonthChartView();
     }
