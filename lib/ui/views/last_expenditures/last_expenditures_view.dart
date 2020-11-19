@@ -48,15 +48,18 @@ class ShortListOfExpenses extends StatelessWidget {
                 child: model.isBusy
                     ? Center(child: CircularProgressIndicator())
                     : !model.hasError
-                        ? ListView(
-                            padding: const EdgeInsets.symmetric(vertical: 6),
-                            children: model.data
-                                .map((item) => ExpenditureItem(
-                                      categoryId: item.categoryId,
-                                      title: item.name,
-                                      value: item.moneyAmount,
-                                    ))
-                                .toList())
+                        ? model.data.length > 0
+                            ? ListView(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 6),
+                                children: model.data
+                                    .map((item) => ExpenditureItem(
+                                          categoryId: item.categoryId,
+                                          title: item.name,
+                                          value: item.moneyAmount,
+                                        ))
+                                    .toList())
+                            : noItemsYetInfo
                         : Container(
                             child: Text('err'),
                             // TODO: show error dialog
@@ -70,6 +73,9 @@ class ShortListOfExpenses extends StatelessWidget {
       viewModelBuilder: () => ShortListOfExpensesViewModel(),
     );
   }
+
+  final noItemsYetInfo =
+      Container(child: Center(child: Text('No expenditures added yet')));
 }
 
 class _ShowAllButton extends ViewModelWidget<ShortListOfExpensesViewModel> {

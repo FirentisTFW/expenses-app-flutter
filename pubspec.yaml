@@ -31,6 +31,8 @@ dependencies:
   get_it: ^5.0.1
   flutter_icons: ^1.1.0
   auto_route_generator:
+  intl: ^0.16.1
+
 
 dev_dependencies:
   flutter_test:
