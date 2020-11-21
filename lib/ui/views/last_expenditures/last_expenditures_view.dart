@@ -1,6 +1,7 @@
 import 'package:Expenses_app/app/locator.dart';
 import 'package:Expenses_app/ui/universal_widgets/expenditure_item.dart';
 import 'package:Expenses_app/ui/views/last_expenditures/last_expenditures_viewmodel.dart';
+import 'package:Expenses_app/ui/views/last_expenditures/last_months_bar_chart.dart';
 import 'package:Expenses_app/ui/views/last_expenditures/short_list_of_expenses_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
@@ -12,11 +13,19 @@ class LastExpendituresView extends StatelessWidget {
       disposeViewModel: false,
       initialiseSpecialViewModelsOnce: true,
       builder: (context, model, child) => Scaffold(
-        body: Column(
-          children: [
-            title,
-            ShortListOfExpenses(),
-          ],
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              title,
+              ShortListOfExpenses(),
+              // Container(
+              //   height: 400,
+              //   // child: SimpleBarChart.withSampleData(),
+              //   child: LastMonthsBarChart.buildSampleData(),
+              // ),
+              LastMonthsBarChart.buildSampleData(),
+            ],
+          ),
         ),
       ),
       viewModelBuilder: () => locator<LastExpendituresViewModel>(),
