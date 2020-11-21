@@ -1,4 +1,4 @@
-import 'package:Expenses_app/datamodels/monthly_expenses.dart';
+import 'package:Expenses_app/datamodels/total_monthly_expenses.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
 
@@ -41,7 +41,7 @@ class LastMonthsBarChart extends StatelessWidget {
       );
 
   factory LastMonthsBarChart.buildFromData(
-      List<MonthlyExpenses> initialData, bool animate) {
+      {List<TotalMonthlyExpenses> initialData, bool animate = true}) {
     return LastMonthsBarChart(
       seriesList: _tranformDataToSeriesList(initialData),
       animate: animate,
@@ -50,10 +50,10 @@ class LastMonthsBarChart extends StatelessWidget {
 
   factory LastMonthsBarChart.buildSampleData() {
     final sampleData = [
-      MonthlyExpenses(monthNumber: '8', totalMoneyAmount: 2154),
-      MonthlyExpenses(monthNumber: '9', totalMoneyAmount: 543),
-      MonthlyExpenses(monthNumber: '10', totalMoneyAmount: 2497),
-      MonthlyExpenses(monthNumber: '11', totalMoneyAmount: 1023),
+      TotalMonthlyExpenses(monthNumber: '8', totalMoneyAmount: 2154),
+      TotalMonthlyExpenses(monthNumber: '9', totalMoneyAmount: 543),
+      TotalMonthlyExpenses(monthNumber: '10', totalMoneyAmount: 2497),
+      TotalMonthlyExpenses(monthNumber: '11', totalMoneyAmount: 1023),
     ];
 
     return LastMonthsBarChart(
@@ -62,17 +62,18 @@ class LastMonthsBarChart extends StatelessWidget {
     );
   }
 
-  static List<charts.Series<MonthlyExpenses, String>> _tranformDataToSeriesList(
-      List<MonthlyExpenses> initialData) {
+  static List<charts.Series<TotalMonthlyExpenses, String>>
+      _tranformDataToSeriesList(List<TotalMonthlyExpenses> initialData) {
     return [
       charts.Series(
         id: 'Expenses',
         data: initialData,
-        domainFn: (MonthlyExpenses expenses, _) => expenses.monthNumber,
-        measureFn: (MonthlyExpenses expenses, _) => expenses.totalMoneyAmount,
+        domainFn: (TotalMonthlyExpenses expenses, _) => expenses.monthNumber,
+        measureFn: (TotalMonthlyExpenses expenses, _) =>
+            expenses.totalMoneyAmount,
         // styling
         colorFn: (_, __) => charts.MaterialPalette.red.shadeDefault,
-        labelAccessorFn: (MonthlyExpenses expenses, _) =>
+        labelAccessorFn: (TotalMonthlyExpenses expenses, _) =>
             expenses.totalMoneyAmount.toString(),
         insideLabelStyleAccessorFn: (_, __) => charts.TextStyleSpec(
           fontSize: 14,

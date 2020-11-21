@@ -1,5 +1,6 @@
 import 'package:Expenses_app/datamodels/expenditure.dart';
 import 'package:Expenses_app/datamodels/category.dart';
+import 'package:Expenses_app/datamodels/total_monthly_expenses.dart';
 import 'package:Expenses_app/services/functional_services/api.dart';
 
 class FakeApi extends Api {
@@ -420,6 +421,30 @@ class FakeApi extends Api {
           moneyAmount: 11.60,
           name: "Spaghetti",
           date: DateTime(2020, 10, 16)),
+    ];
+  }
+
+  @override
+  Future<List<TotalMonthlyExpenses>> getLastMonthsTotalExpenses(
+      int howManyMonths) async {
+    await Future.delayed(Duration(seconds: 1));
+    return [
+      TotalMonthlyExpenses(
+        monthNumber: '8',
+        totalMoneyAmount: 2464,
+      ),
+      TotalMonthlyExpenses(
+        monthNumber: '9',
+        totalMoneyAmount: 2122,
+      ),
+      TotalMonthlyExpenses(
+        monthNumber: '10',
+        totalMoneyAmount: 1977,
+      ),
+      TotalMonthlyExpenses(
+        monthNumber: '11',
+        totalMoneyAmount: 2683,
+      ),
     ];
   }
 }

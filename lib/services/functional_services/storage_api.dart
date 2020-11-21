@@ -1,5 +1,6 @@
 import 'package:Expenses_app/datamodels/expenditure.dart';
 import 'package:Expenses_app/datamodels/category.dart';
+import 'package:Expenses_app/datamodels/total_monthly_expenses.dart';
 import 'package:Expenses_app/services/functional_services/api.dart';
 
 class StorageApi extends Api {
@@ -37,6 +38,13 @@ class StorageApi extends Api {
   @override
   Future<List<Expenditure>> getLastExpenditures({int howMany}) {
     // TODO: implement getLastExpenditures
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<List<TotalMonthlyExpenses>> getLastMonthsTotalExpenses(
+      int howManyMonths) {
+    // TODO: implement getLastMonthsTotalExpenses
     throw UnimplementedError();
   }
 }

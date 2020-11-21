@@ -2,6 +2,7 @@ import 'package:Expenses_app/services/functional_services/api.dart';
 import 'package:Expenses_app/services/functional_services/fake_api.dart';
 import 'package:Expenses_app/services/functional_services/storage_api.dart';
 import 'package:Expenses_app/services/state_services/expenditures_service.dart';
+import 'package:Expenses_app/services/state_services/total_expenses_service.dart';
 import 'package:Expenses_app/ui/views/last_expenditures/last_expenditures_viewmodel.dart';
 import 'package:Expenses_app/ui/views/this_month_chart/this_month_chart_viewmodel.dart';
 import 'package:get_it/get_it.dart';
@@ -19,6 +20,8 @@ void setupLocator() {
       () => _USE_FAKE_IMPLEMENTATION ? FakeApi() : StorageApi());
   locator
       .registerLazySingleton<ExpendituresService>(() => ExpendituresService());
+  locator.registerLazySingleton<TotalExpensesService>(
+      () => TotalExpensesService());
 
   locator.registerSingleton<LastExpendituresViewModel>(
       LastExpendituresViewModel());

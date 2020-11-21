@@ -1,5 +1,6 @@
 import 'package:Expenses_app/datamodels/category.dart';
 import 'package:Expenses_app/datamodels/expenditure.dart';
+import 'package:Expenses_app/datamodels/total_monthly_expenses.dart';
 
 abstract class Api {
   // EXPENDITURES
@@ -14,6 +15,13 @@ abstract class Api {
   Future<List<Expenditure>> getLastExpenditures({int howMany});
 
   // END - EXPENDITURES
+
+  // TOTAL EXPENSES
+
+  Future<List<TotalMonthlyExpenses>> getLastMonthsTotalExpenses(
+      int howManyMonths);
+
+  // END - TOTAL EXPENSES
 
   // CAEGORIES
 
