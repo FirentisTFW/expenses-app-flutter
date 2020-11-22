@@ -18,6 +18,7 @@ class LastExpendituresView extends StatelessWidget {
               title,
               ShortListOfExpenses(),
               LastMonthsExpensesChart(),
+              _SeeMoreTrendsButton(),
             ],
           ),
         ),
@@ -35,4 +36,26 @@ class LastExpendituresView extends StatelessWidget {
       style: TextStyle(fontSize: 28),
     ),
   );
+}
+
+class _SeeMoreTrendsButton extends ViewModelWidget<LastExpendituresViewModel> {
+  const _SeeMoreTrendsButton({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, LastExpendituresViewModel model) {
+    return Container(
+      height: 40,
+      margin: const EdgeInsets.symmetric(vertical: 20),
+      child: RaisedButton(
+        color: Colors.red[400],
+        child: Text(
+          'See More Trends',
+          style: TextStyle(color: Colors.white, fontSize: 20),
+        ),
+        onPressed: model.goToTrendsView,
+      ),
+    );
+  }
 }
