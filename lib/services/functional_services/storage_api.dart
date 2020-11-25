@@ -42,9 +42,23 @@ class StorageApi extends Api {
   }
 
   @override
-  Future<List<TotalMonthlyExpenses>> getLastMonthsTotalExpenses(
+  Future<List<TotalMonthlyExpenses>> getMonthlyTotalExpensesInLastMonths(
       int howManyMonths) {
-    // TODO: implement getLastMonthsTotalExpenses
+    // TODO: implement getLastMonthsTotalExpensesByCategory
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<List<TotalMonthlyExpenses>> getTotalMonthlyExpensesInTimeSpan(
+      DateTime start, DateTime end) {
+    // TODO: implement getTotalMonthlyExpensesInTimeSpan
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<List<TotalCategoryExpenses>> getTotalCategoryExpensesInTimeSpan(
+      DateTime start, DateTime end) {
+    // TODO: implement getTotalCategoryExpensesInTimeSpan
     throw UnimplementedError();
   }
 }

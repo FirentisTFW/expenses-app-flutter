@@ -18,7 +18,7 @@ class FakeApi extends Api {
 
   @override
   Future<List<Category>> getAllCategories() async {
-    await Future.delayed(Duration(seconds: 1));
+    await delayRequest();
     return [
       Category(id: 0, iconId: 0, name: 'Accomodation'),
       Category(id: 1, iconId: 1, name: 'Alcohol'),
@@ -44,7 +44,7 @@ class FakeApi extends Api {
 
   @override
   Future<List<Expenditure>> getAllExpenditures() async {
-    await Future.delayed(Duration(seconds: 1));
+    await delayRequest();
     return [
       Expenditure(
           id: 0,
@@ -292,7 +292,7 @@ class FakeApi extends Api {
   @override
   Future<List<Expenditure>> getExpendituresInTimeSpan(
       DateTime start, DateTime end) async {
-    await Future.delayed(Duration(seconds: 1));
+    await delayRequest();
     return [
       Expenditure(
           id: 2,
@@ -359,7 +359,7 @@ class FakeApi extends Api {
 
   @override
   Future<List<Expenditure>> getLastExpenditures({int howMany}) async {
-    await Future.delayed(Duration(seconds: 1));
+    await delayRequest();
     return [
       Expenditure(
           id: 2,
@@ -425,26 +425,66 @@ class FakeApi extends Api {
   }
 
   @override
-  Future<List<TotalMonthlyExpenses>> getLastMonthsTotalExpenses(
+  Future<List<TotalMonthlyExpenses>> getMonthlyTotalExpensesInLastMonths(
       int howManyMonths) async {
-    await Future.delayed(Duration(seconds: 1));
+    await delayRequest();
     return [
       TotalMonthlyExpenses(
-        monthNumber: '8',
+        name: '8',
         totalMoneyAmount: 2464,
       ),
       TotalMonthlyExpenses(
-        monthNumber: '9',
+        name: '9',
         totalMoneyAmount: 2122,
       ),
       TotalMonthlyExpenses(
-        monthNumber: '10',
+        name: '10',
         totalMoneyAmount: 1977,
       ),
       TotalMonthlyExpenses(
-        monthNumber: '11',
+        name: '11',
         totalMoneyAmount: 2683,
       ),
     ];
+  }
+
+  @override
+  Future<List<TotalMonthlyExpenses>> getTotalMonthlyExpensesInTimeSpan(
+      DateTime start, DateTime end) async {
+    await delayRequest();
+    return [
+      TotalMonthlyExpenses(
+        name: '6',
+        totalMoneyAmount: 1998,
+      ),
+      TotalMonthlyExpenses(
+        name: '7',
+        totalMoneyAmount: 2344,
+      ),
+      TotalMonthlyExpenses(
+        name: '8',
+        totalMoneyAmount: 2333,
+      ),
+      TotalMonthlyExpenses(
+        name: '9',
+        totalMoneyAmount: 2122,
+      ),
+      TotalMonthlyExpenses(
+        name: '10',
+        totalMoneyAmount: 1887,
+      ),
+      TotalMonthlyExpenses(
+        name: '11',
+        totalMoneyAmount: 2485,
+      ),
+    ];
+  }
+
+  @override
+  Future<List<TotalCategoryExpenses>> getTotalCategoryExpensesInTimeSpan(
+      DateTime start, DateTime end) {}
+
+  Future<void> delayRequest() async {
+    await Future.delayed(Duration(seconds: 1));
   }
 }

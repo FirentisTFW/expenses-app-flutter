@@ -4,10 +4,10 @@ import 'package:Expenses_app/services/state_services/total_expenses_service.dart
 import 'package:stacked/stacked.dart';
 
 class LastMonthsExpensesChartViewModel
-    extends FutureViewModel<List<TotalMonthlyExpenses>> {
+    extends FutureViewModel<List<TotalExpenses>> {
   final _totalExpensesService = locator<TotalExpensesService>();
 
   @override
-  Future<List<TotalMonthlyExpenses>> futureToRun() =>
+  Future<List<TotalExpenses>> futureToRun() =>
       _totalExpensesService.getLastMonthsTotalExpenses(4);
 }

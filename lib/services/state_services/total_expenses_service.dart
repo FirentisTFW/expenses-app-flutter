@@ -5,12 +5,19 @@ import 'package:Expenses_app/services/functional_services/api.dart';
 class TotalExpensesService {
   final _api = locator<Api>();
 
-  List<TotalMonthlyExpenses> _totalMonthlyExpenses;
-  List<TotalMonthlyExpenses> get totalMonthlyExpenses => _totalMonthlyExpenses;
+  List<TotalExpenses> _totalMonthlyExpenses;
+  List<TotalExpenses> get totalMonthlyExpenses => _totalMonthlyExpenses;
 
-  Future<List<TotalMonthlyExpenses>> getLastMonthsTotalExpenses(
-      int howMany) async {
-    _totalMonthlyExpenses = await _api.getLastMonthsTotalExpenses(howMany);
+  Future<List<TotalExpenses>> getLastMonthsTotalExpenses(int howMany) async {
+    _totalMonthlyExpenses =
+        await _api.getMonthlyTotalExpensesInLastMonths(howMany);
+    return _totalMonthlyExpenses;
+  }
+
+  Future<List<TotalExpenses>> getTotalMonthlyExpensesInTimeSpan(
+      DateTime start, DateTime end) async {
+    _totalMonthlyExpenses =
+        await _api.getTotalMonthlyExpensesInTimeSpan(start, end);
     return _totalMonthlyExpenses;
   }
 }

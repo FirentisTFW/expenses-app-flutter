@@ -9,17 +9,20 @@ class SelectionFields extends ViewModelWidget<TrendsViewModel> {
 
   @override
   Widget build(BuildContext context, TrendsViewModel model) {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Form(
-          key: model.formKey,
-          child: Column(
-            children: [
-              _GroupingSelectionField(),
-              _DateSelectionFields(),
-              const _ShowChartButton(),
-            ],
+    return Container(
+      height: 200,
+      child: Card(
+        child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: Form(
+            key: model.formKey,
+            child: Column(
+              children: [
+                _GroupingSelectionField(),
+                _DateSelectionFields(),
+                const _ShowChartButton(),
+              ],
+            ),
           ),
         ),
       ),

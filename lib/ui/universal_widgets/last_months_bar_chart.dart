@@ -41,7 +41,7 @@ class LastMonthsBarChart extends StatelessWidget {
       );
 
   factory LastMonthsBarChart.buildFromData(
-      {List<TotalMonthlyExpenses> initialData, bool animate = true}) {
+      {List<TotalExpenses> initialData, bool animate = true}) {
     return LastMonthsBarChart(
       seriesList: _tranformDataToSeriesList(initialData),
       animate: animate,
@@ -50,10 +50,10 @@ class LastMonthsBarChart extends StatelessWidget {
 
   factory LastMonthsBarChart.buildSampleData() {
     final sampleData = [
-      TotalMonthlyExpenses(monthNumber: '8', totalMoneyAmount: 2154),
-      TotalMonthlyExpenses(monthNumber: '9', totalMoneyAmount: 543),
-      TotalMonthlyExpenses(monthNumber: '10', totalMoneyAmount: 2497),
-      TotalMonthlyExpenses(monthNumber: '11', totalMoneyAmount: 1023),
+      TotalMonthlyExpenses(name: '8', totalMoneyAmount: 2154),
+      TotalMonthlyExpenses(name: '9', totalMoneyAmount: 543),
+      TotalMonthlyExpenses(name: '10', totalMoneyAmount: 2497),
+      TotalMonthlyExpenses(name: '11', totalMoneyAmount: 1023),
     ];
 
     return LastMonthsBarChart(
@@ -62,18 +62,17 @@ class LastMonthsBarChart extends StatelessWidget {
     );
   }
 
-  static List<charts.Series<TotalMonthlyExpenses, String>>
-      _tranformDataToSeriesList(List<TotalMonthlyExpenses> initialData) {
+  static List<charts.Series<TotalExpenses, String>> _tranformDataToSeriesList(
+      List<TotalExpenses> initialData) {
     return [
       charts.Series(
         id: 'Expenses',
         data: initialData,
-        domainFn: (TotalMonthlyExpenses expenses, _) => expenses.monthNumber,
-        measureFn: (TotalMonthlyExpenses expenses, _) =>
-            expenses.totalMoneyAmount,
+        domainFn: (TotalExpenses expenses, _) => expenses.name,
+        measureFn: (TotalExpenses expenses, _) => expenses.totalMoneyAmount,
         // styling
         colorFn: (_, __) => charts.MaterialPalette.red.shadeDefault,
-        labelAccessorFn: (TotalMonthlyExpenses expenses, _) =>
+        labelAccessorFn: (TotalExpenses expenses, _) =>
             expenses.totalMoneyAmount.toString(),
         insideLabelStyleAccessorFn: (_, __) => charts.TextStyleSpec(
           fontSize: 14,

@@ -18,8 +18,14 @@ abstract class Api {
 
   // TOTAL EXPENSES
 
-  Future<List<TotalMonthlyExpenses>> getLastMonthsTotalExpenses(
+  Future<List<TotalMonthlyExpenses>> getMonthlyTotalExpensesInLastMonths(
       int howManyMonths);
+
+  Future<List<TotalMonthlyExpenses>> getTotalMonthlyExpensesInTimeSpan(
+      DateTime start, DateTime end);
+
+  Future<List<TotalCategoryExpenses>> getTotalCategoryExpensesInTimeSpan(
+      DateTime start, DateTime end);
 
   // END - TOTAL EXPENSES
 
