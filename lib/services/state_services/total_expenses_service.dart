@@ -1,5 +1,5 @@
 import 'package:Expenses_app/app/locator.dart';
-import 'package:Expenses_app/datamodels/total_monthly_expenses.dart';
+import 'package:Expenses_app/datamodels/total_expenses.dart';
 import 'package:Expenses_app/services/functional_services/api.dart';
 
 class TotalExpensesService {
@@ -18,6 +18,13 @@ class TotalExpensesService {
       DateTime start, DateTime end) async {
     _totalMonthlyExpenses =
         await _api.getTotalMonthlyExpensesInTimeSpan(start, end);
+    return _totalMonthlyExpenses;
+  }
+
+  Future<List<TotalExpenses>> getTotalCategoryExpensesInTimeSpan(
+      DateTime start, DateTime end) async {
+    _totalMonthlyExpenses =
+        await _api.getTotalCategoryExpensesInTimeSpan(start, end);
     return _totalMonthlyExpenses;
   }
 }

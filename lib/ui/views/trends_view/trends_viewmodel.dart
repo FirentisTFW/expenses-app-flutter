@@ -1,6 +1,6 @@
 import 'package:Expenses_app/app/locator.dart';
 import 'package:Expenses_app/datamodels/enums/grouping_method.dart';
-import 'package:Expenses_app/datamodels/total_monthly_expenses.dart';
+import 'package:Expenses_app/datamodels/total_expenses.dart';
 import 'package:Expenses_app/services/functional_services/date_service.dart';
 import 'package:Expenses_app/services/state_services/total_expenses_service.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +16,7 @@ class TrendsViewModel extends BaseViewModel {
   DateTime _secondDate;
 
   List<TotalExpenses> get data => _data;
+  GroupingMethod get groupingMethod => _groupingMethod;
 
   bool get isDataFetched => _data != null;
 
@@ -41,7 +42,7 @@ class TrendsViewModel extends BaseViewModel {
   Future<void> _fetchDataForRequest() async {
     if (_groupingMethod == GroupingMethod.ByMonths) {
       await _fetchMonthlyExpenses();
-    } else if (_groupingMethod == GroupingMethod.ByMonths) {
+    } else if (_groupingMethod == GroupingMethod.ByCategories) {
       await _fetchCategoryExpenses();
     }
   }
@@ -52,7 +53,8 @@ class TrendsViewModel extends BaseViewModel {
   }
 
   Future<void> _fetchCategoryExpenses() async {
-    // TODO: fetch by categories
+    _data = await _totalExpensesService.getTotalCategoryExpensesInTimeSpan(
+        _firstDate, _secondDate);
   }
 
   void setGroupingMethod(value) => _groupingMethod = value;

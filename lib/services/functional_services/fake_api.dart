@@ -1,6 +1,6 @@
 import 'package:Expenses_app/datamodels/expenditure.dart';
 import 'package:Expenses_app/datamodels/category.dart';
-import 'package:Expenses_app/datamodels/total_monthly_expenses.dart';
+import 'package:Expenses_app/datamodels/total_expenses.dart';
 import 'package:Expenses_app/services/functional_services/api.dart';
 
 class FakeApi extends Api {
@@ -429,22 +429,10 @@ class FakeApi extends Api {
       int howManyMonths) async {
     await delayRequest();
     return [
-      TotalMonthlyExpenses(
-        name: '8',
-        totalMoneyAmount: 2464,
-      ),
-      TotalMonthlyExpenses(
-        name: '9',
-        totalMoneyAmount: 2122,
-      ),
-      TotalMonthlyExpenses(
-        name: '10',
-        totalMoneyAmount: 1977,
-      ),
-      TotalMonthlyExpenses(
-        name: '11',
-        totalMoneyAmount: 2683,
-      ),
+      TotalMonthlyExpenses(name: '8', totalMoneyAmount: 2464),
+      TotalMonthlyExpenses(name: '9', totalMoneyAmount: 2122),
+      TotalMonthlyExpenses(name: '10', totalMoneyAmount: 1977),
+      TotalMonthlyExpenses(name: '11', totalMoneyAmount: 2683),
     ];
   }
 
@@ -453,36 +441,33 @@ class FakeApi extends Api {
       DateTime start, DateTime end) async {
     await delayRequest();
     return [
-      TotalMonthlyExpenses(
-        name: '6',
-        totalMoneyAmount: 1998,
-      ),
-      TotalMonthlyExpenses(
-        name: '7',
-        totalMoneyAmount: 2344,
-      ),
-      TotalMonthlyExpenses(
-        name: '8',
-        totalMoneyAmount: 2333,
-      ),
-      TotalMonthlyExpenses(
-        name: '9',
-        totalMoneyAmount: 2122,
-      ),
-      TotalMonthlyExpenses(
-        name: '10',
-        totalMoneyAmount: 1887,
-      ),
-      TotalMonthlyExpenses(
-        name: '11',
-        totalMoneyAmount: 2485,
-      ),
+      TotalMonthlyExpenses(name: '6', totalMoneyAmount: 1998),
+      TotalMonthlyExpenses(name: '7', totalMoneyAmount: 2344),
+      TotalMonthlyExpenses(name: '8', totalMoneyAmount: 2333),
+      TotalMonthlyExpenses(name: '9', totalMoneyAmount: 2122),
+      TotalMonthlyExpenses(name: '10', totalMoneyAmount: 1887),
+      TotalMonthlyExpenses(name: '11', totalMoneyAmount: 2485),
     ];
   }
 
   @override
   Future<List<TotalCategoryExpenses>> getTotalCategoryExpensesInTimeSpan(
-      DateTime start, DateTime end) {}
+      DateTime start, DateTime end) async {
+    await delayRequest();
+    return [
+      TotalCategoryExpenses(name: 'Accomocation', totalMoneyAmount: 6000),
+      TotalCategoryExpenses(name: 'Groceries', totalMoneyAmount: 2746),
+      TotalCategoryExpenses(name: 'Bills', totalMoneyAmount: 643),
+      TotalCategoryExpenses(name: 'Eating out', totalMoneyAmount: 534),
+      TotalCategoryExpenses(name: 'Transport', totalMoneyAmount: 568),
+      TotalCategoryExpenses(name: 'Books', totalMoneyAmount: 124),
+      TotalCategoryExpenses(name: 'Clothes', totalMoneyAmount: 239),
+      TotalCategoryExpenses(name: 'Electronics', totalMoneyAmount: 349),
+      TotalCategoryExpenses(name: 'Gifts', totalMoneyAmount: 240),
+      TotalCategoryExpenses(name: 'Hygiene', totalMoneyAmount: 149),
+      TotalCategoryExpenses(name: 'Sport', totalMoneyAmount: 470),
+    ];
+  }
 
   Future<void> delayRequest() async {
     await Future.delayed(Duration(seconds: 1));

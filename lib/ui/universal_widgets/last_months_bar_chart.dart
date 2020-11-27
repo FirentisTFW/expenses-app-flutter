@@ -1,4 +1,4 @@
-import 'package:Expenses_app/datamodels/total_monthly_expenses.dart';
+import 'package:Expenses_app/datamodels/total_expenses.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
 
@@ -6,30 +6,12 @@ class LastMonthsBarChart extends StatelessWidget {
   final bool animate;
   final List<charts.Series> seriesList;
 
-  LastMonthsBarChart({this.animate = true, @required this.seriesList});
+  LastMonthsBarChart({Key key, this.animate = true, @required this.seriesList})
+      : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        title,
-        buildBarChart(),
-      ],
-    );
-  }
-
-  final title = Container(
-    padding: const EdgeInsets.only(top: 40, bottom: 10),
-    width: double.infinity,
-    child: const Text(
-      'Last months\' total expenses',
-      textAlign: TextAlign.center,
-      style: TextStyle(fontSize: 28),
-    ),
-  );
-
-  buildBarChart() => Container(
-        height: 300,
+  Widget build(BuildContext context) => Container(
+        height: 350,
         padding: const EdgeInsets.all(20),
         child: charts.BarChart(
           seriesList,

@@ -1,3 +1,5 @@
+import 'package:Expenses_app/datamodels/enums/grouping_method.dart';
+import 'package:Expenses_app/ui/universal_widgets/expenses_pie_chart.dart';
 import 'package:Expenses_app/ui/universal_widgets/last_months_bar_chart.dart';
 import 'package:Expenses_app/ui/views/trends_view/selection_fields.dart';
 import 'package:Expenses_app/ui/views/trends_view/trends_viewmodel.dart';
@@ -10,7 +12,7 @@ class TrendsView extends StatelessWidget {
     return ViewModelBuilder<TrendsViewModel>.reactive(
       builder: (context, child, model) => Scaffold(
         appBar: AppBar(title: const Text('Trends')),
-        body: Column(
+        body: ListView(
           children: [
             SelectionFields(),
             TrendsChart(),
@@ -27,9 +29,17 @@ class TrendsChart extends ViewModelWidget<TrendsViewModel> {
   Widget build(BuildContext context, TrendsViewModel model) {
     return model.isBusy
         ? loadingSpinner
-        : model.isDataFetched
-            ? LastMonthsBarChart.buildFromData(initialData: model.data)
-            : Container();
+        : model.isDataFetched ? _buildChart(model) : Container();
+  }
+
+  Widget _buildChart(TrendsViewModel model) {
+    switch (model.groupingMethod) {
+      case GroupingMethod.ByMonths:
+        return LastMonthsBarChart.buildFromData(initialData: model.data);
+      case GroupingMethod.ByCategories:
+        return ExpensesPieChart.buildFromData(initialData: model.data);
+    }
+    return Container();
   }
 
   final loadingSpinner = Padding(

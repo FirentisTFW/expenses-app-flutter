@@ -10,7 +10,12 @@ class LastMonthsExpensesChart extends StatelessWidget {
       builder: (context, model, child) => model.isBusy
           ? loadingSpinner
           : !model.hasError
-              ? LastMonthsBarChart.buildFromData(initialData: model.data)
+              ? Column(
+                  children: [
+                    title,
+                    LastMonthsBarChart.buildFromData(initialData: model.data),
+                  ],
+                )
               : Container(
                   child: Text('err'),
                   // TODO: show error dialog
@@ -18,6 +23,16 @@ class LastMonthsExpensesChart extends StatelessWidget {
       viewModelBuilder: () => LastMonthsExpensesChartViewModel(),
     );
   }
+
+  final title = Container(
+    padding: const EdgeInsets.only(top: 40, bottom: 10),
+    width: double.infinity,
+    child: const Text(
+      'Last months\' total expenses',
+      textAlign: TextAlign.center,
+      style: TextStyle(fontSize: 28),
+    ),
+  );
 
   final loadingSpinner = Padding(
     padding: const EdgeInsets.symmetric(vertical: 50),

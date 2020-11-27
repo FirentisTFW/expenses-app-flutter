@@ -1,6 +1,6 @@
 import 'package:Expenses_app/datamodels/expenditure.dart';
 import 'package:Expenses_app/datamodels/category.dart';
-import 'package:Expenses_app/datamodels/total_monthly_expenses.dart';
+import 'package:Expenses_app/datamodels/total_expenses.dart';
 import 'package:Expenses_app/services/functional_services/api.dart';
 
 class StorageApi extends Api {
