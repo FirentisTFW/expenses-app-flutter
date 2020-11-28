@@ -12,5 +12,5 @@ class ThisMonthChartViewModel
       _totalExpensesService.getThisMonthCategoryExpenses();
 
   String getThisMonthTotalSpending() =>
-      _totalExpensesService.getThisMonthTotalSpending().toString();
+      _totalExpensesService.getThisMonthTotalSpending().toStringAsFixed(2);
 }

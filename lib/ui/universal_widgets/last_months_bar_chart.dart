@@ -55,7 +55,7 @@ class LastMonthsBarChart extends StatelessWidget {
         // styling
         colorFn: (_, __) => charts.MaterialPalette.red.shadeDefault,
         labelAccessorFn: (TotalExpenses expenses, _) =>
-            expenses.totalMoneyAmount.toString(),
+            expenses.totalMoneyAmount.round().toString(),
         insideLabelStyleAccessorFn: (_, __) => charts.TextStyleSpec(
           fontSize: 14,
           color: charts.MaterialPalette.white,

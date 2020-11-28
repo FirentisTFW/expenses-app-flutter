@@ -49,7 +49,7 @@ class ExpensesPieChart extends StatelessWidget {
         insideLabelStyleAccessorFn: (_, __) =>
             charts.TextStyleSpec(color: charts.MaterialPalette.white),
         labelAccessorFn: (expenses, index) =>
-            expenses.name + ': ' + expenses.totalMoneyAmount.toString(),
+            expenses.name + ': ' + expenses.totalMoneyAmount.round().toString(),
       ),
     ];
   }
@@ -64,7 +64,8 @@ class ExpensesPieChart extends StatelessWidget {
           cellPadding: EdgeInsets.only(right: 4.0, bottom: 4.0),
           showMeasures: true,
           legendDefaultMeasure: charts.LegendDefaultMeasure.firstValue,
-          measureFormatter: (num value) => value == null ? '-' : '-   $value',
+          measureFormatter: (num value) =>
+              value == null ? '-' : '-   ' + value.toStringAsFixed(2),
         ),
       ];
 
