@@ -6,7 +6,11 @@ class TotalExpensesService {
   final _api = locator<Api>();
 
   List<TotalExpenses> _totalMonthlyExpenses;
+  List<TotalCategoryExpenses> _totalCategoryExpenses;
+
   List<TotalExpenses> get totalMonthlyExpenses => _totalMonthlyExpenses;
+  List<TotalCategoryExpenses> get totalCategoryExpenses =>
+      _totalCategoryExpenses;
 
   Future<List<TotalExpenses>> getLastMonthsTotalExpenses(int howMany) async {
     _totalMonthlyExpenses =
@@ -23,8 +27,23 @@ class TotalExpensesService {
 
   Future<List<TotalExpenses>> getTotalCategoryExpensesInTimeSpan(
       DateTime start, DateTime end) async {
-    _totalMonthlyExpenses =
+    _totalCategoryExpenses =
         await _api.getTotalCategoryExpensesInTimeSpan(start, end);
-    return _totalMonthlyExpenses;
+    return _totalCategoryExpenses;
+  }
+
+  Future<List<TotalCategoryExpenses>> getThisMonthCategoryExpenses() async {
+    final now = DateTime.now();
+    final monthStart = DateTime(now.year, now.month);
+    _totalCategoryExpenses =
+        await _api.getTotalCategoryExpensesInTimeSpan(monthStart, now);
+    return _totalCategoryExpenses;
+  }
+
+  double getThisMonthTotalSpending() {
+    double sum = 0;
+    _totalCategoryExpenses
+        .forEach((element) => sum += element.totalMoneyAmount);
+    return sum;
   }
 }

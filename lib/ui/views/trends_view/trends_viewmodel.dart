@@ -10,6 +10,7 @@ class TrendsViewModel extends BaseViewModel {
   final _totalExpensesService = locator<TotalExpensesService>();
 
   List<TotalExpenses> _data;
+
   final formKey = GlobalKey<FormState>();
   GroupingMethod _groupingMethod;
   DateTime _firstDate;
@@ -20,9 +21,7 @@ class TrendsViewModel extends BaseViewModel {
 
   bool get isDataFetched => _data != null;
 
-  List<DateTime> getMonthsForList() {
-    return DateService.getMonthsWithYearsFrom(2019);
-  }
+  List<DateTime> getMonthsForList() => DateService.getMonthsWithYearsFrom(2019);
 
   Future saveForm() async {
     formKey.currentState.save();

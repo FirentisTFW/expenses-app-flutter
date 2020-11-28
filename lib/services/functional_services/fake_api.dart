@@ -460,12 +460,12 @@ class FakeApi extends Api {
       TotalCategoryExpenses(name: 'Bills', totalMoneyAmount: 643),
       TotalCategoryExpenses(name: 'Eating out', totalMoneyAmount: 534),
       TotalCategoryExpenses(name: 'Transport', totalMoneyAmount: 568),
-      TotalCategoryExpenses(name: 'Books', totalMoneyAmount: 124),
-      TotalCategoryExpenses(name: 'Clothes', totalMoneyAmount: 239),
-      TotalCategoryExpenses(name: 'Electronics', totalMoneyAmount: 349),
-      TotalCategoryExpenses(name: 'Gifts', totalMoneyAmount: 240),
-      TotalCategoryExpenses(name: 'Hygiene', totalMoneyAmount: 149),
-      TotalCategoryExpenses(name: 'Sport', totalMoneyAmount: 470),
+      // TotalCategoryExpenses(name: 'Books', totalMoneyAmount: 124),
+      // TotalCategoryExpenses(name: 'Clothes', totalMoneyAmount: 239),
+      // TotalCategoryExpenses(name: 'Electronics', totalMoneyAmount: 349),
+      // TotalCategoryExpenses(name: 'Gifts', totalMoneyAmount: 240),
+      // TotalCategoryExpenses(name: 'Hygiene', totalMoneyAmount: 149),
+      // TotalCategoryExpenses(name: 'Sport', totalMoneyAmount: 470),
     ];
   }
 
