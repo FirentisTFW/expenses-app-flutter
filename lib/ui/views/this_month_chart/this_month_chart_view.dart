@@ -1,6 +1,7 @@
 import 'package:Expenses_app/app/locator.dart';
 import 'package:Expenses_app/ui/universal_widgets/expenses_pie_chart.dart';
-import 'package:Expenses_app/ui/universal_widgets/last_months_bar_chart.dart';
+import 'package:Expenses_app/ui/views/this_month_chart/smart_widgets/new_category_button.dart';
+import 'package:Expenses_app/ui/views/this_month_chart/smart_widgets/new_expenditure_button.dart';
 import 'package:Expenses_app/ui/views/this_month_chart/this_month_chart_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
@@ -17,8 +18,10 @@ class ThisMonthChartView extends StatelessWidget {
             : !model.hasError
                 ? ListView(
                     children: [
-                      ThisMonthExpensesChart(),
-                      _ThisMonthTotalExpensesInfo()
+                      _ThisMonthExpensesChart(),
+                      _ThisMonthTotalExpensesInfo(),
+                      NewExpenditureButton(),
+                      NewCategoryButton(),
                     ],
                   )
                 : Container(
@@ -33,15 +36,15 @@ class ThisMonthChartView extends StatelessWidget {
   final loadingSpinner = Center(child: CircularProgressIndicator());
 }
 
-class ThisMonthExpensesChart extends ViewModelWidget<ThisMonthChartViewModel> {
-  ThisMonthExpensesChart({
+class _ThisMonthExpensesChart extends ViewModelWidget<ThisMonthChartViewModel> {
+  _ThisMonthExpensesChart({
     Key key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context, ThisMonthChartViewModel model) {
     return Container(
-      padding: const EdgeInsets.only(top: 50),
+      padding: const EdgeInsets.only(top: 20),
       child: ExpensesPieChart.buildFromData(initialData: model.data),
     );
   }
@@ -56,17 +59,17 @@ class _ThisMonthTotalExpensesInfo
   @override
   Widget build(BuildContext context, ThisMonthChartViewModel model) {
     return Container(
-      height: 70,
+      height: 80,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
             model.getThisMonthTotalSpending(),
-            style: TextStyle(fontSize: 30),
+            style: TextStyle(fontSize: 36),
           ),
           Text(
             'This month\'s expenses',
-            style: TextStyle(fontSize: 24),
+            style: TextStyle(fontSize: 24, color: Colors.grey[300]),
           ),
         ],
       ),
