@@ -1,4 +1,5 @@
 import 'package:Expenses_app/ui/universal_widgets/expenditure_item.dart';
+import 'package:Expenses_app/ui/views/list_of_expenditures/app_bar_with_filtering_options.dart';
 import 'package:Expenses_app/ui/views/list_of_expenditures/list_of_expenditures_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -9,7 +10,7 @@ class ListOfExpendituresView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<ListOfExpendituresViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
-        appBar: AppBar(),
+        appBar: AppBarWithFilterOptions(),
         body: Center(
           child: model.isBusy
               ? Center(child: CircularProgressIndicator())
