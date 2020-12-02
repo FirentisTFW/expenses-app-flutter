@@ -14,7 +14,7 @@ class AppBarWithFilterOptions
       actions: [
         PopupMenuButton(
           icon: Icon(Icons.more_vert),
-          onSelected: model.showFilteringOptions,
+          onSelected: model.filterBy,
           itemBuilder: (_) => [
             PopupMenuItem(
               child: Text('Filter by price'),

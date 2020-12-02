@@ -15,17 +15,18 @@ class ListOfExpendituresView extends StatelessWidget {
           child: model.isBusy
               ? Center(child: CircularProgressIndicator())
               : !model.hasError
-                  ? model.data.length > 0
+                  ? model.expenditures.length > 0
                       ? ListView.builder(
-                          itemCount: model.data.length,
+                          itemCount: model.expenditures.length,
                           itemBuilder: (context, index) {
                             return buildExpenditureItem(
-                              previousDate:
-                                  index > 0 ? model.data[index - 1].date : null,
-                              currentDate: model.data[index].date,
-                              categoryId: model.data[index].categoryId,
-                              title: model.data[index].name,
-                              value: model.data[index].moneyAmount,
+                              previousDate: index > 0
+                                  ? model.expenditures[index - 1].date
+                                  : null,
+                              currentDate: model.expenditures[index].date,
+                              categoryId: model.expenditures[index].categoryId,
+                              title: model.expenditures[index].name,
+                              value: model.expenditures[index].moneyAmount,
                             );
                           })
                       : noItemsYetInfo
@@ -35,6 +36,7 @@ class ListOfExpendituresView extends StatelessWidget {
                     ),
         ),
       ),
+      onModelReady: (model) => model.fetchData(),
       viewModelBuilder: () => ListOfExpendituresViewModel(),
     );
   }

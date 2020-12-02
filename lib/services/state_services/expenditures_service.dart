@@ -17,4 +17,13 @@ class ExpendituresService {
     _expenditures = await _api.getAllExpenditures();
     return _expenditures.reversed.toList();
   }
+
+  List<Expenditure> getExpendituresByPrice(double minPrice, double maxPrice) =>
+      _expenditures
+          .where((element) =>
+              element.moneyAmount >= minPrice &&
+              element.moneyAmount <= maxPrice)
+          .toList()
+          .reversed
+          .toList();
 }
