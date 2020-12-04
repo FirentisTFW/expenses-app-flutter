@@ -26,4 +26,11 @@ class ExpendituresService {
           .toList()
           .reversed
           .toList();
+
+  List<Expenditure> getExpendituresByCategories(List<int> categoriesIds) =>
+      _expenditures
+          .where((element) => categoriesIds.contains(element.categoryId))
+          .toList()
+          .reversed
+          .toList();
 }

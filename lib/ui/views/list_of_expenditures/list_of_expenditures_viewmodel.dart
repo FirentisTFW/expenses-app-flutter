@@ -24,6 +24,8 @@ class ListOfExpendituresViewModel extends BaseViewModel {
 
     if (method == FilteringMethod.ByPrice) {
       await showPriceFilterDialog();
+    } else if (method == FilteringMethod.ByCategory) {
+      await showCategoryFilterDialog();
     }
     notifyListeners();
   }
@@ -35,7 +37,6 @@ class ListOfExpendituresViewModel extends BaseViewModel {
   }
 
   Future showPriceFilterDialog() async {
-    print('lala');
     var response = await _dialogService.showCustomDialog(
       title: 'Filter by price',
       mainButtonTitle: 'Filter',
@@ -44,14 +45,25 @@ class ListOfExpendituresViewModel extends BaseViewModel {
     );
 
     if (response != null && response.confirmed) {
-      print(response.responseData['min']);
-      print(double.parse(response.responseData['min']));
-
       double minPrice = double.parse(response.responseData['min']);
       double maxPrice = double.parse(response.responseData['max']);
 
       _expenditures =
           _expendituresService.getExpendituresByPrice(minPrice, maxPrice);
+    }
+  }
+
+  Future showCategoryFilterDialog() async {
+    var response = await _dialogService.showCustomDialog(
+      title: 'Filter by price',
+      mainButtonTitle: 'Filter',
+      variant: DialogType.CategoryFilter,
+      barrierDismissible: true,
+    );
+
+    if (response != null && response.confirmed) {
+      _expenditures = _expendituresService
+          .getExpendituresByCategories(response.responseData);
     }
   }
 }
