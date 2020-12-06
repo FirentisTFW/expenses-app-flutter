@@ -33,4 +33,13 @@ class ExpendituresService {
           .toList()
           .reversed
           .toList();
+
+  List<Expenditure> getExpendituresByDate(
+          DateTime startDate, DateTime endDate) =>
+      _expenditures
+          .where((element) =>
+              element.date.isAfter(startDate) && element.date.isBefore(endDate))
+          .toList()
+          .reversed
+          .toList();
 }

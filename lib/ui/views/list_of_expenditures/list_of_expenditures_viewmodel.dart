@@ -26,6 +26,8 @@ class ListOfExpendituresViewModel extends BaseViewModel {
       await showPriceFilterDialog();
     } else if (method == FilteringMethod.ByCategory) {
       await showCategoryFilterDialog();
+    } else if (method == FilteringMethod.ByDate) {
+      await showDateFilterDialog();
     }
     notifyListeners();
   }
@@ -55,7 +57,7 @@ class ListOfExpendituresViewModel extends BaseViewModel {
 
   Future showCategoryFilterDialog() async {
     var response = await _dialogService.showCustomDialog(
-      title: 'Filter by price',
+      title: 'Filter by category',
       mainButtonTitle: 'Filter',
       variant: DialogType.CategoryFilter,
       barrierDismissible: true,
@@ -64,6 +66,25 @@ class ListOfExpendituresViewModel extends BaseViewModel {
     if (response != null && response.confirmed) {
       _expenditures = _expendituresService
           .getExpendituresByCategories(response.responseData);
+    }
+  }
+
+  Future showDateFilterDialog() async {
+    var response = await _dialogService.showCustomDialog(
+      title: 'Filter by date',
+      mainButtonTitle: 'Filter',
+      variant: DialogType.DateFilter,
+      barrierDismissible: true,
+    );
+
+    if (response?.responseData != null) {
+      DateTime startDate = response.responseData['startDate'] ?? null;
+      DateTime endDate = response.responseData['endDate'] ?? null;
+
+      if (startDate != null && endDate != null) {
+        _expenditures =
+            _expendituresService.getExpendituresByDate(startDate, endDate);
+      }
     }
   }
 }

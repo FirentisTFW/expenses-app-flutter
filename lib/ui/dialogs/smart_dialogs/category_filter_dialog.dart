@@ -15,7 +15,6 @@ class CategoryFilterDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog(
       child: ViewModelBuilder<CategoryFilterDialogViewModel>.reactive(
-        viewModelBuilder: () => CategoryFilterDialogViewModel(),
         builder: (context, model, chile) => Container(
           height: 200,
           child: model.isBusy
@@ -37,6 +36,7 @@ class CategoryFilterDialog extends StatelessWidget {
                     )
                   : Container(child: Text('Errorek')),
         ),
+        viewModelBuilder: () => CategoryFilterDialogViewModel(),
       ),
     );
   }
