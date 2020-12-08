@@ -1,3 +1,4 @@
+import 'package:Expenses_app/ui/universal_widgets/error_info.dart';
 import 'package:Expenses_app/ui/universal_widgets/expenditure_item.dart';
 import 'package:Expenses_app/ui/views/list_of_expenditures/app_bar_with_filtering_options.dart';
 import 'package:Expenses_app/ui/views/list_of_expenditures/list_of_expenditures_viewmodel.dart';
@@ -30,10 +31,7 @@ class ListOfExpendituresView extends StatelessWidget {
                             );
                           })
                       : noItemsYetInfo
-                  : Container(
-                      child: Text('err'),
-                      // TODO: show error dialog
-                    ),
+                  : ErrorInfo(model.modelError.toString()),
         ),
       ),
       onModelReady: (model) => model.fetchData(),

@@ -1,4 +1,5 @@
 import 'package:Expenses_app/datamodels/enums/grouping_method.dart';
+import 'package:Expenses_app/ui/universal_widgets/error_info.dart';
 import 'package:Expenses_app/ui/universal_widgets/expenses_pie_chart.dart';
 import 'package:Expenses_app/ui/universal_widgets/last_months_bar_chart.dart';
 import 'package:Expenses_app/ui/views/trends_view/selection_fields.dart';
@@ -29,7 +30,13 @@ class TrendsChart extends ViewModelWidget<TrendsViewModel> {
   Widget build(BuildContext context, TrendsViewModel model) {
     return model.isBusy
         ? loadingSpinner
-        : model.isDataFetched ? _buildChart(model) : Container();
+        : !model.hasError
+            ? model.isDataFetched
+                ? _buildChart(model)
+                : Container()
+            : Container(
+                padding: const EdgeInsets.all(30),
+                child: ErrorInfo(model.modelError.toString()));
   }
 
   Widget _buildChart(TrendsViewModel model) {

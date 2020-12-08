@@ -1,3 +1,4 @@
+import 'package:Expenses_app/ui/universal_widgets/error_info.dart';
 import 'package:Expenses_app/ui/universal_widgets/last_months_bar_chart.dart';
 import 'package:Expenses_app/ui/views/last_expenditures/smart_widgets/last_months_expenses_chart_viewmodel.dart';
 import 'package:flutter/material.dart';
@@ -16,10 +17,7 @@ class LastMonthsExpensesChart extends StatelessWidget {
                     LastMonthsBarChart.buildFromData(initialData: model.data),
                   ],
                 )
-              : Container(
-                  child: Text('err'),
-                  // TODO: show error dialog
-                ),
+              : ErrorInfo(model.modelError.toString()),
       viewModelBuilder: () => LastMonthsExpensesChartViewModel(),
     );
   }

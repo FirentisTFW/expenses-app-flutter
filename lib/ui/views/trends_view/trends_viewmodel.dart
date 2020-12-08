@@ -33,6 +33,7 @@ class TrendsViewModel extends BaseViewModel {
 
   Future<void> _setBusyAndFetchData() async {
     setBusy(true);
+    clearErrors();
     notifyListeners();
     await _fetchDataForRequest();
     setBusy(false);
@@ -47,13 +48,21 @@ class TrendsViewModel extends BaseViewModel {
   }
 
   Future<void> _fetchMonthlyExpenses() async {
-    _data = await _totalExpensesService.getTotalMonthlyExpensesInTimeSpan(
-        _firstDate, _secondDate);
+    try {
+      _data = await _totalExpensesService.getTotalMonthlyExpensesInTimeSpan(
+          _firstDate, _secondDate);
+    } catch (err) {
+      setError(err);
+    }
   }
 
   Future<void> _fetchCategoryExpenses() async {
-    _data = await _totalExpensesService.getTotalCategoryExpensesInTimeSpan(
-        _firstDate, _secondDate);
+    try {
+      _data = await _totalExpensesService.getTotalCategoryExpensesInTimeSpan(
+          _firstDate, _secondDate);
+    } catch (err) {
+      setError(err);
+    }
   }
 
   void setGroupingMethod(value) => _groupingMethod = value;

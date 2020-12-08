@@ -15,7 +15,11 @@ class ListOfExpendituresViewModel extends BaseViewModel {
 
   Future<void> fetchData() async {
     setBusy(true);
-    _expenditures = await _expendituresService.getAllExpenditures();
+    try {
+      _expenditures = await _expendituresService.getAllExpenditures();
+    } catch (err) {
+      setError(err);
+    }
     setBusy(false);
   }
 

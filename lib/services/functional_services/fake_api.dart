@@ -45,6 +45,7 @@ class FakeApi extends Api {
   @override
   Future<List<Expenditure>> getAllExpenditures() async {
     await delayRequest();
+    // throw ErrorDescription('Error occured!');
     return [
       Expenditure(
           id: 0,
@@ -428,6 +429,7 @@ class FakeApi extends Api {
   Future<List<TotalMonthlyExpenses>> getMonthlyTotalExpensesInLastMonths(
       int howManyMonths) async {
     await delayRequest();
+
     return [
       TotalMonthlyExpenses(name: '8', totalMoneyAmount: 2464),
       TotalMonthlyExpenses(name: '9', totalMoneyAmount: 2122),

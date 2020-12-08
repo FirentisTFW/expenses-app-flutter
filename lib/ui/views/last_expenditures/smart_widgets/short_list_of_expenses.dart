@@ -1,3 +1,4 @@
+import 'package:Expenses_app/ui/universal_widgets/error_info.dart';
 import 'package:Expenses_app/ui/universal_widgets/expenditure_item.dart';
 import 'package:Expenses_app/ui/views/last_expenditures/smart_widgets/short_list_of_expenses_viewmodel.dart';
 import 'package:flutter/material.dart';
@@ -29,10 +30,7 @@ class ShortListOfExpenses extends StatelessWidget {
                                         ))
                                     .toList())
                             : noItemsYetInfo
-                        : Container(
-                            child: Text('err'),
-                            // TODO: show error dialog
-                          ),
+                        : ErrorInfo(model.modelError.toString()),
               ),
               _ShowAllButton(),
             ],
