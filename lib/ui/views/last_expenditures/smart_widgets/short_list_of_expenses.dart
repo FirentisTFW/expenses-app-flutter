@@ -58,7 +58,7 @@ class _ShowAllButton extends ViewModelWidget<ShortListOfExpensesViewModel> {
           'Show All Expenditures',
           style: TextStyle(color: Colors.white, fontSize: 20),
         ),
-        onPressed: model.goToListOfExpansesView,
+        onPressed: model.goToListOfExpensesView,
       ),
     );
   }

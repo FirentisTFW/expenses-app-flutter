@@ -30,7 +30,6 @@ dependencies:
   auto_route: 0.6.7
   get_it: ^5.0.1
   flutter_icons: ^1.1.0
-  auto_route_generator:
   intl: ^0.16.1
   charts_flutter: ^0.9.0
   multi_select_flutter: ^3.1.2
@@ -42,6 +41,9 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   build_runner:
+  mockito:
+  auto_route_generator:
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

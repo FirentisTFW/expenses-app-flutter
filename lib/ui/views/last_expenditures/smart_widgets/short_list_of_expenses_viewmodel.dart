@@ -13,7 +13,7 @@ class ShortListOfExpensesViewModel extends FutureViewModel<List<Expenditure>> {
   Future<List<Expenditure>> futureToRun() =>
       _expendituresService.getLastExpenditures(5);
 
-  Future goToListOfExpansesView() async {
+  Future goToListOfExpensesView() async {
     await _navigationService.navigateTo(Routes.listOfExpendituresView);
   }
 }
