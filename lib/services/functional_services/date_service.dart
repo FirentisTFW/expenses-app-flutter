@@ -13,9 +13,9 @@ class DateService {
     return monthsList.reversed.toList();
   }
 
-  static DateTime setToLastDayOfTheMonth(DateTime date) {
+  static DateTime getLastDayOfTheMonth(DateTime date) {
     var nextMonth = DateTime(date.month < 12 ? date.year : date.year + 1,
         date.month < 12 ? date.month + 1 : 1);
-    return nextMonth.subtract(Duration(microseconds: 1));
+    return nextMonth.subtract(Duration(milliseconds: 1));
   }
 }

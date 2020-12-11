@@ -80,5 +80,5 @@ class TrendsViewModel extends BaseViewModel {
   }
 
   void _setSecondDateToLastDayOfMonth() =>
-      _secondDate = DateService.setToLastDayOfTheMonth(_secondDate);
+      _secondDate = DateService.getLastDayOfTheMonth(_secondDate);
 }
