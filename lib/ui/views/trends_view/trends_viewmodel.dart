@@ -35,11 +35,12 @@ class TrendsViewModel extends BaseViewModel {
     setBusy(true);
     clearErrors();
     notifyListeners();
-    await _fetchDataForRequest();
+    await fetchDataForRequest();
     setBusy(false);
   }
 
-  Future<void> _fetchDataForRequest() async {
+  @visibleForTesting
+  Future<void> fetchDataForRequest() async {
     if (_groupingMethod == GroupingMethod.ByMonths) {
       await _fetchMonthlyExpenses();
     } else if (_groupingMethod == GroupingMethod.ByCategories) {

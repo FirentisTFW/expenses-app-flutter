@@ -74,7 +74,7 @@ class PriceFilterDialog extends HookWidget {
           decoration: InputDecoration(hintText: hintText),
           keyboardType: TextInputType.number,
           textAlign: TextAlign.center,
-          validator: Validator.validateForDouble,
+          validator: Validator.vaidateForNonNegativeDouble,
         ),
       );
 
