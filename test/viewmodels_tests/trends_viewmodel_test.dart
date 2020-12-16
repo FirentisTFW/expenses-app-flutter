@@ -1,6 +1,7 @@
 import 'package:Expenses_app/datamodels/enums/grouping_method.dart';
 import 'package:Expenses_app/datamodels/total_expenses.dart';
 import 'package:Expenses_app/ui/views/trends_view/trends_viewmodel.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
@@ -16,25 +17,60 @@ void main() {
         var model = TrendsViewModel();
         expect(model.isDataFetched, false);
       });
-      //   test(
-      //       'When fetchDataForRequest is called and returns correct values, should return true',
-      //       () async {
-      //     var totalExpensesService = getAndRegisterTotalExpensesServiceMock();
-      //     var model = TrendsViewModel();
-      //     model.setFirstDate(DateTime(2020, 01, 01));
-      //     model.setSecondDate(DateTime(2020, 02, 01));
-      //     model.setGroupingMethod(GroupingMethod.ByCategories);
+      test(
+          'When fetchDataForRequest is called and returns correct values, should return true',
+          () async {
+        var totalExpensesService = getAndRegisterTotalExpensesServiceMock();
+        var model = TrendsViewModel();
+        model.setFirstDate(DateTime(2020, 01, 01));
+        model.setSecondDate(DateTime(2020, 02, 01));
+        model.setGroupingMethod(GroupingMethod.ByCategories);
 
-      //     when(await totalExpensesService.getTotalCategoryExpensesInTimeSpan(
-      //             DateTime(2020, 01, 01), DateTime(2020, 02, 01)))
-      //         .thenReturn([
-      //       TotalCategoryExpenses(totalMoneyAmount: 222.33, name: 'Bills')
-      //     ]);
+        when(totalExpensesService.getTotalCategoryExpensesInTimeSpan(
+                DateTime(2020, 01, 01), DateTime(2020, 02, 01)))
+            .thenAnswer((_) async => [
+                  TotalCategoryExpenses(totalMoneyAmount: 222.33, name: 'Bills')
+                ]);
 
-      //     print(model.data.toString());
+        await model.fetchDataForRequest();
 
-      //     expect(model.isDataFetched, true);
-      //   });
+        expect(model.isDataFetched, true);
+      });
+      test(
+          'When fetchDataForRequest is called and returns null values, should return false',
+          () async {
+        var totalExpensesService = getAndRegisterTotalExpensesServiceMock();
+        var model = TrendsViewModel();
+        model.setFirstDate(DateTime(2020, 01, 01));
+        model.setSecondDate(DateTime(2020, 02, 01));
+        model.setGroupingMethod(GroupingMethod.ByCategories);
+
+        when(totalExpensesService.getTotalCategoryExpensesInTimeSpan(
+                DateTime(2020, 01, 01), DateTime(2020, 02, 01)))
+            .thenAnswer((_) async => null);
+
+        await model.fetchDataForRequest();
+
+        expect(model.isDataFetched, false);
+      });
+      test(
+          'When fetchDataForRequest is called and throws error, should return false',
+          () async {
+        var totalExpensesService = getAndRegisterTotalExpensesServiceMock();
+        var model = TrendsViewModel();
+        model.setFirstDate(DateTime(2020, 01, 01));
+        model.setSecondDate(DateTime(2020, 02, 01));
+        model.setGroupingMethod(GroupingMethod.ByCategories);
+
+        when(totalExpensesService.getTotalCategoryExpensesInTimeSpan(
+                DateTime(2020, 01, 01), DateTime(2020, 02, 01)))
+            .thenAnswer(
+                (_) async => throw ErrorDescription('Could not fetch data'));
+
+        await model.fetchDataForRequest();
+
+        expect(model.isDataFetched, false);
+      });
     });
     group('fetchDataForRequest -', () {
       test(
@@ -60,6 +96,115 @@ void main() {
         await model.fetchDataForRequest();
         verify(totalExpensesService.getTotalMonthlyExpensesInTimeSpan(
             DateTime(2020, 01, 01), DateTime(2020, 02, 01)));
+      });
+    });
+    group('hasError -', () {
+      test(
+          'When _fetchCategoryExpenses is called and throws error, should return true',
+          () async {
+        var totalExpensesService = getAndRegisterTotalExpensesServiceMock();
+        var model = TrendsViewModel();
+        model.setFirstDate(DateTime(2020, 01, 01));
+        model.setSecondDate(DateTime(2020, 02, 01));
+        model.setGroupingMethod(GroupingMethod.ByCategories);
+
+        when(totalExpensesService.getTotalCategoryExpensesInTimeSpan(
+                DateTime(2020, 01, 01), DateTime(2020, 02, 01)))
+            .thenAnswer(
+                (_) async => throw ErrorDescription('Could not fetch data'));
+
+        await model.fetchDataForRequest();
+
+        expect(model.hasError, true);
+      });
+      test(
+          'When _fetchCategoryExpenses is called and returns correct values, should return false',
+          () async {
+        var totalExpensesService = getAndRegisterTotalExpensesServiceMock();
+        var model = TrendsViewModel();
+        model.setFirstDate(DateTime(2020, 01, 01));
+        model.setSecondDate(DateTime(2020, 02, 01));
+        model.setGroupingMethod(GroupingMethod.ByCategories);
+
+        when(totalExpensesService.getTotalCategoryExpensesInTimeSpan(
+                DateTime(2020, 01, 01), DateTime(2020, 02, 01)))
+            .thenAnswer((_) async => [
+                  TotalCategoryExpenses(totalMoneyAmount: 222.33, name: 'Bills')
+                ]);
+
+        await model.fetchDataForRequest();
+
+        expect(model.hasError, false);
+      });
+      test(
+          'When _fetchCategoryExpenses is called and returns null, should return false',
+          () async {
+        var totalExpensesService = getAndRegisterTotalExpensesServiceMock();
+        var model = TrendsViewModel();
+        model.setFirstDate(DateTime(2020, 01, 01));
+        model.setSecondDate(DateTime(2020, 02, 01));
+        model.setGroupingMethod(GroupingMethod.ByCategories);
+
+        when(totalExpensesService.getTotalCategoryExpensesInTimeSpan(
+                DateTime(2020, 01, 01), DateTime(2020, 02, 01)))
+            .thenAnswer((_) async => null);
+
+        await model.fetchDataForRequest();
+
+        expect(model.hasError, false);
+      });
+      test(
+          'When _fetchMonthlyExpenses is called and throws error, should return true',
+          () async {
+        var totalExpensesService = getAndRegisterTotalExpensesServiceMock();
+        var model = TrendsViewModel();
+        model.setFirstDate(DateTime(2020, 01, 01));
+        model.setSecondDate(DateTime(2020, 02, 01));
+        model.setGroupingMethod(GroupingMethod.ByMonths);
+
+        when(totalExpensesService.getTotalMonthlyExpensesInTimeSpan(
+                DateTime(2020, 01, 01), DateTime(2020, 02, 01)))
+            .thenAnswer(
+                (_) async => throw ErrorDescription('Could not fetch data'));
+
+        await model.fetchDataForRequest();
+
+        expect(model.hasError, true);
+      });
+      test(
+          'When _fetchMonthlyExpenses is called and returns correct values, should return false',
+          () async {
+        var totalExpensesService = getAndRegisterTotalExpensesServiceMock();
+        var model = TrendsViewModel();
+        model.setFirstDate(DateTime(2020, 01, 01));
+        model.setSecondDate(DateTime(2020, 02, 01));
+        model.setGroupingMethod(GroupingMethod.ByMonths);
+
+        when(totalExpensesService.getTotalMonthlyExpensesInTimeSpan(
+                DateTime(2020, 01, 01), DateTime(2020, 02, 01)))
+            .thenAnswer((_) async =>
+                [TotalMonthlyExpenses(totalMoneyAmount: 3500.22, name: '4')]);
+
+        await model.fetchDataForRequest();
+
+        expect(model.hasError, false);
+      });
+      test(
+          'When _fetchMonthlyExpenses is called and returns null, should return false',
+          () async {
+        var totalExpensesService = getAndRegisterTotalExpensesServiceMock();
+        var model = TrendsViewModel();
+        model.setFirstDate(DateTime(2020, 01, 01));
+        model.setSecondDate(DateTime(2020, 02, 01));
+        model.setGroupingMethod(GroupingMethod.ByMonths);
+
+        when(totalExpensesService.getTotalMonthlyExpensesInTimeSpan(
+                DateTime(2020, 01, 01), DateTime(2020, 02, 01)))
+            .thenAnswer((_) async => null);
+
+        await model.fetchDataForRequest();
+
+        expect(model.hasError, false);
       });
     });
   });
