@@ -1,8 +1,8 @@
 import 'package:Expenses_app/app/locator.dart';
 import 'package:Expenses_app/ui/universal_widgets/error_info.dart';
 import 'package:Expenses_app/ui/universal_widgets/expenses_pie_chart.dart';
-import 'package:Expenses_app/ui/views/this_month_chart/smart_widgets/new_category_button.dart';
-import 'package:Expenses_app/ui/views/this_month_chart/smart_widgets/new_expenditure_button.dart';
+import 'package:Expenses_app/ui/views/this_month_chart/new_category_button.dart';
+import 'package:Expenses_app/ui/views/this_month_chart/new_expenditure_button.dart';
 import 'package:Expenses_app/ui/views/this_month_chart/this_month_chart_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';

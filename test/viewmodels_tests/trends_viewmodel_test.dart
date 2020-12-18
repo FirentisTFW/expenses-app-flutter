@@ -1,6 +1,6 @@
 import 'package:Expenses_app/datamodels/enums/grouping_method.dart';
 import 'package:Expenses_app/datamodels/total_expenses.dart';
-import 'package:Expenses_app/ui/views/trends_view/trends_viewmodel.dart';
+import 'package:Expenses_app/ui/views/trends/trends_viewmodel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';

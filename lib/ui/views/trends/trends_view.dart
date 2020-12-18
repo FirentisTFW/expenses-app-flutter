@@ -2,8 +2,8 @@ import 'package:Expenses_app/datamodels/enums/grouping_method.dart';
 import 'package:Expenses_app/ui/universal_widgets/error_info.dart';
 import 'package:Expenses_app/ui/universal_widgets/expenses_pie_chart.dart';
 import 'package:Expenses_app/ui/universal_widgets/last_months_bar_chart.dart';
-import 'package:Expenses_app/ui/views/trends_view/selection_fields.dart';
-import 'package:Expenses_app/ui/views/trends_view/trends_viewmodel.dart';
+import 'package:Expenses_app/ui/views/trends/selection_fields.dart';
+import 'package:Expenses_app/ui/views/trends/trends_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 

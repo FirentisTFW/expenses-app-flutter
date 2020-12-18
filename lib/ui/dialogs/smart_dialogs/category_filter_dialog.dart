@@ -1,4 +1,4 @@
-import 'package:Expenses_app/ui/dialogs/smart_dialogs/category_filter_dialog_viewmodel.dart';
+import 'package:Expenses_app/ui/universal_viewmodels/category_filter_dialog_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:stacked/stacked.dart';
@@ -14,7 +14,7 @@ class CategoryFilterDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      child: ViewModelBuilder<CategoryFilterDialogViewModel>.reactive(
+      child: ViewModelBuilder<CategoriesViewModel>.reactive(
         builder: (context, model, chile) => Container(
           height: 200,
           child: model.isBusy
@@ -36,7 +36,7 @@ class CategoryFilterDialog extends StatelessWidget {
                     )
                   : Container(child: Text('Errorek')),
         ),
-        viewModelBuilder: () => CategoryFilterDialogViewModel(),
+        viewModelBuilder: () => CategoriesViewModel(),
       ),
     );
   }

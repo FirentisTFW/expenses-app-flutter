@@ -1,5 +1,5 @@
 import 'package:Expenses_app/datamodels/enums/grouping_method.dart';
-import 'package:Expenses_app/ui/views/trends_view/trends_viewmodel.dart';
+import 'package:Expenses_app/ui/views/trends/trends_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:stacked/stacked.dart';
