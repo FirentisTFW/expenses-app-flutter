@@ -41,5 +41,13 @@ void main() {
         expect(Validator.vaidateForNonNegativeDouble('1'), null);
       });
     });
+    group('validateForEmptyString -', () {
+      test('Given empty String returns hint message', () {
+        expect(Validator.validateForEmptyString(''), isA<String>());
+      });
+      test('Given non-empty String returns null', () {
+        expect(Validator.validateForEmptyString('value'), null);
+      });
+    });
   });
 }
