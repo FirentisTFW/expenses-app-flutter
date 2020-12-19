@@ -75,7 +75,8 @@ void main() {
             throw ErrorDescription('Couldn\'t add expenditure to database.'));
 
         await model.addExpenditureAndShowSnackbar();
-        verify(snackbarService.showSnackbar(message: model.error.toString()));
+        verify(
+            snackbarService.showSnackbar(message: model.modelError.toString()));
       });
     });
   });

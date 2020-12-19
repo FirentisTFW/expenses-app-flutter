@@ -59,7 +59,7 @@ class NewExpenditureViewModel extends BaseViewModel {
       _snackbarService.showSnackbar(message: 'Expenditure added succesfully.');
 
   void showSnackbarWithErrorMessage() =>
-      _snackbarService.showSnackbar(message: error.toString());
+      _snackbarService.showSnackbar(message: modelError.toString());
 
   void setExpenditureName(String name) => _expenditureName = name;
 
