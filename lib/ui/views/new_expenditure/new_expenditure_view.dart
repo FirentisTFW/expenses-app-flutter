@@ -1,4 +1,5 @@
 import 'package:Expenses_app/datamodels/category.dart';
+import 'package:Expenses_app/services/functional_services/validator.dart';
 import 'package:Expenses_app/ui/universal_viewmodels/category_filter_dialog_viewmodel.dart';
 import 'package:Expenses_app/ui/views/new_expenditure/new_expenditure_viewmodel.dart';
 import 'package:flutter/material.dart';
@@ -44,6 +45,7 @@ class _ExpendtiureNameInput extends ViewModelWidget<NewExpenditureViewModel> {
       padding: const EdgeInsets.symmetric(vertical: 20),
       child: TextFormField(
         decoration: InputDecoration(hintText: 'Name'),
+        validator: Validator.validateForEmptyString,
         onSaved: model.setExpenditureName,
       ),
     );
@@ -60,7 +62,8 @@ class _AmountInput extends ViewModelWidget<NewExpenditureViewModel> {
       child: TextFormField(
         decoration: InputDecoration(hintText: 'Amount'),
         keyboardType: TextInputType.number,
-        onSaved: model.setExpenditureName,
+        validator: Validator.vaidateForNonNegativeDouble,
+        onSaved: (value) => model.setMoneyAmount(double.parse(value)),
       ),
     );
   }
@@ -104,11 +107,8 @@ class _DateSelection extends ViewModelWidget<NewExpenditureViewModel> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 20),
       child: FlatButton(
-        child: Text(
-            model.isDateSet
-                ? DateFormat('yMd').format(model.expenditureDate)
-                : 'Choose Date',
-            style: TextStyle(fontSize: 18)),
+        child: Text('Date: ' + DateFormat('yMd').format(model.expenditureDate),
+            style: TextStyle(fontSize: 20)),
         onPressed: () => DatePicker.showDatePicker(
           context,
           currentTime: DateTime.now(),
@@ -128,23 +128,27 @@ class _DateSelection extends ViewModelWidget<NewExpenditureViewModel> {
 }
 
 class _AddExpenditureButton extends ViewModelWidget<NewExpenditureViewModel> {
-  _AddExpenditureButton() : super(reactive: false);
-
   @override
   Widget build(BuildContext context, NewExpenditureViewModel model) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 10),
-      child: RaisedButton(
-        color: Colors.red[400],
-        child: Padding(
-          padding: const EdgeInsets.all(20),
-          child: const Text(
-            'Add Expenditure',
-            style: TextStyle(fontSize: 22),
-          ),
-        ),
-        onPressed: () {},
-      ),
-    );
+    return model.isBusy
+        ? loadingSpinner
+        : Padding(
+            padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 10),
+            child: RaisedButton(
+              color: Colors.red[400],
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: const Text(
+                  'Add Expenditure',
+                  style: TextStyle(fontSize: 22),
+                ),
+              ),
+              onPressed: model.validateAndAddExpenditure,
+            ),
+          );
   }
+
+  final loadingSpinner = Padding(
+      padding: const EdgeInsets.all(20),
+      child: Center(child: CircularProgressIndicator()));
 }

@@ -13,7 +13,7 @@ class FakeApi extends Api {
   @override
   Future<void> addExpenditure(Expenditure expenditure) async {
     // TODO: implement addExpenditure
-    throw UnimplementedError();
+    await delayRequest();
   }
 
   @override
