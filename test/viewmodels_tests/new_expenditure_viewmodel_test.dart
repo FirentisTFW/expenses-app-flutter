@@ -23,7 +23,6 @@ void main() {
       test(
           'When expenditure properties are set correct and api returns no error, function returns true',
           () async {
-        var api = getAndRegisterApiMock();
         var model = NewExpenditureViewModel();
         model.setExpenditureCategory(1);
         model.setExpenditureName('Groceries');
@@ -34,23 +33,22 @@ void main() {
       test(
           'When expenditures properties are set correct and api throws an error, function returns false',
           () async {
-        var api = getAndRegisterApiMock();
+        var expendituresService = getAndRegisterExpendituresServiceMock();
         var model = NewExpenditureViewModel();
         model.setExpenditureCategory(1);
         model.setExpenditureName('Groceries');
         model.setMoneyAmount(43.26);
 
-        when(api.addExpenditure(any)).thenAnswer((_) =>
-            throw ErrorDescription('Couldn\'t add expenditure to database.'));
+        when(expendituresService.addExpenditure(any)).thenThrow(
+            ErrorDescription('Couldn\'t add expenditure to database.'));
 
         expect(await model.addExpenditure(), false);
       });
     });
     group('addExpenditureAndShowSnackbar -', () {
       test(
-          'When expenditures properties are set correct and api returns no error, SnackbarService shows snackbar with success message',
+          'When expenditure properties are set correct and api returns no error, SnackbarService shows snackbar with success message',
           () async {
-        var api = getAndRegisterApiMock();
         var snackbarService = getAndRegisterSnackbarServiceMock();
         var model = NewExpenditureViewModel();
         model.setExpenditureCategory(1);
@@ -62,17 +60,18 @@ void main() {
             message: 'Expenditure added succesfully.'));
       });
       test(
-          'When expenditures properties are set correct and api throws an error, SnackbarService shows snackbar with error',
+          'When expenditure properties are set correct and api throws an error, SnackbarService shows snackbar with error',
           () async {
-        var api = getAndRegisterApiMock();
+        var expendituresService = getAndRegisterExpendituresServiceMock();
+
         var snackbarService = getAndRegisterSnackbarServiceMock();
         var model = NewExpenditureViewModel();
         model.setExpenditureCategory(1);
         model.setExpenditureName('Groceries');
         model.setMoneyAmount(43.26);
 
-        when(api.addExpenditure(any)).thenAnswer((_) =>
-            throw ErrorDescription('Couldn\'t add expenditure to database.'));
+        when(expendituresService.addExpenditure(any)).thenThrow(
+            ErrorDescription('Couldn\'t add expenditure to database.'));
 
         await model.addExpenditureAndShowSnackbar();
         verify(

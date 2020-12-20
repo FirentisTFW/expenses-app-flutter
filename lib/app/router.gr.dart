@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 
 import '../ui/views/home/home_view.dart';
 import '../ui/views/list_of_expenditures/list_of_expenditures_view.dart';
+import '../ui/views/new_category/new_category_view.dart';
 import '../ui/views/new_expenditure/new_expenditure_view.dart';
 import '../ui/views/trends/trends_view.dart';
 
@@ -19,11 +20,13 @@ class Routes {
   static const String listOfExpendituresView = '/list-of-expenditures-view';
   static const String trendsView = '/trends-view';
   static const String newExpenditureView = '/new-expenditure-view';
+  static const String newCategoryView = '/new-category-view';
   static const all = <String>{
     homeView,
     listOfExpendituresView,
     trendsView,
     newExpenditureView,
+    newCategoryView,
   };
 }
 
@@ -35,6 +38,7 @@ class Router extends RouterBase {
     RouteDef(Routes.listOfExpendituresView, page: ListOfExpendituresView),
     RouteDef(Routes.trendsView, page: TrendsView),
     RouteDef(Routes.newExpenditureView, page: NewExpenditureView),
+    RouteDef(Routes.newCategoryView, page: NewCategoryView),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -60,6 +64,12 @@ class Router extends RouterBase {
     NewExpenditureView: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => NewExpenditureView(),
+        settings: data,
+      );
+    },
+    NewCategoryView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => NewCategoryView(),
         settings: data,
       );
     },

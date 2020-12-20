@@ -17,7 +17,7 @@ class NewCategoryButton extends ViewModelWidget<ThisMonthChartViewModel> {
           'New Category',
           style: TextStyle(fontSize: 22),
         ),
-        onPressed: () {},
+        onPressed: model.goToNewCategoryView,
       ),
     );
   }

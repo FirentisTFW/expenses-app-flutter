@@ -2,12 +2,13 @@ import 'package:Expenses_app/datamodels/expenditure.dart';
 import 'package:Expenses_app/datamodels/category.dart';
 import 'package:Expenses_app/datamodels/total_expenses.dart';
 import 'package:Expenses_app/services/functional_services/api.dart';
+import 'package:flutter/cupertino.dart';
 
 class FakeApi extends Api {
   @override
   Future<void> addCategory(Category category) async {
     // TODO: implement addCategory
-    throw UnimplementedError();
+    await delayRequest();
   }
 
   @override

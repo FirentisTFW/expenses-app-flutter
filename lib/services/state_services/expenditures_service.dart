@@ -8,6 +8,9 @@ class ExpendituresService {
   List<Expenditure> _expenditures;
   List<Expenditure> get expenditures => _expenditures;
 
+  Future addExpenditure(Expenditure expenditure) async =>
+      await _api.addExpenditure(expenditure);
+
   Future<List<Expenditure>> getLastExpenditures(int howMany) async {
     _expenditures = await _api.getLastExpenditures(howMany: 10);
     return _expenditures.reversed.toList();

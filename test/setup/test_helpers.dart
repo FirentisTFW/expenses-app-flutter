@@ -1,5 +1,6 @@
 import 'package:Expenses_app/app/locator.dart';
 import 'package:Expenses_app/services/functional_services/api.dart';
+import 'package:Expenses_app/services/state_services/categories_service.dart';
 import 'package:Expenses_app/services/state_services/expenditures_service.dart';
 import 'package:Expenses_app/services/state_services/total_expenses_service.dart';
 import 'package:mockito/mockito.dart';
@@ -12,6 +13,8 @@ class DialogServiceMock extends Mock implements DialogService {}
 class SnackbarServiceMock extends Mock implements SnackbarService {}
 
 class ExpendituresServiceMock extends Mock implements ExpendituresService {}
+
+class CategoriesServiceMock extends Mock implements CategoriesService {}
 
 class TotalExpensesServiceMock extends Mock implements TotalExpensesService {}
 
@@ -45,6 +48,13 @@ ExpendituresService getAndRegisterExpendituresServiceMock() {
   return service;
 }
 
+CategoriesService getAndRegisterCategoriesServiceMock() {
+  _removeRegistrationIfExists<CategoriesService>();
+  var service = CategoriesServiceMock();
+  locator.registerSingleton<CategoriesService>(service);
+  return service;
+}
+
 TotalExpensesService getAndRegisterTotalExpensesServiceMock() {
   _removeRegistrationIfExists<TotalExpensesService>();
   var service = TotalExpensesServiceMock();
@@ -64,6 +74,7 @@ void registerServices() {
   getAndRegisterDialogServiceMock();
   getAndRegisterSnackbarServiceMock();
   getAndRegisterExpendituresServiceMock();
+  getAndRegisterCategoriesServiceMock();
   getAndRegisterTotalExpensesServiceMock();
   getAndRegisterApiMock();
 }
@@ -73,6 +84,7 @@ void unregisterServices() {
   locator.unregister<DialogService>();
   locator.unregister<SnackbarService>();
   locator.unregister<ExpendituresService>();
+  locator.unregister<CategoriesService>();
   locator.unregister<TotalExpensesService>();
   locator.unregister<Api>();
 }

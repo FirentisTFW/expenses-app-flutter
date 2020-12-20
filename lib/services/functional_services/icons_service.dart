@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 
 class IconsService {
+  static const numberOfIcons = 19;
+
   static Icon getIconForCategory(int categoryId) {
     switch (categoryId) {
       case 0: // accomodation

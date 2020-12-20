@@ -1,12 +1,12 @@
 import 'package:Expenses_app/app/locator.dart';
 import 'package:Expenses_app/datamodels/expenditure.dart';
-import 'package:Expenses_app/services/functional_services/api.dart';
+import 'package:Expenses_app/services/state_services/expenditures_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 class NewExpenditureViewModel extends BaseViewModel {
-  var _api = locator<Api>();
+  var _expendituresService = locator<ExpendituresService>();
   var _navigationService = locator<NavigationService>();
   var _snackbarService = locator<SnackbarService>();
 
@@ -22,6 +22,7 @@ class NewExpenditureViewModel extends BaseViewModel {
     setBusy(true);
     var isValid = formKey.currentState.validate();
     if (isValid) {
+      formKey.currentState.save();
       await addExpenditureAndShowSnackbar();
     }
     setBusy(false);
@@ -47,7 +48,7 @@ class NewExpenditureViewModel extends BaseViewModel {
     );
 
     try {
-      await _api.addExpenditure(newExpenditure);
+      await _expendituresService.addExpenditure(newExpenditure);
       return true;
     } catch (err) {
       setError(err);

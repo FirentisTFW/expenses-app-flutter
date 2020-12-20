@@ -20,4 +20,8 @@ class ThisMonthChartViewModel
   Future goToNewExpenditureView() async {
     await _navigationService.navigateTo(Routes.newExpenditureView);
   }
+
+  Future goToNewCategoryView() async {
+    await _navigationService.navigateTo(Routes.newCategoryView);
+  }
 }

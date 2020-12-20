@@ -8,6 +8,9 @@ class CategoriesService {
   List<Category> _categories;
   List<Category> get categories => _categories;
 
+  Future addCategory(Category category) async =>
+      await _api.addCategory(category);
+
   Future<List<Category>> getAllCategories() async {
     _categories = await _api.getAllCategories();
     return _categories;
