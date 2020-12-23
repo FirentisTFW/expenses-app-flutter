@@ -10,9 +10,11 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<HomeViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
-        body: Center(
-          child: model.getViewForIndex(),
-        ),
+        body: model.isBusy
+            ? Center(child: CircularProgressIndicator())
+            : Center(
+                child: model.getViewForIndex(),
+              ),
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           backgroundColor: Colors.grey[800],
@@ -30,6 +32,7 @@ class HomeView extends StatelessWidget {
           ],
         ),
       ),
+      onModelReady: (model) => model.initialise(),
       viewModelBuilder: () => HomeViewModel(),
     );
   }

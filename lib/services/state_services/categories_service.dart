@@ -8,6 +8,8 @@ class CategoriesService {
   List<Category> _categories;
   List<Category> get categories => _categories;
 
+  bool get areCategoriesFetched => _categories != null;
+
   Future addCategory(Category category) async =>
       await _api.addCategory(category);
 
@@ -15,4 +17,7 @@ class CategoriesService {
     _categories = await _api.getAllCategories();
     return _categories;
   }
+
+  int getIconIdForCategory(int categoryId) =>
+      _categories.firstWhere((c) => c.id == categoryId).iconId;
 }

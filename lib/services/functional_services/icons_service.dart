@@ -1,3 +1,5 @@
+import 'package:Expenses_app/app/locator.dart';
+import 'package:Expenses_app/services/state_services/categories_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 
@@ -5,7 +7,11 @@ class IconsService {
   static const numberOfIcons = 19;
 
   static Icon getIconForCategory(int categoryId) {
-    switch (categoryId) {
+    final categoriesService = locator<CategoriesService>();
+
+    int iconId = categoriesService.getIconIdForCategory(categoryId);
+
+    switch (iconId) {
       case 0: // accomodation
         return Icon(MaterialCommunityIcons.home);
       case 1: // alcohol
