@@ -1,6 +1,6 @@
 import 'package:Expenses_app/app/locator.dart';
 import 'package:Expenses_app/datamodels/total_expenses.dart';
-import 'package:Expenses_app/services/functional_services/api.dart';
+import 'package:Expenses_app/services/functional_services/database_services/api.dart';
 
 class TotalExpensesService {
   final _api = locator<Api>();

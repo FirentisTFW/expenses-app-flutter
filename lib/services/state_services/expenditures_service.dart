@@ -1,6 +1,6 @@
 import 'package:Expenses_app/app/locator.dart';
 import 'package:Expenses_app/datamodels/expenditure.dart';
-import 'package:Expenses_app/services/functional_services/api.dart';
+import 'package:Expenses_app/services/functional_services/database_services/api.dart';
 
 class ExpendituresService {
   final _api = locator<Api>();
@@ -41,7 +41,10 @@ class ExpendituresService {
           DateTime startDate, DateTime endDate) =>
       _expenditures
           .where((element) =>
-              element.date.isAfter(startDate) && element.date.isBefore(endDate))
+              (element.date.isAfter(startDate) &&
+                  element.date.isBefore(endDate)) ||
+              element.date.isAtSameMomentAs(startDate) ||
+              element.date.isAtSameMomentAs(endDate))
           .toList()
           .reversed
           .toList();

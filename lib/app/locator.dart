@@ -1,7 +1,7 @@
-import 'package:Expenses_app/services/functional_services/api.dart';
-import 'package:Expenses_app/services/functional_services/database_service.dart';
-import 'package:Expenses_app/services/functional_services/fake_api.dart';
-import 'package:Expenses_app/services/functional_services/storage_api.dart';
+import 'package:Expenses_app/services/functional_services/database_services/api.dart';
+import 'package:Expenses_app/services/functional_services/database_services/database_service.dart';
+import 'package:Expenses_app/services/functional_services/database_services/fake_api.dart';
+import 'package:Expenses_app/services/functional_services/database_services/storage_api.dart';
 import 'package:Expenses_app/services/state_services/categories_service.dart';
 import 'package:Expenses_app/services/state_services/expenditures_service.dart';
 import 'package:Expenses_app/services/state_services/total_expenses_service.dart';
@@ -13,7 +13,7 @@ import 'package:stacked_services/stacked_services.dart';
 
 final locator = GetIt.instance;
 
-const bool _USE_FAKE_IMPLEMENTATION = true;
+const bool _USE_FAKE_IMPLEMENTATION = false;
 
 void setupLocator() {
   // STACKED SERVICES

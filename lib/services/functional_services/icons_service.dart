@@ -11,6 +11,10 @@ class IconsService {
 
     int iconId = categoriesService.getIconIdForCategory(categoryId);
 
+    return getIconForId(iconId);
+  }
+
+  static Icon getIconForId(int iconId) {
     switch (iconId) {
       case 0: // accomodation
         return Icon(MaterialCommunityIcons.home);

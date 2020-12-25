@@ -39,6 +39,7 @@ class _CategoryNameInput extends ViewModelWidget<NewCategoryViewModel> {
       child: TextFormField(
         decoration: InputDecoration(hintText: 'Name'),
         validator: Validator.validateForEmptyString,
+        textCapitalization: TextCapitalization.sentences,
         onSaved: model.setCategoryName,
       ),
     );
@@ -62,7 +63,7 @@ class _IconSelection extends ViewModelWidget<NewCategoryViewModel> {
                   child: CircleAvatar(
                     maxRadius: 20,
                     backgroundColor: Colors.yellow[400],
-                    child: IconsService.getIconForCategory(i),
+                    child: IconsService.getIconForId(i),
                   )),
             }.toList()
         ],

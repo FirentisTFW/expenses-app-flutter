@@ -46,6 +46,7 @@ class _ExpendtiureNameInput extends ViewModelWidget<NewExpenditureViewModel> {
       child: TextFormField(
         decoration: InputDecoration(hintText: 'Name'),
         validator: Validator.validateForEmptyString,
+        textCapitalization: TextCapitalization.sentences,
         onSaved: model.setExpenditureName,
       ),
     );

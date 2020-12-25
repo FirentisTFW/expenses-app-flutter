@@ -1,5 +1,5 @@
 import 'package:Expenses_app/app/locator.dart';
-import 'package:Expenses_app/services/functional_services/database_service.dart';
+import 'package:Expenses_app/services/functional_services/database_services/database_service.dart';
 import 'package:Expenses_app/services/state_services/categories_service.dart';
 import 'package:Expenses_app/ui/views/last_expenditures/last_expenditures_view.dart';
 import 'package:Expenses_app/ui/views/this_month_chart/this_month_chart_view.dart';
@@ -25,7 +25,7 @@ class HomeViewModel extends IndexTrackingViewModel {
   }
 
   Future initialise() async {
-    // await _databaseService.initialise();
+    await _databaseService.initialise();
     await _categoriesService
         .getAllCategories(); // make sure categories are fetched when app is initialized
   }

@@ -1,7 +1,8 @@
+import 'package:Expenses_app/app/locator.dart';
 import 'package:Expenses_app/datamodels/expenditure.dart';
 import 'package:Expenses_app/datamodels/category.dart';
 import 'package:Expenses_app/datamodels/total_expenses.dart';
-import 'package:Expenses_app/services/functional_services/api.dart';
+import 'package:Expenses_app/services/functional_services/database_services/api.dart';
 import 'package:flutter/cupertino.dart';
 
 class FakeApi extends Api {
