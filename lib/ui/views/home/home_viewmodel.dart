@@ -25,8 +25,10 @@ class HomeViewModel extends IndexTrackingViewModel {
   }
 
   Future initialise() async {
+    setBusy(true);
     await _databaseService.initialise();
     await _categoriesService
         .getAllCategories(); // make sure categories are fetched when app is initialized
+    setBusy(false);
   }
 }

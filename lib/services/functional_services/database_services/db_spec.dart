@@ -1,9 +1,9 @@
 // class holding specification for database (table names etc.)
 // accesible by static variables
-class DatabaseSpec {
+class DbSpec {
   static const String DB_NAME = 'expenditures_database.sqflite';
 
-  static const String CATEGORIES_TABLE_NAME = 'categories';
+  static const String T_CATEGORIES = 'categories';
 
-  static const String EXPENDITURES_TABLE_NAME = 'expenditures';
+  static const String T_EXPENDITURES = 'expenditures';
 }

@@ -1,6 +1,8 @@
 import 'package:Expenses_app/app/locator.dart';
 import 'package:Expenses_app/datamodels/total_expenses.dart';
 import 'package:Expenses_app/services/functional_services/database_services/api.dart';
+import 'package:Expenses_app/services/functional_services/date_service.dart';
+import 'package:jiffy/jiffy.dart';
 
 class TotalExpensesService {
   final _api = locator<Api>();
@@ -13,8 +15,17 @@ class TotalExpensesService {
       _totalCategoryExpenses;
 
   Future<List<TotalExpenses>> getLastMonthsTotalExpenses(int howMany) async {
+    // set endDate to last day and last second of previous month
+    DateTime endDate = DateService.getLastDayAndSecondOfTheMonth(
+        Jiffy(DateTime.now()).subtract(months: 1));
+    // set startDate to last day and last second $howMany months before
+    DateTime startDate = DateService.getLastDayAndSecondOfTheMonth(
+        Jiffy(endDate).subtract(months: howMany));
+    // set startDate to first day and first second of next month so you have $howMany full months
+    startDate = startDate.add(Duration(milliseconds: 1));
+
     _totalMonthlyExpenses =
-        await _api.getMonthlyTotalExpensesInLastMonths(howMany);
+        await _api.getTotalMonthlyExpensesInTimeSpan(startDate, endDate);
     return _totalMonthlyExpenses;
   }
 
