@@ -428,19 +428,6 @@ class FakeApi extends Api {
   }
 
   @override
-  Future<List<TotalMonthlyExpenses>> getMonthlyTotalExpensesInLastMonths(
-      int howManyMonths) async {
-    await delayRequest();
-
-    return [
-      TotalMonthlyExpenses(name: '8', totalMoneyAmount: 2464),
-      TotalMonthlyExpenses(name: '9', totalMoneyAmount: 2122),
-      TotalMonthlyExpenses(name: '10', totalMoneyAmount: 1977),
-      TotalMonthlyExpenses(name: '11', totalMoneyAmount: 2683),
-    ];
-  }
-
-  @override
   Future<List<TotalMonthlyExpenses>> getTotalMonthlyExpensesInTimeSpan(
       DateTime start, DateTime end) async {
     await delayRequest();
@@ -475,5 +462,11 @@ class FakeApi extends Api {
 
   Future<void> delayRequest() async {
     await Future.delayed(Duration(seconds: 1));
+  }
+
+  @override
+  Future<void> deleteExpenditureById(int id) {
+    // TODO: implement deleteExpenditureById
+    throw UnimplementedError();
   }
 }

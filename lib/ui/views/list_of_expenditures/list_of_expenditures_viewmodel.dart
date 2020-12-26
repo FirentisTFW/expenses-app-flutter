@@ -8,6 +8,7 @@ import 'package:stacked_services/stacked_services.dart';
 
 class ListOfExpendituresViewModel extends BaseViewModel {
   final _expendituresService = locator<ExpendituresService>();
+  final _snackbarService = locator<SnackbarService>();
   final _dialogService = locator<DialogService>();
   List<Expenditure> _expenditures;
 
@@ -21,6 +22,33 @@ class ListOfExpendituresViewModel extends BaseViewModel {
       setError(err);
     }
     setBusy(false);
+  }
+
+  Future<void> deleteExpenditureAndShowSnackbar(int id) async {
+    var isDeleted = await deleteExpenditure(id);
+
+    if (isDeleted) {
+      notifyListeners();
+      _snackbarService.showSnackbar(
+          message: 'Expenditure deleted.', duration: Duration(seconds: 2));
+    } else {
+      setBusy(true);
+      // I know this looks stupid but I found that this trick prevents Dismissable error
+      await Future.delayed(Duration(seconds: 0), () => setBusy(false));
+      _snackbarService.showSnackbar(
+          message: 'Couldn\'t delete expenditure.',
+          duration: Duration(seconds: 2));
+    }
+  }
+
+  Future<bool> deleteExpenditure(int id) async {
+    try {
+      await _expendituresService.deleteExpenditureById(id);
+      _expenditures.removeWhere((element) => element.id == id);
+      return true;
+    } catch (err) {
+      return false;
+    }
   }
 
   Future<void> filterBy(FilteringMethod method) async {

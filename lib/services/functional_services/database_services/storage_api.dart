@@ -5,6 +5,7 @@ import 'package:Expenses_app/datamodels/total_expenses.dart';
 import 'package:Expenses_app/services/functional_services/database_services/api.dart';
 import 'package:Expenses_app/services/functional_services/database_services/database_service.dart';
 import 'package:Expenses_app/services/functional_services/database_services/db_spec.dart';
+import 'package:flutter/cupertino.dart';
 
 class StorageApi extends Api {
   final _databaseService = locator<DatabaseService>();
@@ -24,6 +25,20 @@ class StorageApi extends Api {
     try {
       await _databaseService.database
           .insert(DbSpec.T_EXPENDITURES, expenditure.toJson());
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  @override
+  Future<void> deleteExpenditureById(int id) async {
+    try {
+      throw ErrorDescription('message');
+      await _databaseService.database.delete(
+        DbSpec.T_EXPENDITURES,
+        where: 'id = ?',
+        whereArgs: [id],
+      );
     } catch (err) {
       throw err;
     }
@@ -78,19 +93,6 @@ class StorageApi extends Api {
   }
 
   @override
-  Future<List<TotalMonthlyExpenses>> getMonthlyTotalExpensesInLastMonths(
-      int howManyMonths) async {
-    //   try {
-    //   List<Map> monthlyExpensesRedults = await _databaseService.database.rawQuery(
-    //       "SELECT ");
-    //   // return monthlyExpensesRedults.map((c) => Expenditure.fromJson(c)).toList();
-    // } catch (err) {
-    //   throw err;
-    // }
-    throw UnimplementedError();
-  }
-
-  @override
   Future<List<TotalMonthlyExpenses>> getTotalMonthlyExpensesInTimeSpan(
       DateTime start, DateTime end) async {
     try {
@@ -99,7 +101,6 @@ class StorageApi extends Api {
 
       List<Map> monthlyExpensesResults = await _databaseService.database.rawQuery(
           "SELECT SUM(moneyAmount) AS 'totalMoneyAmount', SUBSTR(expDate, 6, 2) AS 'name' FROM ${DbSpec.T_EXPENDITURES} WHERE expDate >= '$startDate' AND expDate <= '$endDate' GROUP BY 2 ORDER BY 2");
-      print(monthlyExpensesResults);
       return monthlyExpensesResults
           .map((c) => TotalMonthlyExpenses.fromJson(c))
           .toList();

@@ -1,3 +1,4 @@
+import 'package:Expenses_app/datamodels/expenditure.dart';
 import 'package:Expenses_app/ui/universal_widgets/error_info.dart';
 import 'package:Expenses_app/ui/universal_widgets/expenditure_item.dart';
 import 'package:Expenses_app/ui/views/list_of_expenditures/app_bar_with_filtering_options.dart';
@@ -20,14 +21,12 @@ class ListOfExpendituresView extends StatelessWidget {
                       ? ListView.builder(
                           itemCount: model.expenditures.length,
                           itemBuilder: (context, index) {
-                            return buildExpenditureItem(
+                            return buildDismissibleExpenditureItem(
+                              model,
                               previousDate: index > 0
                                   ? model.expenditures[index - 1].date
                                   : null,
-                              currentDate: model.expenditures[index].date,
-                              categoryId: model.expenditures[index].categoryId,
-                              title: model.expenditures[index].name,
-                              value: model.expenditures[index].moneyAmount,
+                              expenditure: model.expenditures[index],
                             );
                           })
                       : noItemsYetInfo
@@ -42,18 +41,28 @@ class ListOfExpendituresView extends StatelessWidget {
   final noItemsYetInfo =
       Container(child: Center(child: Text('No expenditures added yet')));
 
-  Widget buildExpenditureItem(
-      {previousDate, currentDate, categoryId, title, value}) {
-    final expenditureWidget = ExpenditureItem(
-      categoryId: categoryId,
-      title: title,
-      value: value,
-    );
+  Widget buildDismissibleExpenditureItem(ListOfExpendituresViewModel model,
+      {DateTime previousDate, Expenditure expenditure}) {
+    final expenditureWidget = Dismissible(
+        onDismissed: (direction) =>
+            model.deleteExpenditureAndShowSnackbar(expenditure.id),
+        key: Key(expenditure.id.toString()),
+        background: Container(
+            color: Colors.red,
+            child: Padding(
+              padding: const EdgeInsets.only(right: 200),
+              child: Icon(Icons.delete, size: 32),
+            )),
+        child: ExpenditureItem(
+          categoryId: expenditure.categoryId,
+          title: expenditure.name,
+          value: expenditure.moneyAmount,
+        ));
 
-    if (shouldYouShowDateField(previousDate, currentDate)) {
+    if (shouldYouShowDateField(previousDate, expenditure.date)) {
       return Column(
         children: [
-          buildDateField(currentDate),
+          buildDateField(expenditure.date),
           expenditureWidget,
         ],
       );

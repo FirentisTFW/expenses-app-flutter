@@ -44,7 +44,8 @@ void main() {
 
         await model.addCategoryAndShowSnackbar();
         verify(snackbarService.showSnackbar(
-            message: 'Category added succesfully.'));
+            message: 'Category added succesfully.',
+            duration: Duration(seconds: 2)));
       });
       test(
           'When category properties are set correct and api throws an error, SnackbarService shows snackbar with error message',
@@ -59,8 +60,9 @@ void main() {
             .thenThrow(ErrorDescription('Couldn\'t add category to database.'));
 
         await model.addCategoryAndShowSnackbar();
-        verify(
-            snackbarService.showSnackbar(message: model.modelError.toString()));
+        verify(snackbarService.showSnackbar(
+            message: model.modelError.toString(),
+            duration: Duration(seconds: 2)));
       });
     });
   });

@@ -55,9 +55,9 @@ class NewCategoryViewModel extends BaseViewModel {
     }
   }
 
-  void showSnackbarWithSuccessMessage() =>
-      _snackbarService.showSnackbar(message: 'Category added succesfully.');
+  void showSnackbarWithSuccessMessage() => _snackbarService.showSnackbar(
+      message: 'Category added succesfully.', duration: Duration(seconds: 2));
 
-  void showSnackbarWithErrorMessage() =>
-      _snackbarService.showSnackbar(message: modelError.toString());
+  void showSnackbarWithErrorMessage() => _snackbarService.showSnackbar(
+      message: modelError.toString(), duration: Duration(seconds: 2));
 }

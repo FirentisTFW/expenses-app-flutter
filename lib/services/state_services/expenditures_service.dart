@@ -11,6 +11,9 @@ class ExpendituresService {
   Future addExpenditure(Expenditure expenditure) async =>
       await _api.addExpenditure(expenditure);
 
+  Future deleteExpenditureById(int id) async =>
+      await _api.deleteExpenditureById(id);
+
   Future<List<Expenditure>> getLastExpenditures(int howMany) async {
     _expenditures = await _api.getLastExpenditures(howMany: 10);
     return _expenditures.reversed.toList();

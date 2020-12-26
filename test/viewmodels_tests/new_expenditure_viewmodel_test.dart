@@ -57,7 +57,8 @@ void main() {
 
         await model.addExpenditureAndShowSnackbar();
         verify(snackbarService.showSnackbar(
-            message: 'Expenditure added succesfully.'));
+            message: 'Expenditure added succesfully.',
+            duration: Duration(seconds: 2)));
       });
       test(
           'When expenditure properties are set correct and api throws an error, SnackbarService shows snackbar with error',
@@ -74,8 +75,9 @@ void main() {
             ErrorDescription('Couldn\'t add expenditure to database.'));
 
         await model.addExpenditureAndShowSnackbar();
-        verify(
-            snackbarService.showSnackbar(message: model.modelError.toString()));
+        verify(snackbarService.showSnackbar(
+            message: model.modelError.toString(),
+            duration: Duration(seconds: 2)));
       });
     });
   });
