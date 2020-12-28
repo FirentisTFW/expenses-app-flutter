@@ -45,10 +45,15 @@ class _ThisMonthExpensesChart extends ViewModelWidget<ThisMonthChartViewModel> {
 
   @override
   Widget build(BuildContext context, ThisMonthChartViewModel model) {
-    return Container(
-      padding: const EdgeInsets.only(top: 20),
-      child: ExpensesPieChart.buildFromData(initialData: model.data),
-    );
+    return model.data.isNotEmpty
+        ? Container(
+            padding: const EdgeInsets.only(top: 20),
+            child: ExpensesPieChart.buildFromData(initialData: model.data),
+          )
+        : Container(
+            height: 300,
+            // TODO: some kind of picture
+          );
   }
 }
 

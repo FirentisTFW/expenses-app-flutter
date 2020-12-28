@@ -33,7 +33,6 @@ class StorageApi extends Api {
   @override
   Future<void> deleteExpenditureById(int id) async {
     try {
-      throw ErrorDescription('message');
       await _databaseService.database.delete(
         DbSpec.T_EXPENDITURES,
         where: 'id = ?',

@@ -32,7 +32,9 @@ class TrendsChart extends ViewModelWidget<TrendsViewModel> {
         ? loadingSpinner
         : !model.hasError
             ? model.isDataFetched
-                ? _buildChart(model)
+                ? model.data.isNotEmpty
+                    ? _buildChart(model)
+                    : noDataInfo
                 : Container()
             : Container(
                 padding: const EdgeInsets.all(30),
@@ -55,5 +57,13 @@ class TrendsChart extends ViewModelWidget<TrendsViewModel> {
   final loadingSpinner = Padding(
     padding: const EdgeInsets.symmetric(vertical: 50),
     child: Center(child: CircularProgressIndicator()),
+  );
+
+  final noDataInfo = Container(
+    child: Center(
+        child: Padding(
+      padding: const EdgeInsets.only(top: 40),
+      child: Text('No data for selected range'),
+    )),
   );
 }
