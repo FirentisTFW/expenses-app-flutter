@@ -1,4 +1,5 @@
 import 'package:Expenses_app/datamodels/enums/dialog_type.dart';
+import 'package:Expenses_app/datamodels/expenditure.dart';
 import 'package:Expenses_app/ui/views/list_of_expenditures/list_of_expenditures_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -152,6 +153,89 @@ void main() {
         await model.showDateFilterDialog();
         verifyNever(_expendituresService.getExpendituresByDate(
             argThat(anything), argThat(anything)));
+      });
+    });
+    group('deleteExpenditure -', () {
+      test('When called, calls ExpendituresService to delete expenditure',
+          () async {
+        var _expendituresService = getAndRegisterExpendituresServiceMock();
+        var model = ListOfExpendituresViewModel();
+
+        when(_expendituresService.deleteExpenditureById(1))
+            .thenThrow(ErrorDescription('Error'));
+
+        await model.deleteExpenditure(1);
+        verify(_expendituresService.deleteExpenditureById(1));
+      });
+      test('When API throws an error, function returns true', () async {
+        var _expendituresService = getAndRegisterExpendituresServiceMock();
+        var model = ListOfExpendituresViewModel();
+
+        when(_expendituresService.getAllExpenditures()).thenAnswer((_) async =>
+            [Expenditure(id: 0), Expenditure(id: 1), Expenditure(id: 2)]);
+
+        await model.fetchData();
+
+        expect(await model.deleteExpenditure(1), true);
+      });
+      test('When API throws an error, function returns false', () async {
+        var _expendituresService = getAndRegisterExpendituresServiceMock();
+        var model = ListOfExpendituresViewModel();
+
+        when(_expendituresService.deleteExpenditureById(1))
+            .thenThrow(ErrorDescription('Error'));
+
+        expect(await model.deleteExpenditure(1), false);
+      });
+      test(
+          'When API throws no error, function removes expenditure from viewmodel local variable',
+          () async {
+        var _expendituresService = getAndRegisterExpendituresServiceMock();
+        var model = ListOfExpendituresViewModel();
+
+        when(_expendituresService.getAllExpenditures()).thenAnswer((_) async =>
+            [Expenditure(id: 0), Expenditure(id: 1), Expenditure(id: 2)]);
+
+        await model.fetchData();
+        var originalLength = model.expenditures.length;
+        await model.deleteExpenditure(0);
+
+        expect(model.expenditures.length, originalLength - 1);
+      });
+      test(
+          'When API throws an error, function doesn\'t remove expenditure from viewmodel local variable',
+          () async {
+        var _expendituresService = getAndRegisterExpendituresServiceMock();
+        var model = ListOfExpendituresViewModel();
+
+        when(_expendituresService.getAllExpenditures()).thenAnswer((_) async =>
+            [Expenditure(id: 0), Expenditure(id: 1), Expenditure(id: 2)]);
+
+        await model.fetchData();
+        var originalLength = model.expenditures.length;
+
+        when(_expendituresService.deleteExpenditureById(0))
+            .thenThrow(ErrorDescription('Error'));
+
+        await model.deleteExpenditure(0);
+
+        expect(model.expenditures.length, originalLength);
+      });
+      test(
+          'When called with wrong parameter (id of inexisting expenditure), function doesn\'t remove nothing from viewmodel local variable',
+          () async {
+        var _expendituresService = getAndRegisterExpendituresServiceMock();
+        var model = ListOfExpendituresViewModel();
+
+        when(_expendituresService.getAllExpenditures()).thenAnswer((_) async =>
+            [Expenditure(id: 0), Expenditure(id: 1), Expenditure(id: 2)]);
+
+        await model.fetchData();
+        var originalLength = model.expenditures.length;
+
+        await model.deleteExpenditure(3);
+
+        expect(model.expenditures.length, originalLength);
       });
     });
   });
