@@ -37,6 +37,7 @@ class ShortListOfExpenses extends StatelessWidget {
           ),
         ),
       ),
+      onModelReady: (model) => model.fetchData(),
       viewModelBuilder: () => ShortListOfExpensesViewModel(),
     );
   }

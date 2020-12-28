@@ -13,6 +13,7 @@ class ThisMonthChartView extends StatelessWidget {
     return ViewModelBuilder<ThisMonthChartViewModel>.reactive(
       disposeViewModel: false,
       initialiseSpecialViewModelsOnce: true,
+      onModelReady: (model) => model.fetchData(),
       builder: (context, model, child) => Scaffold(
         body: model.isBusy
             ? loadingSpinner

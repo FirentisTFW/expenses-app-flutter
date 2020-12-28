@@ -15,13 +15,13 @@ class ExpendituresService {
       await _api.deleteExpenditureById(id);
 
   Future<List<Expenditure>> getLastExpenditures(int howMany) async {
-    _expenditures = await _api.getLastExpenditures(howMany: 10);
-    return _expenditures.reversed.toList();
+    _expenditures = await _api.getLastExpenditures(howMany: howMany);
+    return _expenditures;
   }
 
   Future<List<Expenditure>> getAllExpenditures() async {
     _expenditures = await _api.getAllExpenditures();
-    return _expenditures.reversed.toList();
+    return _expenditures;
   }
 
   List<Expenditure> getExpendituresByPrice(double minPrice, double maxPrice) =>
@@ -29,15 +29,11 @@ class ExpendituresService {
           .where((element) =>
               element.moneyAmount >= minPrice &&
               element.moneyAmount <= maxPrice)
-          .toList()
-          .reversed
           .toList();
 
   List<Expenditure> getExpendituresByCategories(List<int> categoriesIds) =>
       _expenditures
           .where((element) => categoriesIds.contains(element.categoryId))
-          .toList()
-          .reversed
           .toList();
 
   List<Expenditure> getExpendituresByDate(
@@ -48,7 +44,5 @@ class ExpendituresService {
                   element.date.isBefore(endDate)) ||
               element.date.isAtSameMomentAs(startDate) ||
               element.date.isAtSameMomentAs(endDate))
-          .toList()
-          .reversed
           .toList();
 }

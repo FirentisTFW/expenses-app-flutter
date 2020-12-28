@@ -5,7 +5,6 @@ import 'package:Expenses_app/datamodels/total_expenses.dart';
 import 'package:Expenses_app/services/functional_services/database_services/api.dart';
 import 'package:Expenses_app/services/functional_services/database_services/database_service.dart';
 import 'package:Expenses_app/services/functional_services/database_services/db_spec.dart';
-import 'package:flutter/cupertino.dart';
 
 class StorageApi extends Api {
   final _databaseService = locator<DatabaseService>();
@@ -57,8 +56,8 @@ class StorageApi extends Api {
   @override
   Future<List<Expenditure>> getAllExpenditures() async {
     try {
-      List<Map> expendituresResults =
-          await _databaseService.database.query(DbSpec.T_EXPENDITURES);
+      List<Map> expendituresResults = await _databaseService.database.rawQuery(
+          "SELECT * FROM ${DbSpec.T_EXPENDITURES} ORDER BY expDate DESC");
       return expendituresResults.map((c) => Expenditure.fromJson(c)).toList();
     } catch (err) {
       throw err;
@@ -73,7 +72,7 @@ class StorageApi extends Api {
       String endDate = end.toIso8601String();
 
       List<Map> expendituresResults = await _databaseService.database.rawQuery(
-          "SELECT * FROM ${DbSpec.T_EXPENDITURES} WHERE expDate >= '$startDate' AND expDate <= '$endDate'");
+          "SELECT * FROM ${DbSpec.T_EXPENDITURES} WHERE expDate >= '$startDate' AND expDate <= '$endDate ORDER BY expDate DESC'");
       return expendituresResults.map((c) => Expenditure.fromJson(c)).toList();
     } catch (err) {
       throw err;
@@ -84,7 +83,7 @@ class StorageApi extends Api {
   Future<List<Expenditure>> getLastExpenditures({int howMany}) async {
     try {
       List<Map> expendituresResults = await _databaseService.database.rawQuery(
-          "SELECT * FROM ${DbSpec.T_EXPENDITURES} ORDER BY id DESC LIMIT $howMany");
+          "SELECT * FROM ${DbSpec.T_EXPENDITURES} ORDER BY expDate DESC LIMIT $howMany");
       return expendituresResults.map((c) => Expenditure.fromJson(c)).toList();
     } catch (err) {
       throw err;
