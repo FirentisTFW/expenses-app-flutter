@@ -52,8 +52,12 @@ class _ThisMonthExpensesChart extends ViewModelWidget<ThisMonthChartViewModel> {
             child: ExpensesPieChart.buildFromData(initialData: model.data),
           )
         : Container(
+            padding: const EdgeInsets.all(30),
             height: 300,
-            // TODO: some kind of picture
+            child: Image.asset(
+              'assets/images/no_expenses.png',
+              color: Colors.green,
+            ),
           );
   }
 }
