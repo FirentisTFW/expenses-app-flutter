@@ -1,5 +1,6 @@
 import 'package:Expenses_app/services/functional_services/icons_service.dart';
 import 'package:Expenses_app/services/functional_services/validator.dart';
+import 'package:Expenses_app/ui/universal_widgets/loading_spinner.dart';
 import 'package:Expenses_app/ui/views/new_category/new_category_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
@@ -77,7 +78,7 @@ class _AddCategoryButton extends ViewModelWidget<NewCategoryViewModel> {
   @override
   Widget build(BuildContext context, NewCategoryViewModel model) {
     return model.isBusy
-        ? loadingSpinner
+        ? LoadingSpinner(padding: EdgeInsets.all(20))
         : Padding(
             padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 10),
             child: RaisedButton(
@@ -93,8 +94,4 @@ class _AddCategoryButton extends ViewModelWidget<NewCategoryViewModel> {
             ),
           );
   }
-
-  final loadingSpinner = Padding(
-      padding: const EdgeInsets.all(20),
-      child: Center(child: CircularProgressIndicator()));
 }

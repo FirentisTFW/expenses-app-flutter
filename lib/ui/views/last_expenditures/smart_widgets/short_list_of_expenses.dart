@@ -1,5 +1,6 @@
 import 'package:Expenses_app/ui/universal_widgets/error_info.dart';
 import 'package:Expenses_app/ui/universal_widgets/expenditure_item.dart';
+import 'package:Expenses_app/ui/universal_widgets/loading_spinner.dart';
 import 'package:Expenses_app/ui/views/last_expenditures/smart_widgets/short_list_of_expenses_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
@@ -16,7 +17,7 @@ class ShortListOfExpenses extends StatelessWidget {
               Container(
                 height: 300,
                 child: model.isBusy
-                    ? Center(child: CircularProgressIndicator())
+                    ? LoadingSpinner()
                     : !model.hasError
                         ? model.data.length > 0
                             ? ListView(

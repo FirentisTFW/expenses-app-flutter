@@ -1,6 +1,7 @@
 import 'package:Expenses_app/datamodels/category.dart';
 import 'package:Expenses_app/services/functional_services/validator.dart';
 import 'package:Expenses_app/ui/universal_viewmodels/category_filter_dialog_viewmodel.dart';
+import 'package:Expenses_app/ui/universal_widgets/loading_spinner.dart';
 import 'package:Expenses_app/ui/views/new_expenditure/new_expenditure_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
@@ -81,7 +82,7 @@ class _CategorySelection extends StatelessWidget {
       builder: (context, model, child) => Padding(
         padding: const EdgeInsets.symmetric(vertical: 20),
         child: model.isBusy
-            ? const Center(child: CircularProgressIndicator())
+            ? LoadingSpinner()
             : DropdownButtonFormField(
                 value: 0,
                 items: [
@@ -132,7 +133,7 @@ class _AddExpenditureButton extends ViewModelWidget<NewExpenditureViewModel> {
   @override
   Widget build(BuildContext context, NewExpenditureViewModel model) {
     return model.isBusy
-        ? loadingSpinner
+        ? LoadingSpinner(padding: EdgeInsets.all(20))
         : Padding(
             padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 10),
             child: RaisedButton(
@@ -148,8 +149,4 @@ class _AddExpenditureButton extends ViewModelWidget<NewExpenditureViewModel> {
             ),
           );
   }
-
-  final loadingSpinner = Padding(
-      padding: const EdgeInsets.all(20),
-      child: Center(child: CircularProgressIndicator()));
 }

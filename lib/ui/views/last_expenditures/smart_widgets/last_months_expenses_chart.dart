@@ -1,5 +1,6 @@
 import 'package:Expenses_app/ui/universal_widgets/error_info.dart';
 import 'package:Expenses_app/ui/universal_widgets/last_months_bar_chart.dart';
+import 'package:Expenses_app/ui/universal_widgets/loading_spinner.dart';
 import 'package:Expenses_app/ui/views/last_expenditures/smart_widgets/last_months_expenses_chart_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
@@ -9,7 +10,7 @@ class LastMonthsExpensesChart extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<LastMonthsExpensesChartViewModel>.reactive(
       builder: (context, model, child) => model.isBusy
-          ? loadingSpinner
+          ? LoadingSpinner(padding: EdgeInsets.symmetric(vertical: 50))
           : !model.hasError
               ? Column(
                   children: [
@@ -30,10 +31,5 @@ class LastMonthsExpensesChart extends StatelessWidget {
       textAlign: TextAlign.center,
       style: TextStyle(fontSize: 28),
     ),
-  );
-
-  final loadingSpinner = Padding(
-    padding: const EdgeInsets.symmetric(vertical: 50),
-    child: Center(child: CircularProgressIndicator()),
   );
 }

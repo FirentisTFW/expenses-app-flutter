@@ -1,6 +1,7 @@
 import 'package:Expenses_app/app/locator.dart';
 import 'package:Expenses_app/ui/universal_widgets/error_info.dart';
 import 'package:Expenses_app/ui/universal_widgets/expenses_pie_chart.dart';
+import 'package:Expenses_app/ui/universal_widgets/loading_spinner.dart';
 import 'package:Expenses_app/ui/views/this_month_chart/new_category_button.dart';
 import 'package:Expenses_app/ui/views/this_month_chart/new_expenditure_button.dart';
 import 'package:Expenses_app/ui/views/this_month_chart/this_month_chart_viewmodel.dart';
@@ -16,7 +17,7 @@ class ThisMonthChartView extends StatelessWidget {
       onModelReady: (model) => model.fetchData(),
       builder: (context, model, child) => Scaffold(
         body: model.isBusy
-            ? loadingSpinner
+            ? LoadingSpinner()
             : !model.hasError
                 ? ListView(
                     children: [
@@ -35,8 +36,6 @@ class ThisMonthChartView extends StatelessWidget {
       viewModelBuilder: () => locator<ThisMonthChartViewModel>(),
     );
   }
-
-  final loadingSpinner = Center(child: CircularProgressIndicator());
 }
 
 class _ThisMonthExpensesChart extends ViewModelWidget<ThisMonthChartViewModel> {

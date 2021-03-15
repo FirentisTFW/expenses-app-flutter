@@ -1,4 +1,5 @@
 import 'package:Expenses_app/ui/universal_viewmodels/category_filter_dialog_viewmodel.dart';
+import 'package:Expenses_app/ui/universal_widgets/loading_spinner.dart';
 import 'package:flutter/material.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:stacked/stacked.dart';
@@ -18,7 +19,7 @@ class CategoryFilterDialog extends StatelessWidget {
         builder: (context, model, chile) => Container(
           height: 200,
           child: model.isBusy
-              ? Center(child: CircularProgressIndicator())
+              ? LoadingSpinner()
               : !model.hasError
                   ? MultiSelectDialogField(
                       items: model.data

@@ -1,3 +1,4 @@
+import 'package:Expenses_app/ui/universal_widgets/loading_spinner.dart';
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
@@ -14,7 +15,7 @@ class HomeView extends StatelessWidget {
     return ViewModelBuilder<HomeViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
         body: model.isBusy
-            ? Center(child: CircularProgressIndicator())
+            ? LoadingSpinner()
             : PageTransitionSwitcher(
                 duration: const Duration(milliseconds: 400),
                 reverse: model.reverse,

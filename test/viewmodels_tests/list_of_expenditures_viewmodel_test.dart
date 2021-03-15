@@ -167,7 +167,8 @@ void main() {
         await model.deleteExpenditure(1);
         verify(_expendituresService.deleteExpenditureById(1));
       });
-      test('When API throws an error, function returns true', () async {
+      test('When expenditure is deleted successfuly, function returns true',
+          () async {
         var _expendituresService = getAndRegisterExpendituresServiceMock();
         var model = ListOfExpendituresViewModel();
 
@@ -188,7 +189,7 @@ void main() {
         expect(await model.deleteExpenditure(1), false);
       });
       test(
-          'When API throws no error, function removes expenditure from viewmodel local variable',
+          'When expenditure is deleted successfuly, function removes expenditure from viewmodel local variable',
           () async {
         var _expendituresService = getAndRegisterExpendituresServiceMock();
         var model = ListOfExpendituresViewModel();
@@ -222,7 +223,7 @@ void main() {
         expect(model.expenditures.length, originalLength);
       });
       test(
-          'When called with wrong parameter (id of inexisting expenditure), function doesn\'t remove nothing from viewmodel local variable',
+          'When called with wrong parameter (id of inexisting expenditure), function doesn\'t remove anything from viewmodel local variable',
           () async {
         var _expendituresService = getAndRegisterExpendituresServiceMock();
         var model = ListOfExpendituresViewModel();
