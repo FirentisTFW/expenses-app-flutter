@@ -44,20 +44,22 @@ class ListOfExpendituresView extends StatelessWidget {
   Widget buildDismissibleExpenditureItem(ListOfExpendituresViewModel model,
       {DateTime previousDate, Expenditure expenditure}) {
     final expenditureWidget = Dismissible(
-        onDismissed: (direction) =>
-            model.deleteExpenditureAndShowSnackbar(expenditure.id),
+      onDismissed: (direction) =>
+          model.deleteExpenditureAndShowSnackbar(expenditure.id),
+      direction: DismissDirection.startToEnd,
+      key: Key(expenditure.id.toString()),
+      background: Container(
+          color: Colors.red,
+          padding: const EdgeInsets.only(left: 40),
+          alignment: Alignment.centerLeft,
+          child: const Icon(Icons.delete, size: 32)),
+      child: ExpenditureItem(
         key: Key(expenditure.id.toString()),
-        background: Container(
-            color: Colors.red,
-            child: Padding(
-              padding: const EdgeInsets.only(right: 200),
-              child: Icon(Icons.delete, size: 32),
-            )),
-        child: ExpenditureItem(
-          categoryId: expenditure.categoryId,
-          title: expenditure.name,
-          value: expenditure.moneyAmount,
-        ));
+        categoryId: expenditure.categoryId,
+        title: expenditure.name,
+        value: expenditure.moneyAmount,
+      ),
+    );
 
     if (shouldYouShowDateField(previousDate, expenditure.date)) {
       return Column(

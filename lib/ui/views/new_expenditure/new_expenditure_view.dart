@@ -13,7 +13,7 @@ class NewExpenditureView extends StatelessWidget {
     return ViewModelBuilder<NewExpenditureViewModel>.nonReactive(
       builder: (context, model, child) => Scaffold(
         appBar: AppBar(
-          title: Text('Add New Expenditure'),
+          title: const Text('Add New Expenditure'),
         ),
         body: Container(
           padding: const EdgeInsets.all(30),
@@ -44,7 +44,7 @@ class _ExpendtiureNameInput extends ViewModelWidget<NewExpenditureViewModel> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 20),
       child: TextFormField(
-        decoration: InputDecoration(hintText: 'Name'),
+        decoration: const InputDecoration(hintText: 'Name'),
         validator: Validator.validateForEmptyString,
         textCapitalization: TextCapitalization.sentences,
         onSaved: model.setExpenditureName,
@@ -61,7 +61,7 @@ class _AmountInput extends ViewModelWidget<NewExpenditureViewModel> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 20),
       child: TextFormField(
-        decoration: InputDecoration(hintText: 'Amount'),
+        decoration: const InputDecoration(hintText: 'Amount'),
         keyboardType: TextInputType.number,
         validator: Validator.vaidateForNonNegativeDouble,
         onSaved: (value) => model.setMoneyAmount(double.parse(value)),
@@ -81,7 +81,7 @@ class _CategorySelection extends StatelessWidget {
       builder: (context, model, child) => Padding(
         padding: const EdgeInsets.symmetric(vertical: 20),
         child: model.isBusy
-            ? Center(child: CircularProgressIndicator())
+            ? const Center(child: CircularProgressIndicator())
             : DropdownButtonFormField(
                 value: 0,
                 items: [
@@ -137,9 +137,9 @@ class _AddExpenditureButton extends ViewModelWidget<NewExpenditureViewModel> {
             padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 10),
             child: RaisedButton(
               color: Colors.red[400],
-              child: Padding(
-                padding: const EdgeInsets.all(20),
-                child: const Text(
+              child: const Padding(
+                padding: EdgeInsets.all(20),
+                child: Text(
                   'Add Expenditure',
                   style: TextStyle(fontSize: 22),
                 ),

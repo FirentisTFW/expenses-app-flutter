@@ -1,6 +1,9 @@
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
+import 'package:Expenses_app/ui/views/last_expenditures/last_expenditures_view.dart';
+import 'package:Expenses_app/ui/views/this_month_chart/this_month_chart_view.dart';
 import 'home_viewmodel.dart';
 
 class HomeView extends StatelessWidget {
@@ -12,8 +15,22 @@ class HomeView extends StatelessWidget {
       builder: (context, model, child) => Scaffold(
         body: model.isBusy
             ? Center(child: CircularProgressIndicator())
-            : Center(
-                child: model.getViewForIndex(),
+            : PageTransitionSwitcher(
+                duration: const Duration(milliseconds: 400),
+                reverse: model.reverse,
+                transitionBuilder: (
+                  Widget child,
+                  Animation<double> animation,
+                  Animation<double> secondaryAnimation,
+                ) {
+                  return SharedAxisTransition(
+                    child: child,
+                    animation: animation,
+                    secondaryAnimation: secondaryAnimation,
+                    transitionType: SharedAxisTransitionType.horizontal,
+                  );
+                },
+                child: getViewForIndex(model.currentIndex),
               ),
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
@@ -21,11 +38,11 @@ class HomeView extends StatelessWidget {
           currentIndex: model.currentIndex,
           onTap: model.setIndex,
           items: [
-            BottomNavigationBarItem(
+            const BottomNavigationBarItem(
               label: 'Home',
               icon: Icon(Icons.home),
             ),
-            BottomNavigationBarItem(
+            const BottomNavigationBarItem(
               label: 'Expenses',
               icon: Icon(Icons.list),
             ),
@@ -35,5 +52,16 @@ class HomeView extends StatelessWidget {
       onModelReady: (model) => model.initialise(),
       viewModelBuilder: () => HomeViewModel(),
     );
+  }
+
+  Widget getViewForIndex(int index) {
+    switch (index) {
+      case 0:
+        return ThisMonthChartView();
+      case 1:
+        return LastExpendituresView();
+      default:
+        return ThisMonthChartView();
+    }
   }
 }

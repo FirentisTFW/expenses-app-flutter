@@ -6,12 +6,12 @@ class ExpenditureItem extends StatelessWidget {
   final double value;
   final int categoryId;
 
-  const ExpenditureItem(
-      {Key key,
-      @required this.title,
-      @required this.value,
-      @required this.categoryId})
-      : super(key: key);
+  const ExpenditureItem({
+    Key key,
+    @required this.title,
+    @required this.value,
+    @required this.categoryId,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class ExpenditureItem extends StatelessWidget {
             ],
           ),
         ),
-        Divider(height: 10)
+        const Divider(height: 10)
       ],
     );
   }

@@ -4,8 +4,8 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 class LastExpendituresViewModel extends BaseViewModel {
-  final _navigationServie = locator<NavigationService>();
+  final _navigationService = locator<NavigationService>();
 
   Future goToTrendsView() async =>
-      await _navigationServie.navigateTo(Routes.trendsView);
+      await _navigationService.navigateTo(Routes.trendsView);
 }
