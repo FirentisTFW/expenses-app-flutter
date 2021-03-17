@@ -16,10 +16,15 @@ class TrendsViewModel extends BaseViewModel {
   DateTime _firstDate;
   DateTime _secondDate;
 
-  List<TotalExpenses> get data => _data;
-  GroupingMethod get groupingMethod => _groupingMethod;
-
   bool get isDataFetched => _data != null;
+  List<TotalExpenses> get data => _data;
+  List<TotalExpenses> get dataSortedByAmout {
+    final data = _data;
+    data.sort((a, b) => a.totalMoneyAmount.compareTo(b.totalMoneyAmount));
+    return data.reversed.toList();
+  }
+
+  GroupingMethod get groupingMethod => _groupingMethod;
 
   List<DateTime> getMonthsForList() => DateService.getMonthsWithYearsFrom(2019);
 

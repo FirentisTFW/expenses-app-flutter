@@ -46,11 +46,13 @@ class _SeeMoreTrendsButton extends ViewModelWidget<LastExpendituresViewModel> {
   @override
   Widget build(BuildContext context, LastExpendituresViewModel model) {
     return Container(
-      height: 40,
+      height: 50,
       margin: const EdgeInsets.symmetric(vertical: 20),
       child: RaisedButton(
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
         color: Colors.red[400],
-        child: Text(
+        child: const Text(
           'See More Trends',
           style: TextStyle(color: Colors.white, fontSize: 20),
         ),

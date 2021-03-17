@@ -39,9 +39,7 @@ class ThisMonthChartView extends StatelessWidget {
 }
 
 class _ThisMonthExpensesChart extends ViewModelWidget<ThisMonthChartViewModel> {
-  _ThisMonthExpensesChart({
-    Key key,
-  }) : super(key: key);
+  _ThisMonthExpensesChart({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, ThisMonthChartViewModel model) {
@@ -63,9 +61,7 @@ class _ThisMonthExpensesChart extends ViewModelWidget<ThisMonthChartViewModel> {
 
 class _ThisMonthTotalExpensesInfo
     extends ViewModelWidget<ThisMonthChartViewModel> {
-  _ThisMonthTotalExpensesInfo({
-    Key key,
-  }) : super(key: key);
+  _ThisMonthTotalExpensesInfo({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, ThisMonthChartViewModel model) {

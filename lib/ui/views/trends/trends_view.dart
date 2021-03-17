@@ -48,7 +48,7 @@ class TrendsChart extends ViewModelWidget<TrendsViewModel> {
         return LastMonthsBarChart.buildFromData(initialData: model.data);
       case GroupingMethod.ByCategories:
         return ExpensesPieChart.buildFromData(
-          initialData: model.data,
+          initialData: model.dataSortedByAmout,
           legend: true,
         );
     }

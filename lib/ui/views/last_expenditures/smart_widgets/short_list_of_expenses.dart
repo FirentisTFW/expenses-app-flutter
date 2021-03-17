@@ -12,6 +12,7 @@ class ShortListOfExpenses extends StatelessWidget {
       builder: (context, model, child) => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: Card(
+          shape: _roundedBottomCorners,
           child: Column(
             children: [
               Container(
@@ -55,6 +56,7 @@ class _ShowAllButton extends ViewModelWidget<ShortListOfExpensesViewModel> {
       width: double.infinity,
       height: 44,
       child: RaisedButton(
+        shape: _roundedBottomCorners,
         color: Colors.red[400],
         child: Text(
           'Show All Expenditures',
@@ -65,3 +67,9 @@ class _ShowAllButton extends ViewModelWidget<ShortListOfExpensesViewModel> {
     );
   }
 }
+
+final _roundedBottomCorners = RoundedRectangleBorder(
+    borderRadius: BorderRadius.only(
+  bottomLeft: Radius.circular(14.0),
+  bottomRight: Radius.circular(14.0),
+));
