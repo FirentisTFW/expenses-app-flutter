@@ -1,6 +1,7 @@
 import 'package:Expenses_app/datamodels/category.dart';
 import 'package:Expenses_app/services/functional_services/validator.dart';
 import 'package:Expenses_app/ui/universal_viewmodels/category_filter_dialog_viewmodel.dart';
+import 'package:Expenses_app/ui/universal_widgets/add_button.dart';
 import 'package:Expenses_app/ui/universal_widgets/loading_spinner.dart';
 import 'package:Expenses_app/ui/views/new_expenditure/new_expenditure_viewmodel.dart';
 import 'package:flutter/material.dart';
@@ -134,19 +135,9 @@ class _AddExpenditureButton extends ViewModelWidget<NewExpenditureViewModel> {
   Widget build(BuildContext context, NewExpenditureViewModel model) {
     return model.isBusy
         ? LoadingSpinner(padding: EdgeInsets.all(20))
-        : Padding(
-            padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 10),
-            child: RaisedButton(
-              color: Colors.red[400],
-              child: const Padding(
-                padding: EdgeInsets.all(20),
-                child: Text(
-                  'Add Expenditure',
-                  style: TextStyle(fontSize: 22),
-                ),
-              ),
-              onPressed: model.validateAndAddExpenditure,
-            ),
+        : AddButton(
+            onPressed: model.validateAndAddExpenditure,
+            text: 'Add Expenditure',
           );
   }
 }

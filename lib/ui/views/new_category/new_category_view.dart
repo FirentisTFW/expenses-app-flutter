@@ -1,5 +1,6 @@
 import 'package:Expenses_app/services/functional_services/icons_service.dart';
 import 'package:Expenses_app/services/functional_services/validator.dart';
+import 'package:Expenses_app/ui/universal_widgets/add_button.dart';
 import 'package:Expenses_app/ui/universal_widgets/loading_spinner.dart';
 import 'package:Expenses_app/ui/views/new_category/new_category_viewmodel.dart';
 import 'package:flutter/material.dart';
@@ -79,19 +80,9 @@ class _AddCategoryButton extends ViewModelWidget<NewCategoryViewModel> {
   Widget build(BuildContext context, NewCategoryViewModel model) {
     return model.isBusy
         ? LoadingSpinner(padding: EdgeInsets.all(20))
-        : Padding(
-            padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 10),
-            child: RaisedButton(
-              color: Colors.red[400],
-              child: Padding(
-                padding: const EdgeInsets.all(20),
-                child: const Text(
-                  'Add Category',
-                  style: TextStyle(fontSize: 22),
-                ),
-              ),
-              onPressed: model.validateAndAddCategory,
-            ),
+        : AddButton(
+            onPressed: model.validateAndAddCategory,
+            text: 'Add Category',
           );
   }
 }
