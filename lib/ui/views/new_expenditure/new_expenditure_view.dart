@@ -49,6 +49,7 @@ class _ExpendtiureNameInput extends ViewModelWidget<NewExpenditureViewModel> {
         decoration: const InputDecoration(hintText: 'Name'),
         validator: Validator.validateForEmptyString,
         textCapitalization: TextCapitalization.sentences,
+        textInputAction: TextInputAction.next,
         onSaved: model.setExpenditureName,
       ),
     );
@@ -66,6 +67,7 @@ class _AmountInput extends ViewModelWidget<NewExpenditureViewModel> {
         decoration: const InputDecoration(hintText: 'Amount'),
         keyboardType: TextInputType.number,
         validator: Validator.vaidateForNonNegativeDouble,
+        textInputAction: TextInputAction.next,
         onSaved: (value) => model.setMoneyAmount(double.parse(value)),
       ),
     );
@@ -95,7 +97,10 @@ class _CategorySelection extends StatelessWidget {
                       ),
                     }.toList()
                 ],
-                onChanged: (_) {},
+                onChanged: (_) {
+                  Future.delayed(Duration(milliseconds: 300),
+                      () => FocusScope.of(context).unfocus());
+                },
                 onSaved: onSaved,
               ),
       ),
@@ -114,7 +119,7 @@ class _DateSelection extends ViewModelWidget<NewExpenditureViewModel> {
             style: TextStyle(fontSize: 20)),
         onPressed: () => DatePicker.showDatePicker(
           context,
-          currentTime: DateTime.now(),
+          currentTime: model.expenditureDate ?? DateTime.now(),
           maxTime: DateTime.now(),
           theme: DatePickerTheme(
             backgroundColor: Theme.of(context).primaryColor,

@@ -69,7 +69,12 @@ class _IconSelection extends ViewModelWidget<NewCategoryViewModel> {
                   )),
             }.toList()
         ],
-        onChanged: model.setIconId,
+        onChanged: (value) {
+          model.setIconId(value);
+
+          Future.delayed(Duration(milliseconds: 300),
+              () => FocusScope.of(context).unfocus());
+        },
       ),
     );
   }

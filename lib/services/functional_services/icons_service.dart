@@ -21,7 +21,7 @@ class IconsService {
       case 1: // alcohol
         return Icon(MaterialCommunityIcons.bottle_wine);
       case 2: // bills
-        return Icon(FontAwesome.question);
+        return Icon(MaterialCommunityIcons.water_pump);
       case 3: // books
         return Icon(FontAwesome.book);
       case 4: // car
@@ -31,7 +31,7 @@ class IconsService {
       case 6: // clothes
         return Icon(MaterialCommunityIcons.tshirt_crew);
       case 7: // debt
-        return Icon(FontAwesome.question);
+        return Icon(MaterialCommunityIcons.bank);
       case 8: // eating out
         return Icon(MaterialCommunityIcons.food);
       case 9: // education
@@ -45,7 +45,7 @@ class IconsService {
       case 13: // groceries
         return Icon(MaterialCommunityIcons.food_variant);
       case 14: // health care
-        return Icon(FontAwesome.question);
+        return Icon(MaterialCommunityIcons.hospital_box_outline);
       case 15: // hygiene
         return Icon(MaterialCommunityIcons.spray_bottle);
       case 16: // other
