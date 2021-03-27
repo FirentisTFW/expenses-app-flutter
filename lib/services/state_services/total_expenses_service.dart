@@ -48,7 +48,7 @@ class TotalExpensesService {
     final monthStart = DateTime(now.year, now.month);
     _totalCategoryExpenses =
         await _api.getTotalCategoryExpensesInTimeSpan(monthStart, now);
-    return _totalCategoryExpenses;
+    return _totalCategoryExpenses.reversed.toList();
   }
 
   double getThisMonthTotalSpending() {

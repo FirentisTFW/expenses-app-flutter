@@ -15,3 +15,9 @@ App for tracking personal expenses. It allows you to add expenses, categorize th
 ## Launch
 
 If you want to launch the app, you can download expenses_app.apk file from apk folder and install it on your device.
+
+## App Preview
+
+
+![Browsing Expenditures](demo_gifs/expenditures.gif) ![Trends](demo_gifs/trends.gif)
+![Adding expenditure](demo_gifs/adding_expenditure.gif) ![Filtering expenditures](demo_gifs/filtering.gif)
