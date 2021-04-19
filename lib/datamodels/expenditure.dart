@@ -1,4 +1,6 @@
-class Expenditure {
+import 'package:equatable/equatable.dart';
+
+class Expenditure extends Equatable {
   final int id;
   final int categoryId;
   final String name;
@@ -22,4 +24,7 @@ class Expenditure {
         'moneyAmount': moneyAmount,
         'expDate': date.toIso8601String(),
       };
+
+  @override
+  List<Object> get props => [id, categoryId, name, moneyAmount, date];
 }

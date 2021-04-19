@@ -11,7 +11,7 @@ void main() {
     tearDown(() => unregisterServices());
 
     group('expenditureDate -', () {
-      test('When model is created is set to current date', () {
+      test('When model is created, is set to current date', () {
         var model = NewExpenditureViewModel();
         var currentDate = DateTime.now();
         expect(model.expenditureDate.year, currentDate.year);
@@ -21,6 +21,19 @@ void main() {
     });
     group('addExpenditure -', () {
       test(
+          'When expenditure properties are set correct, function calls expendituresService to add expenditure',
+          () async {
+        final expendituresService = getAndRegisterExpendituresServiceMock();
+        var model = NewExpenditureViewModel();
+
+        model.setExpenditureCategory(1);
+        model.setExpenditureName('Groceries');
+        model.setMoneyAmount(43.26);
+
+        await model.addExpenditure();
+        verify(expendituresService.addExpenditure(any));
+      });
+      test(
           'When expenditure properties are set correct and api returns no error, function returns true',
           () async {
         var model = NewExpenditureViewModel();
@@ -29,6 +42,7 @@ void main() {
         model.setMoneyAmount(43.26);
 
         expect(await model.addExpenditure(), true);
+        expect(model.hasError, false);
       });
       test(
           'When expenditures properties are set correct and api throws an error, function returns false',
@@ -43,6 +57,21 @@ void main() {
             ErrorDescription('Couldn\'t add expenditure to database.'));
 
         expect(await model.addExpenditure(), false);
+      });
+      test(
+          'When expenditures properties are set correct and api throws an error, function sets error for the ViewModel',
+          () async {
+        var expendituresService = getAndRegisterExpendituresServiceMock();
+        var model = NewExpenditureViewModel();
+        model.setExpenditureCategory(1);
+        model.setExpenditureName('Groceries');
+        model.setMoneyAmount(43.26);
+
+        when(expendituresService.addExpenditure(any)).thenThrow(
+            ErrorDescription('Couldn\'t add expenditure to database.'));
+
+        await model.addExpenditure();
+        expect(model.hasError, true);
       });
     });
     group('addExpenditureAndShowSnackbar -', () {

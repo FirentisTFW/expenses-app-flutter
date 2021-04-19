@@ -72,6 +72,49 @@ void main() {
         expect(model.isDataFetched, false);
       });
     });
+    group('data -', () {
+      test('When ViewModel is created, should be null', () {
+        var model = TrendsViewModel();
+        expect(model.data, null);
+      });
+      test(
+          'When fetchDataForRequest is called and returns correct values, should be the returned values',
+          () async {
+        var totalExpensesService = getAndRegisterTotalExpensesServiceMock();
+        var model = TrendsViewModel();
+        model.setFirstDate(DateTime(2020, 01, 01));
+        model.setSecondDate(DateTime(2020, 02, 01));
+        model.setGroupingMethod(GroupingMethod.ByCategories);
+
+        when(totalExpensesService.getTotalCategoryExpensesInTimeSpan(
+                DateTime(2020, 01, 01), DateTime(2020, 02, 01)))
+            .thenAnswer((_) async => [
+                  TotalCategoryExpenses(totalMoneyAmount: 222.33, name: 'Bills')
+                ]);
+
+        await model.fetchDataForRequest();
+
+        expect(model.data,
+            [TotalCategoryExpenses(totalMoneyAmount: 222.33, name: 'Bills')]);
+      });
+      test(
+          'When fetchDataForRequest is called and returns throws an error, should be null',
+          () async {
+        var totalExpensesService = getAndRegisterTotalExpensesServiceMock();
+        var model = TrendsViewModel();
+        model.setFirstDate(DateTime(2020, 01, 01));
+        model.setSecondDate(DateTime(2020, 02, 01));
+        model.setGroupingMethod(GroupingMethod.ByCategories);
+
+        when(totalExpensesService.getTotalCategoryExpensesInTimeSpan(
+                DateTime(2020, 01, 01), DateTime(2020, 02, 01)))
+            .thenThrow(Exception('Could not fetch data'));
+
+        await model.fetchDataForRequest();
+
+        expect(model.data, null);
+      });
+    });
     group('fetchDataForRequest -', () {
       test(
           'When _groupingMethod is set to group by categories, calls totalExpensesService for total expenses in time span sorted by categories ',
@@ -110,8 +153,7 @@ void main() {
 
         when(totalExpensesService.getTotalCategoryExpensesInTimeSpan(
                 DateTime(2020, 01, 01), DateTime(2020, 02, 01)))
-            .thenAnswer(
-                (_) async => throw ErrorDescription('Could not fetch data'));
+            .thenThrow(ErrorDescription('Could not fetch data'));
 
         await model.fetchDataForRequest();
 

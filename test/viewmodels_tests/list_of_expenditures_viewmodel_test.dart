@@ -22,7 +22,7 @@ void main() {
         expect(model.hasError, false);
       });
       test(
-          'When called and and ExpendituresService returns error, should set error for ViewModel',
+          'When called and ExpendituresService returns error, should set error for ViewModel',
           () async {
         var _expendituresService = getAndRegisterExpendituresServiceMock();
         var model = ListOfExpendituresViewModel();
@@ -201,6 +201,7 @@ void main() {
         var originalLength = model.expenditures.length;
         await model.deleteExpenditure(0);
 
+        expect(model.expenditures, [Expenditure(id: 1), Expenditure(id: 2)]);
         expect(model.expenditures.length, originalLength - 1);
       });
       test(
@@ -220,6 +221,8 @@ void main() {
 
         await model.deleteExpenditure(0);
 
+        expect(model.expenditures,
+            [Expenditure(id: 0), Expenditure(id: 1), Expenditure(id: 2)]);
         expect(model.expenditures.length, originalLength);
       });
       test(
@@ -236,6 +239,8 @@ void main() {
 
         await model.deleteExpenditure(3);
 
+        expect(model.expenditures,
+            [Expenditure(id: 0), Expenditure(id: 1), Expenditure(id: 2)]);
         expect(model.expenditures.length, originalLength);
       });
     });

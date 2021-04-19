@@ -1,6 +1,7 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
-abstract class TotalExpenses {
+abstract class TotalExpenses extends Equatable {
   final double totalMoneyAmount;
   final String name;
 
@@ -14,6 +15,9 @@ abstract class TotalExpenses {
         'totalMoneyAmount': totalMoneyAmount,
         'name': name,
       };
+
+  @override
+  List<Object> get props => [totalMoneyAmount, name];
 }
 
 class TotalMonthlyExpenses extends TotalExpenses {
