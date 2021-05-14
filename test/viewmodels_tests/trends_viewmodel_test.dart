@@ -98,7 +98,7 @@ void main() {
             [TotalCategoryExpenses(totalMoneyAmount: 222.33, name: 'Bills')]);
       });
       test(
-          'When fetchDataForRequest is called and returns throws an error, should be null',
+          'When fetchDataForRequest is called and throws an error, should be null',
           () async {
         var totalExpensesService = getAndRegisterTotalExpensesServiceMock();
         var model = TrendsViewModel();
