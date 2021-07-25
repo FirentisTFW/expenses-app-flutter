@@ -13,7 +13,6 @@ class TrendsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<TrendsViewModel>.reactive(
       builder: (context, child, model) => Scaffold(
-        appBar: AppBar(title: const Text('Trends')),
         body: ListView(
           children: [
             SelectionFields(),
@@ -30,36 +29,71 @@ class TrendsChart extends ViewModelWidget<TrendsViewModel> {
   @override
   Widget build(BuildContext context, TrendsViewModel model) {
     return model.isBusy
-        ? LoadingSpinner(padding: EdgeInsets.symmetric(vertical: 50))
+        ? LoadingSpinner(
+            padding: EdgeInsets.symmetric(
+              vertical: 50.0,
+            ),
+          )
         : !model.hasError
             ? model.isDataFetched
                 ? model.data.isNotEmpty
                     ? _buildChart(model)
                     : noDataInfo
-                : Container()
+                : const SizedBox()
             : Container(
-                padding: const EdgeInsets.all(30),
-                child: ErrorInfo(model.modelError.toString()));
+                padding: const EdgeInsets.all(30.0),
+                child: ErrorInfo(model.modelError.toString()),
+              );
   }
 
   Widget _buildChart(TrendsViewModel model) {
+    Widget child;
+
     switch (model.groupingMethod) {
       case GroupingMethod.ByMonths:
-        return LastMonthsBarChart.buildFromData(initialData: model.data);
+        child = LastMonthsBarChart.buildFromData(
+          initialData: model.data,
+        );
+        break;
       case GroupingMethod.ByCategories:
-        return ExpensesPieChart.buildFromData(
+        child = ExpensesPieChart.buildFromData(
           initialData: model.dataSortedByAmout,
           legend: true,
         );
+        break;
+      default:
+        child = const SizedBox.shrink();
     }
-    return Container();
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          child,
+          _buildTotalExpenses(model),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTotalExpenses(TrendsViewModel model) {
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: Text(
+        'Total: ${model.totalDataAmount.toStringAsFixed(2)}',
+        style: TextStyle(
+          fontSize: 22.0,
+        ),
+      ),
+    );
   }
 
   final noDataInfo = Container(
     child: const Center(
-        child: Padding(
-      padding: EdgeInsets.only(top: 40),
-      child: Text('No data for selected range'),
-    )),
+      child: Padding(
+        padding: EdgeInsets.only(
+          top: 40.0,
+        ),
+        child: Text('No data for selected range'),
+      ),
+    ),
   );
 }

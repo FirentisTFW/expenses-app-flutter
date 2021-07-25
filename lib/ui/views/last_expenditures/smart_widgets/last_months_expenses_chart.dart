@@ -10,12 +10,18 @@ class LastMonthsExpensesChart extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<LastMonthsExpensesChartViewModel>.reactive(
       builder: (context, model, child) => model.isBusy
-          ? LoadingSpinner(padding: EdgeInsets.symmetric(vertical: 50))
+          ? LoadingSpinner(
+              padding: EdgeInsets.symmetric(
+                vertical: 50,
+              ),
+            )
           : !model.hasError
               ? Column(
                   children: [
                     title,
-                    LastMonthsBarChart.buildFromData(initialData: model.data),
+                    LastMonthsBarChart.buildFromData(
+                      initialData: model.data,
+                    ),
                   ],
                 )
               : ErrorInfo(model.modelError.toString()),

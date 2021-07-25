@@ -1,4 +1,5 @@
 import 'package:Expenses_app/ui/universal_widgets/loading_spinner.dart';
+import 'package:Expenses_app/ui/views/trends/trends_view.dart';
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
@@ -47,6 +48,10 @@ class HomeView extends StatelessWidget {
               label: 'Expenses',
               icon: Icon(Icons.list),
             ),
+            const BottomNavigationBarItem(
+              label: 'Trends',
+              icon: Icon(Icons.bar_chart),
+            ),
           ],
         ),
       ),
@@ -61,6 +66,8 @@ class HomeView extends StatelessWidget {
         return ThisMonthChartView();
       case 1:
         return LastExpendituresView();
+      case 2:
+        return TrendsView();
       default:
         return ThisMonthChartView();
     }

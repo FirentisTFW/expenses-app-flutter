@@ -38,15 +38,15 @@ class _GroupingSelectionField extends ViewModelWidget<TrendsViewModel> {
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
       child: DropdownButtonFormField(
-        value: GroupingMethod.ByMonths,
+        value: GroupingMethod.ByCategories,
         items: [
-          const DropdownMenuItem(
-            value: GroupingMethod.ByMonths,
-            child: const Text('By Months'),
-          ),
           const DropdownMenuItem(
             value: GroupingMethod.ByCategories,
             child: const Text('By Categories'),
+          ),
+          const DropdownMenuItem(
+            value: GroupingMethod.ByMonths,
+            child: const Text('By Months'),
           ),
         ],
         onChanged: (value) {},

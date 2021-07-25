@@ -11,50 +11,39 @@ class TotalExpensesService {
   List<TotalCategoryExpenses> _totalCategoryExpenses;
 
   List<TotalExpenses> get totalMonthlyExpenses => _totalMonthlyExpenses;
-  List<TotalCategoryExpenses> get totalCategoryExpenses =>
-      _totalCategoryExpenses;
+  List<TotalCategoryExpenses> get totalCategoryExpenses => _totalCategoryExpenses;
 
   Future<List<TotalExpenses>> getLastMonthsTotalExpenses(int howMany) async {
-    // set endDate to last day and last second of previous month
-    DateTime endDate = DateService.getLastDayAndSecondOfTheMonth(
-        Jiffy(DateTime.now()).subtract(months: 1));
+    DateTime endDate = DateTime.now();
     // set startDate to last day and last second $howMany months before
-    DateTime startDate = DateService.getLastDayAndSecondOfTheMonth(
-        Jiffy(endDate).subtract(months: howMany));
+    DateTime startDate = DateService.getLastDayAndSecondOfTheMonth(Jiffy(endDate).subtract(months: howMany));
     // set startDate to first day and first second of next month so you have $howMany full months
     startDate = startDate.add(Duration(milliseconds: 1));
 
-    _totalMonthlyExpenses =
-        await _api.getTotalMonthlyExpensesInTimeSpan(startDate, endDate);
+    _totalMonthlyExpenses = await _api.getTotalMonthlyExpensesInTimeSpan(startDate, endDate);
     return _totalMonthlyExpenses;
   }
 
-  Future<List<TotalExpenses>> getTotalMonthlyExpensesInTimeSpan(
-      DateTime start, DateTime end) async {
-    _totalMonthlyExpenses =
-        await _api.getTotalMonthlyExpensesInTimeSpan(start, end);
+  Future<List<TotalExpenses>> getTotalMonthlyExpensesInTimeSpan(DateTime start, DateTime end) async {
+    _totalMonthlyExpenses = await _api.getTotalMonthlyExpensesInTimeSpan(start, end);
     return _totalMonthlyExpenses;
   }
 
-  Future<List<TotalExpenses>> getTotalCategoryExpensesInTimeSpan(
-      DateTime start, DateTime end) async {
-    _totalCategoryExpenses =
-        await _api.getTotalCategoryExpensesInTimeSpan(start, end);
+  Future<List<TotalExpenses>> getTotalCategoryExpensesInTimeSpan(DateTime start, DateTime end) async {
+    _totalCategoryExpenses = await _api.getTotalCategoryExpensesInTimeSpan(start, end);
     return _totalCategoryExpenses;
   }
 
   Future<List<TotalCategoryExpenses>> getThisMonthCategoryExpenses() async {
     final now = DateTime.now();
     final monthStart = DateTime(now.year, now.month);
-    _totalCategoryExpenses =
-        await _api.getTotalCategoryExpensesInTimeSpan(monthStart, now);
+    _totalCategoryExpenses = await _api.getTotalCategoryExpensesInTimeSpan(monthStart, now);
     return _totalCategoryExpenses.reversed.toList();
   }
 
   double getThisMonthTotalSpending() {
     double sum = 0;
-    _totalCategoryExpenses
-        .forEach((element) => sum += element.totalMoneyAmount);
+    _totalCategoryExpenses.forEach((element) => sum += element.totalMoneyAmount);
     return sum;
   }
 }

@@ -10,6 +10,7 @@ class TrendsViewModel extends BaseViewModel {
   final _totalExpensesService = locator<TotalExpensesService>();
 
   List<TotalExpenses> _data;
+  double _totalDataAmount = 0.0;
 
   final formKey = GlobalKey<FormState>();
   GroupingMethod _groupingMethod;
@@ -23,6 +24,8 @@ class TrendsViewModel extends BaseViewModel {
     data.sort((a, b) => a.totalMoneyAmount.compareTo(b.totalMoneyAmount));
     return data.reversed.toList();
   }
+
+  double get totalDataAmount => _totalDataAmount;
 
   GroupingMethod get groupingMethod => _groupingMethod;
 
@@ -55,8 +58,8 @@ class TrendsViewModel extends BaseViewModel {
 
   Future<void> _fetchMonthlyExpenses() async {
     try {
-      _data = await _totalExpensesService.getTotalMonthlyExpensesInTimeSpan(
-          _firstDate, _secondDate);
+      _data = await _totalExpensesService.getTotalMonthlyExpensesInTimeSpan(_firstDate, _secondDate);
+      _totalDataAmount = _data.map((element) => element.totalMoneyAmount).toList().fold(0, (p, e) => p + e);
     } catch (err) {
       setError(err);
     }
@@ -64,8 +67,8 @@ class TrendsViewModel extends BaseViewModel {
 
   Future<void> _fetchCategoryExpenses() async {
     try {
-      _data = await _totalExpensesService.getTotalCategoryExpensesInTimeSpan(
-          _firstDate, _secondDate);
+      _data = await _totalExpensesService.getTotalCategoryExpensesInTimeSpan(_firstDate, _secondDate);
+      _totalDataAmount = _data.map((element) => element.totalMoneyAmount).toList().fold(0, (p, e) => p + e);
     } catch (err) {
       setError(err);
     }
@@ -85,6 +88,5 @@ class TrendsViewModel extends BaseViewModel {
     }
   }
 
-  void _setSecondDateToLastDayOfMonth() =>
-      _secondDate = DateService.getLastDayAndSecondOfTheMonth(_secondDate);
+  void _setSecondDateToLastDayOfMonth() => _secondDate = DateService.getLastDayAndSecondOfTheMonth(_secondDate);
 }
