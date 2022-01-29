@@ -12,11 +12,10 @@ class NewExpenditureButton extends ViewModelWidget<ThisMonthChartViewModel> {
       padding: const EdgeInsets.symmetric(horizontal: 30),
       margin: const EdgeInsets.only(top: 30),
       child: RaisedButton(
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
         color: Colors.red[400],
         child: const Text(
-          'New Expenditure',
+          'Nowy wydatek',
           style: TextStyle(fontSize: 26),
         ),
         onPressed: model.goToNewExpenditureView,

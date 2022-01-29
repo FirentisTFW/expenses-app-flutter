@@ -59,8 +59,7 @@ class _ThisMonthExpensesChart extends ViewModelWidget<ThisMonthChartViewModel> {
   }
 }
 
-class _ThisMonthTotalExpensesInfo
-    extends ViewModelWidget<ThisMonthChartViewModel> {
+class _ThisMonthTotalExpensesInfo extends ViewModelWidget<ThisMonthChartViewModel> {
   _ThisMonthTotalExpensesInfo({Key key}) : super(key: key);
 
   @override
@@ -75,7 +74,7 @@ class _ThisMonthTotalExpensesInfo
             style: TextStyle(fontSize: 36),
           ),
           Text(
-            'This month\'s expenses',
+            'Wydatki w tym miesiącu',
             style: TextStyle(fontSize: 24, color: Colors.grey[300]),
           ),
         ],

@@ -24,9 +24,7 @@ class ListOfExpendituresView extends StatelessWidget {
                           itemBuilder: (context, index) {
                             return buildDismissibleExpenditureItem(
                               model,
-                              previousDate: index > 0
-                                  ? model.expenditures[index - 1].date
-                                  : null,
+                              previousDate: index > 0 ? model.expenditures[index - 1].date : null,
                               expenditure: model.expenditures[index],
                             );
                           })
@@ -39,14 +37,16 @@ class ListOfExpendituresView extends StatelessWidget {
     );
   }
 
-  final noItemsYetInfo =
-      Container(child: Center(child: Text('No expenditures added yet')));
+  final noItemsYetInfo = Container(
+    child: Center(
+      child: Text('Brak wydatków'),
+    ),
+  );
 
   Widget buildDismissibleExpenditureItem(ListOfExpendituresViewModel model,
       {DateTime previousDate, Expenditure expenditure}) {
     final expenditureWidget = Dismissible(
-      onDismissed: (direction) =>
-          model.deleteExpenditureAndShowSnackbar(expenditure.id),
+      onDismissed: (direction) => model.deleteExpenditureAndShowSnackbar(expenditure.id),
       direction: DismissDirection.startToEnd,
       key: Key(expenditure.id.toString()),
       background: Container(
@@ -73,11 +73,8 @@ class ListOfExpendituresView extends StatelessWidget {
     return expenditureWidget;
   }
 
-  bool shouldYouShowDateField(
-          previousDate, currentDate) =>
-      (previousDate == null ||
-          (DateFormat('d/M/y').format(previousDate) !=
-              DateFormat('d/M/y').format(currentDate)));
+  bool shouldYouShowDateField(previousDate, currentDate) =>
+      (previousDate == null || (DateFormat('d/M/y').format(previousDate) != DateFormat('d/M/y').format(currentDate)));
 
   Widget buildDateField(DateTime date) => Container(
         height: 60,

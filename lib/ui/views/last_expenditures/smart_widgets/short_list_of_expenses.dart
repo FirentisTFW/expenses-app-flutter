@@ -22,8 +22,7 @@ class ShortListOfExpenses extends StatelessWidget {
                     : !model.hasError
                         ? model.data.length > 0
                             ? ListView(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 6),
+                                padding: const EdgeInsets.symmetric(vertical: 6),
                                 children: model.data
                                     .map((item) => ExpenditureItem(
                                           categoryId: item.categoryId,
@@ -44,8 +43,13 @@ class ShortListOfExpenses extends StatelessWidget {
     );
   }
 
-  final noItemsYetInfo =
-      Container(child: Center(child: Text('No expenditures added yet')));
+  final noItemsYetInfo = Container(
+    child: Center(
+      child: Text(
+        'Brak wydatków',
+      ),
+    ),
+  );
 }
 
 class _ShowAllButton extends ViewModelWidget<ShortListOfExpensesViewModel> {
@@ -59,7 +63,7 @@ class _ShowAllButton extends ViewModelWidget<ShortListOfExpensesViewModel> {
         shape: _roundedBottomCorners,
         color: Colors.red[400],
         child: Text(
-          'Show All Expenditures',
+          'Pokaż wszystkie wydatki',
           style: TextStyle(color: Colors.white, fontSize: 20),
         ),
         onPressed: model.goToListOfExpensesView,

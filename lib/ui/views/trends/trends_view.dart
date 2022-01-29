@@ -78,7 +78,7 @@ class TrendsChart extends ViewModelWidget<TrendsViewModel> {
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Text(
-        'Total: ${model.totalDataAmount.toStringAsFixed(2)}',
+        'Suma: ${model.totalDataAmount.toStringAsFixed(2)}',
         style: TextStyle(
           fontSize: 22.0,
         ),
@@ -92,7 +92,7 @@ class TrendsChart extends ViewModelWidget<TrendsViewModel> {
         padding: EdgeInsets.only(
           top: 40.0,
         ),
-        child: Text('No data for selected range'),
+        child: Text('Brak danych dla wybranego okresu'),
       ),
     ),
   );

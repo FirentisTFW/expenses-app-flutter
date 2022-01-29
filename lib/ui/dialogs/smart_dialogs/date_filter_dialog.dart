@@ -9,8 +9,7 @@ class DateFilterDialog extends StatelessWidget {
   final DialogRequest dialogRequest;
   final Function(DialogResponse) completer;
 
-  DateFilterDialog({Key key, this.dialogRequest, this.completer})
-      : super(key: key);
+  DateFilterDialog({Key key, this.dialogRequest, this.completer}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,11 +33,7 @@ class DateFilterDialog extends StatelessWidget {
               ),
               _buildConfirmationButton(
                 onTap: () => completer(DialogResponse(
-                    confirmed: true,
-                    responseData: {
-                      'startDate': model.startDate,
-                      'endDate': model.endDate
-                    })),
+                    confirmed: true, responseData: {'startDate': model.startDate, 'endDate': model.endDate})),
               ),
             ],
           ),
@@ -48,9 +43,7 @@ class DateFilterDialog extends StatelessWidget {
     );
   }
 
-  Widget _buildDatePickerButton(
-          BuildContext context, DateFilterDialogViewModel model,
-          {bool isFirst = false}) =>
+  Widget _buildDatePickerButton(BuildContext context, DateFilterDialogViewModel model, {bool isFirst = false}) =>
       FlatButton(
         color: Colors.grey[600],
         padding: const EdgeInsets.all(10),
@@ -59,10 +52,10 @@ class DateFilterDialog extends StatelessWidget {
           isFirst
               ? model.startDate != null
                   ? DateFormat('yMd').format(model.startDate)
-                  : 'From'
+                  : 'Od'
               : model.endDate != null
                   ? DateFormat('yMd').format(model.endDate)
-                  : 'To',
+                  : 'Do',
           style: TextStyle(fontSize: 20),
         ),
         onPressed: () {
@@ -70,9 +63,7 @@ class DateFilterDialog extends StatelessWidget {
         },
       );
 
-  void _showDatePickerAndChooseDate(
-      BuildContext context, DateFilterDialogViewModel model,
-      {bool isFirst = false}) {
+  void _showDatePickerAndChooseDate(BuildContext context, DateFilterDialogViewModel model, {bool isFirst = false}) {
     DatePicker.showDatePicker(
       context,
       currentTime: DateTime.now().subtract(Duration(days: 60)),

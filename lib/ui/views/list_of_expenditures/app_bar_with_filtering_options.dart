@@ -3,9 +3,7 @@ import 'package:Expenses_app/ui/views/list_of_expenditures/list_of_expenditures_
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
-class AppBarWithFilterOptions
-    extends ViewModelWidget<ListOfExpendituresViewModel>
-    implements PreferredSizeWidget {
+class AppBarWithFilterOptions extends ViewModelWidget<ListOfExpendituresViewModel> implements PreferredSizeWidget {
   final Size preferredSize = Size.fromHeight(kToolbarHeight);
 
   @override
@@ -17,15 +15,15 @@ class AppBarWithFilterOptions
           onSelected: model.filterBy,
           itemBuilder: (_) => [
             PopupMenuItem(
-              child: Text('Filter by price'),
+              child: Text('Filtruj po cenie'),
               value: FilteringMethod.ByPrice,
             ),
             PopupMenuItem(
-              child: Text('Filter by category'),
+              child: Text('Filtruj po kategoriach'),
               value: FilteringMethod.ByCategory,
             ),
             PopupMenuItem(
-              child: Text('Filter by date'),
+              child: Text('Filtruj po dacie'),
               value: FilteringMethod.ByDate,
             ),
           ],

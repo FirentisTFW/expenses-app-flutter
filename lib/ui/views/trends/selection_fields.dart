@@ -42,11 +42,11 @@ class _GroupingSelectionField extends ViewModelWidget<TrendsViewModel> {
         items: [
           const DropdownMenuItem(
             value: GroupingMethod.ByCategories,
-            child: const Text('By Categories'),
+            child: const Text('Kategorie'),
           ),
           const DropdownMenuItem(
             value: GroupingMethod.ByMonths,
-            child: const Text('By Months'),
+            child: const Text('Miesiące'),
           ),
         ],
         onChanged: (value) {},
@@ -109,7 +109,7 @@ class _ShowChartButton extends ViewModelWidget<TrendsViewModel> {
         width: double.infinity,
         child: FlatButton(
           color: Colors.grey[600],
-          child: const Text('Show Chart'),
+          child: const Text('Pokaż wykres'),
           onPressed: model.saveForm,
         ),
       ),

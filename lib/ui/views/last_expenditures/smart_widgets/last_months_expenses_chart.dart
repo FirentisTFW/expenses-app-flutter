@@ -33,7 +33,7 @@ class LastMonthsExpensesChart extends StatelessWidget {
     padding: const EdgeInsets.only(top: 40, bottom: 10),
     width: double.infinity,
     child: const Text(
-      'Last months\' total expenses',
+      'Wydatki w ostatnich miesiącach',
       textAlign: TextAlign.center,
       style: TextStyle(fontSize: 28),
     ),

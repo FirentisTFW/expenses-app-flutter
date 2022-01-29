@@ -15,7 +15,7 @@ class NewExpenditureView extends StatelessWidget {
     return ViewModelBuilder<NewExpenditureViewModel>.nonReactive(
       builder: (context, model, child) => Scaffold(
         appBar: AppBar(
-          title: const Text('Add New Expenditure'),
+          title: const Text('Nowy wydatek'),
         ),
         body: Container(
           padding: const EdgeInsets.all(30),
@@ -46,7 +46,7 @@ class _ExpendtiureNameInput extends ViewModelWidget<NewExpenditureViewModel> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 20),
       child: TextFormField(
-        decoration: const InputDecoration(hintText: 'Name'),
+        decoration: const InputDecoration(hintText: 'Nazwa'),
         validator: Validator.validateForEmptyString,
         textCapitalization: TextCapitalization.sentences,
         textInputAction: TextInputAction.next,
@@ -64,7 +64,7 @@ class _AmountInput extends ViewModelWidget<NewExpenditureViewModel> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 20),
       child: TextFormField(
-        decoration: const InputDecoration(hintText: 'Amount'),
+        decoration: const InputDecoration(hintText: 'Kwota'),
         keyboardType: TextInputType.number,
         validator: Validator.vaidateForNonNegativeDouble,
         textInputAction: TextInputAction.next,
@@ -98,8 +98,7 @@ class _CategorySelection extends StatelessWidget {
                     }.toList()
                 ],
                 onChanged: (_) {
-                  Future.delayed(Duration(milliseconds: 300),
-                      () => FocusScope.of(context).unfocus());
+                  Future.delayed(Duration(milliseconds: 300), () => FocusScope.of(context).unfocus());
                 },
                 onSaved: onSaved,
               ),
@@ -115,8 +114,7 @@ class _DateSelection extends ViewModelWidget<NewExpenditureViewModel> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 20),
       child: FlatButton(
-        child: Text('Date: ' + DateFormat('yMd').format(model.expenditureDate),
-            style: TextStyle(fontSize: 20)),
+        child: Text('Data: ' + DateFormat('yMd').format(model.expenditureDate), style: TextStyle(fontSize: 20)),
         onPressed: () => DatePicker.showDatePicker(
           context,
           currentTime: model.expenditureDate ?? DateTime.now(),
@@ -142,7 +140,7 @@ class _AddExpenditureButton extends ViewModelWidget<NewExpenditureViewModel> {
         ? LoadingSpinner(padding: EdgeInsets.all(20))
         : AddButton(
             onPressed: model.validateAndAddExpenditure,
-            text: 'Add Expenditure',
+            text: 'Dodaj wydatek',
           );
   }
 }

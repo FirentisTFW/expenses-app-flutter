@@ -30,7 +30,7 @@ class LastExpendituresView extends StatelessWidget {
     padding: const EdgeInsets.only(top: 50, bottom: 25),
     width: double.infinity,
     child: const Text(
-      'Last Expenditures',
+      'Ostatnie wydatki',
       textAlign: TextAlign.center,
       style: TextStyle(fontSize: 28),
     ),

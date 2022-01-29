@@ -41,15 +41,15 @@ class HomeView extends StatelessWidget {
           onTap: model.setIndex,
           items: [
             const BottomNavigationBarItem(
-              label: 'Home',
+              label: 'Start',
               icon: Icon(Icons.home),
             ),
             const BottomNavigationBarItem(
-              label: 'Expenses',
+              label: 'Wydatki',
               icon: Icon(Icons.list),
             ),
             const BottomNavigationBarItem(
-              label: 'Trends',
+              label: 'Wykresy',
               icon: Icon(Icons.bar_chart),
             ),
           ],

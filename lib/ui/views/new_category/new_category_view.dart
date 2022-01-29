@@ -11,7 +11,7 @@ class NewCategoryView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder.nonReactive(
       builder: (context, model, child) => Scaffold(
-        appBar: AppBar(title: Text('Add New Category')),
+        appBar: AppBar(title: Text('Nowa kategoria')),
         body: Container(
           padding: const EdgeInsets.all(30),
           child: Form(
@@ -39,7 +39,7 @@ class _CategoryNameInput extends ViewModelWidget<NewCategoryViewModel> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 20),
       child: TextFormField(
-        decoration: InputDecoration(hintText: 'Name'),
+        decoration: InputDecoration(hintText: 'Nazwa'),
         validator: Validator.validateForEmptyString,
         textCapitalization: TextCapitalization.sentences,
         onSaved: model.setCategoryName,
@@ -72,8 +72,7 @@ class _IconSelection extends ViewModelWidget<NewCategoryViewModel> {
         onChanged: (value) {
           model.setIconId(value);
 
-          Future.delayed(Duration(milliseconds: 300),
-              () => FocusScope.of(context).unfocus());
+          Future.delayed(Duration(milliseconds: 300), () => FocusScope.of(context).unfocus());
         },
       ),
     );
@@ -87,7 +86,7 @@ class _AddCategoryButton extends ViewModelWidget<NewCategoryViewModel> {
         ? LoadingSpinner(padding: EdgeInsets.all(20))
         : AddButton(
             onPressed: model.validateAndAddCategory,
-            text: 'Add Category',
+            text: 'Dodaj kategorię',
           );
   }
 }

@@ -12,11 +12,10 @@ class NewCategoryButton extends ViewModelWidget<ThisMonthChartViewModel> {
       padding: const EdgeInsets.symmetric(horizontal: 40),
       margin: const EdgeInsets.symmetric(vertical: 30),
       child: RaisedButton(
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
         color: Colors.red[400],
         child: const Text(
-          'New Category',
+          'Nowa kategoria',
           style: TextStyle(fontSize: 22),
         ),
         onPressed: model.goToNewCategoryView,
