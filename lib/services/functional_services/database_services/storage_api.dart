@@ -12,8 +12,7 @@ class StorageApi extends Api {
   @override
   Future<void> addCategory(Category category) async {
     try {
-      await _databaseService.database
-          .insert(DbSpec.T_CATEGORIES, category.toJson());
+      await _databaseService.database.insert(DbSpec.T_CATEGORIES, category.toJson());
     } catch (err) {
       throw err;
     }
@@ -22,8 +21,7 @@ class StorageApi extends Api {
   @override
   Future<void> addExpenditure(Expenditure expenditure) async {
     try {
-      await _databaseService.database
-          .insert(DbSpec.T_EXPENDITURES, expenditure.toJson());
+      await _databaseService.database.insert(DbSpec.T_EXPENDITURES, expenditure.toJson());
     } catch (err) {
       throw err;
     }
@@ -45,8 +43,7 @@ class StorageApi extends Api {
   @override
   Future<List<Category>> getAllCategories() async {
     try {
-      List<Map> categoriesResults =
-          await _databaseService.database.query(DbSpec.T_CATEGORIES);
+      List<Map> categoriesResults = await _databaseService.database.query(DbSpec.T_CATEGORIES);
       return categoriesResults.map((c) => Category.fromJson(c)).toList();
     } catch (err) {
       throw err;
@@ -56,8 +53,8 @@ class StorageApi extends Api {
   @override
   Future<List<Expenditure>> getAllExpenditures() async {
     try {
-      List<Map> expendituresResults = await _databaseService.database.rawQuery(
-          "SELECT * FROM ${DbSpec.T_EXPENDITURES} ORDER BY expDate DESC");
+      List<Map> expendituresResults =
+          await _databaseService.database.rawQuery("SELECT * FROM ${DbSpec.T_EXPENDITURES} ORDER BY expDate DESC");
       return expendituresResults.map((c) => Expenditure.fromJson(c)).toList();
     } catch (err) {
       throw err;
@@ -65,8 +62,7 @@ class StorageApi extends Api {
   }
 
   @override
-  Future<List<Expenditure>> getExpendituresInTimeSpan(
-      DateTime start, DateTime end) async {
+  Future<List<Expenditure>> getExpendituresInTimeSpan(DateTime start, DateTime end) async {
     try {
       String startDate = start.toIso8601String();
       String endDate = end.toIso8601String();
@@ -82,8 +78,8 @@ class StorageApi extends Api {
   @override
   Future<List<Expenditure>> getLastExpenditures({int howMany}) async {
     try {
-      List<Map> expendituresResults = await _databaseService.database.rawQuery(
-          "SELECT * FROM ${DbSpec.T_EXPENDITURES} ORDER BY expDate DESC LIMIT $howMany");
+      List<Map> expendituresResults = await _databaseService.database
+          .rawQuery("SELECT * FROM ${DbSpec.T_EXPENDITURES} ORDER BY expDate DESC LIMIT $howMany");
       return expendituresResults.map((c) => Expenditure.fromJson(c)).toList();
     } catch (err) {
       throw err;
@@ -91,34 +87,28 @@ class StorageApi extends Api {
   }
 
   @override
-  Future<List<TotalMonthlyExpenses>> getTotalMonthlyExpensesInTimeSpan(
-      DateTime start, DateTime end) async {
+  Future<List<TotalMonthlyExpenses>> getTotalMonthlyExpensesInTimeSpan(DateTime start, DateTime end) async {
     try {
       String startDate = start.toIso8601String();
       String endDate = end.toIso8601String();
 
       List<Map> monthlyExpensesResults = await _databaseService.database.rawQuery(
-          "SELECT SUM(moneyAmount) AS 'totalMoneyAmount', SUBSTR(expDate, 6, 2) AS 'name' FROM ${DbSpec.T_EXPENDITURES} WHERE expDate >= '$startDate' AND expDate <= '$endDate' GROUP BY 2 ORDER BY 2");
-      return monthlyExpensesResults
-          .map((c) => TotalMonthlyExpenses.fromJson(c))
-          .toList();
+          "SELECT SUM(moneyAmount) AS 'totalMoneyAmount', SUBSTR(expDate, 6, 2) AS 'name' FROM ${DbSpec.T_EXPENDITURES} WHERE expDate >= '$startDate' AND expDate <= '$endDate' GROUP BY 2 ORDER BY expDate");
+      return monthlyExpensesResults.map((c) => TotalMonthlyExpenses.fromJson(c)).toList();
     } catch (err) {
       throw err;
     }
   }
 
   @override
-  Future<List<TotalCategoryExpenses>> getTotalCategoryExpensesInTimeSpan(
-      DateTime start, DateTime end) async {
+  Future<List<TotalCategoryExpenses>> getTotalCategoryExpensesInTimeSpan(DateTime start, DateTime end) async {
     try {
       String startDate = start.toIso8601String();
       String endDate = end.toIso8601String();
 
       List<Map> categoryExpensesResults = await _databaseService.database.rawQuery(
           "SELECT SUM(moneyAmount) AS 'totalMoneyAmount', catName AS 'name' FROM ${DbSpec.T_EXPENDITURES} e INNER JOIN ${DbSpec.T_CATEGORIES} c ON e.categoryId = c.id WHERE expDate >= '$startDate' AND expDate <= '$endDate' GROUP BY 2 ORDER BY 1");
-      return categoryExpensesResults
-          .map((c) => TotalCategoryExpenses.fromJson(c))
-          .toList();
+      return categoryExpensesResults.map((c) => TotalCategoryExpenses.fromJson(c)).toList();
     } catch (err) {
       throw err;
     }
