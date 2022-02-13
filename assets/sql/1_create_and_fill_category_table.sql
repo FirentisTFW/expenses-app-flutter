@@ -7,8 +7,8 @@ CREATE TABLE categories(
 INSERT INTO categories VALUES
     (0, 'Zakwaterowanie', 0),
     (2, 'Rachunki', 2),
-    (3, 'Ksiąki', 3),
-    (4, 'Samochów', 4),
+    (3, 'Książki', 3),
+    (4, 'Samochód', 4),
     (6, 'Ubrania', 6),
     (7, 'Kredyt', 7),
     (8, 'Jedzenie na mieście', 8),

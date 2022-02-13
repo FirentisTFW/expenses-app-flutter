@@ -44,7 +44,8 @@ class StorageApi extends Api {
   Future<List<Category>> getAllCategories() async {
     try {
       List<Map> categoriesResults = await _databaseService.database.query(DbSpec.T_CATEGORIES);
-      return categoriesResults.map((c) => Category.fromJson(c)).toList();
+      return categoriesResults.map((c) => Category.fromJson(c)).toList()
+        ..sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
     } catch (err) {
       throw err;
     }

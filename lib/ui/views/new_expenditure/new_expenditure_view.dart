@@ -82,24 +82,25 @@ class _CategorySelection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<CategoriesViewModel>.reactive(
-      builder: (context, model, child) => Padding(
+      builder: (_, model, __) => Padding(
         padding: const EdgeInsets.symmetric(vertical: 20),
         child: model.isBusy
             ? LoadingSpinner()
             : DropdownButtonFormField(
-                value: 0,
-                items: [
-                  for (Category category in model.data)
-                    ...{
-                      DropdownMenuItem(
+                value: model.data.first.id,
+                items: model.data
+                    .map(
+                      (category) => DropdownMenuItem(
                         value: category.id,
                         child: Text(category.name),
                       ),
-                    }.toList()
-                ],
-                onChanged: (_) {
-                  Future.delayed(Duration(milliseconds: 300), () => FocusScope.of(context).unfocus());
-                },
+                    )
+                    .toList(),
+                onChanged: (_) => Future.delayed(
+                    Duration(
+                      milliseconds: 300,
+                    ),
+                    () => FocusScope.of(context).unfocus()),
                 onSaved: onSaved,
               ),
       ),
