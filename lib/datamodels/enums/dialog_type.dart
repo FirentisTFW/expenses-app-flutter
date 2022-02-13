@@ -1,5 +1,5 @@
 enum DialogType {
-  PriceFilter,
   CategoryFilter,
   DateFilter,
+  PriceFilter,
 }

@@ -3,7 +3,11 @@ class Category {
   final String name;
   final int iconId;
 
-  Category({this.id, this.name, this.iconId});
+  const Category({
+    this.id,
+    this.name,
+    this.iconId,
+  });
 
   Category.fromJson(Map<String, dynamic> json)
       : id = json['id'],

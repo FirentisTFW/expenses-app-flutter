@@ -11,7 +11,7 @@ import 'package:get_it/get_it.dart';
 import 'package:sqflite_migration_service/sqflite_migration_service.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-final locator = GetIt.instance;
+final GetIt locator = GetIt.instance;
 
 const bool _USE_FAKE_IMPLEMENTATION = false;
 
@@ -22,21 +22,16 @@ void setupLocator() {
   locator.registerLazySingleton(() => SnackbarService());
 
   // API, DATABASE
-  locator.registerLazySingleton<Api>(
-      () => _USE_FAKE_IMPLEMENTATION ? FakeApi() : StorageApi());
+  locator.registerLazySingleton<Api>(() => _USE_FAKE_IMPLEMENTATION ? FakeApi() : StorageApi());
   locator.registerLazySingleton<DatabaseService>(() => DatabaseService());
-  locator.registerLazySingleton<DatabaseMigrationService>(
-      () => DatabaseMigrationService());
+  locator.registerLazySingleton<DatabaseMigrationService>(() => DatabaseMigrationService());
 
   // CUSTOM SERVICES
-  locator
-      .registerLazySingleton<ExpendituresService>(() => ExpendituresService());
-  locator.registerLazySingleton<TotalExpensesService>(
-      () => TotalExpensesService());
+  locator.registerLazySingleton<ExpendituresService>(() => ExpendituresService());
+  locator.registerLazySingleton<TotalExpensesService>(() => TotalExpensesService());
   locator.registerLazySingleton<CategoriesService>(() => CategoriesService());
 
   // VIEWMODELS
-  locator.registerSingleton<LastExpendituresViewModel>(
-      LastExpendituresViewModel());
+  locator.registerSingleton<LastExpendituresViewModel>(LastExpendituresViewModel());
   locator.registerSingleton<ThisMonthChartViewModel>(ThisMonthChartViewModel());
 }

@@ -7,11 +7,24 @@ import 'package:auto_route/auto_route_annotations.dart';
 
 @MaterialAutoRouter(
   routes: <AutoRoute>[
-    MaterialRoute(page: HomeView, initial: true),
-    MaterialRoute(page: ListOfExpendituresView),
-    MaterialRoute(page: TrendsView),
-    MaterialRoute(page: NewExpenditureView),
-    MaterialRoute(page: NewCategoryView),
+    MaterialRoute(
+      page: HomeView,
+      initial: true,
+    ),
+    MaterialRoute(
+      page: ListOfExpendituresView,
+    ),
+    MaterialRoute(
+      page: TrendsView,
+    ),
+    MaterialRoute(
+      page: NewExpenditureView,
+    ),
+    MaterialRoute(
+      page: NewCategoryView,
+    ),
   ],
 )
-class $Router {}
+class $Router {
+  const $Router();
+}

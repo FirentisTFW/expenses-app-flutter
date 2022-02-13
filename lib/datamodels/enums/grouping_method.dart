@@ -1,4 +1,4 @@
 enum GroupingMethod {
-  ByMonths,
   ByCategories,
+  ByMonths,
 }

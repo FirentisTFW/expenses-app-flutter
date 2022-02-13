@@ -1,4 +1,3 @@
-import 'package:Expenses_app/datamodels/category.dart';
 import 'package:Expenses_app/services/functional_services/validator.dart';
 import 'package:Expenses_app/ui/universal_viewmodels/category_filter_dialog_viewmodel.dart';
 import 'package:Expenses_app/ui/universal_widgets/add_button.dart';

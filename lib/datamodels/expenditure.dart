@@ -1,28 +1,33 @@
 import 'package:equatable/equatable.dart';
 
 class Expenditure extends Equatable {
-  final int id;
   final int categoryId;
-  final String name;
-  final double moneyAmount;
   final DateTime date;
+  final int id;
+  final double moneyAmount;
+  final String name;
 
-  Expenditure(
-      {this.id, this.categoryId, this.name, this.moneyAmount, this.date});
+  const Expenditure({
+    this.categoryId,
+    this.date,
+    this.id,
+    this.moneyAmount,
+    this.name,
+  });
 
   Expenditure.fromJson(Map<String, dynamic> json)
-      : id = json['id'],
-        categoryId = json['categoryId'],
-        name = json['expName'],
+      : categoryId = json['categoryId'],
+        date = DateTime.tryParse(json['expDate']),
+        id = json['id'],
         moneyAmount = json['moneyAmount'],
-        date = DateTime.tryParse(json['expDate']);
+        name = json['expName'];
 
   Map<String, dynamic> toJson() => {
-        'id': id,
         'categoryId': categoryId,
-        'expName': name,
-        'moneyAmount': moneyAmount,
         'expDate': date.toIso8601String(),
+        'expName': name,
+        'id': id,
+        'moneyAmount': moneyAmount,
       };
 
   @override

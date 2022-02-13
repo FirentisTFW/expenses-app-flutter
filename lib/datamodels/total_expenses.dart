@@ -2,38 +2,47 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
 abstract class TotalExpenses extends Equatable {
-  final double totalMoneyAmount;
   final String name;
+  final double totalMoneyAmount;
 
-  TotalExpenses(this.totalMoneyAmount, this.name);
+  const TotalExpenses({
+    @required this.name,
+    @required this.totalMoneyAmount,
+  });
 
   TotalExpenses.fromJson(Map<String, dynamic> json)
-      : totalMoneyAmount = json['totalMoneyAmount'],
-        name = json['name'];
+      : name = json['name'],
+        totalMoneyAmount = json['totalMoneyAmount'];
 
   Map<String, dynamic> toJson() => {
-        'totalMoneyAmount': totalMoneyAmount,
         'name': name,
+        'totalMoneyAmount': totalMoneyAmount,
       };
 
   @override
   List<Object> get props => [totalMoneyAmount, name];
 }
 
-class TotalMonthlyExpenses extends TotalExpenses {
-  TotalMonthlyExpenses(
-      {@required double totalMoneyAmount, @required String name})
-      : super(totalMoneyAmount, name);
+class TotalCategoryExpenses extends TotalExpenses {
+  const TotalCategoryExpenses({
+    @required String name,
+    @required double totalMoneyAmount,
+  }) : super(
+          name: name,
+          totalMoneyAmount: totalMoneyAmount,
+        );
 
-  TotalMonthlyExpenses.fromJson(Map<String, dynamic> json)
-      : super.fromJson(json);
+  TotalCategoryExpenses.fromJson(Map<String, dynamic> json) : super.fromJson(json);
 }
 
-class TotalCategoryExpenses extends TotalExpenses {
-  TotalCategoryExpenses(
-      {@required double totalMoneyAmount, @required String name})
-      : super(totalMoneyAmount, name);
+class TotalMonthlyExpenses extends TotalExpenses {
+  const TotalMonthlyExpenses({
+    @required String name,
+    @required double totalMoneyAmount,
+  }) : super(
+          name: name,
+          totalMoneyAmount: totalMoneyAmount,
+        );
 
-  TotalCategoryExpenses.fromJson(Map<String, dynamic> json)
-      : super.fromJson(json);
+  TotalMonthlyExpenses.fromJson(Map<String, dynamic> json) : super.fromJson(json);
 }
