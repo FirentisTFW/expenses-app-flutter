@@ -6,6 +6,7 @@
 .DS_Store
 .atom/
 .buildlog/
+.fvm/flutter_sdk
 .history
 .svn/
 
@@ -44,3 +45,6 @@ app.*.map.json
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 
 .metadata
+
+# Android related
+android/key/*
