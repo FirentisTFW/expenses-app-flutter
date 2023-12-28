@@ -3,11 +3,13 @@ import 'package:Expenses_app/ui/universal_viewmodels/category_filter_dialog_view
 import 'package:Expenses_app/ui/universal_widgets/add_button.dart';
 import 'package:Expenses_app/ui/universal_widgets/loading_spinner.dart';
 import 'package:Expenses_app/ui/views/new_expenditure/new_expenditure_viewmodel.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:stacked/stacked.dart';
 
+@RoutePage()
 class NewExpenditureView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

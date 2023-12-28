@@ -3,9 +3,11 @@ import 'package:Expenses_app/services/functional_services/validator.dart';
 import 'package:Expenses_app/ui/universal_widgets/add_button.dart';
 import 'package:Expenses_app/ui/universal_widgets/loading_spinner.dart';
 import 'package:Expenses_app/ui/views/new_category/new_category_viewmodel.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
+@RoutePage()
 class NewCategoryView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
