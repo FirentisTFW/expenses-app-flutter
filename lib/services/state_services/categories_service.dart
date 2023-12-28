@@ -5,10 +5,8 @@ import 'package:Expenses_app/services/functional_services/database_services/api.
 class CategoriesService {
   final _api = locator<Api>();
 
-  List<Category> _categories;
+  List<Category> _categories = [];
   List<Category> get categories => _categories;
-
-  bool get areCategoriesFetched => _categories != null;
 
   Future addCategory(Category category) async =>
       await _api.addCategory(category);

@@ -5,7 +5,7 @@ import 'package:sqflite_migration_service/sqflite_migration_service.dart';
 
 class DatabaseService {
   final _migrationService = locator<DatabaseMigrationService>();
-  Database _database;
+  late final Database _database;
 
   Database get database => _database;
 

@@ -8,16 +8,16 @@ class Expenditure extends Equatable {
   final String name;
 
   const Expenditure({
-    this.categoryId,
-    this.date,
-    this.id,
-    this.moneyAmount,
-    this.name,
+    required this.categoryId,
+    required this.date,
+    required this.id,
+    required this.moneyAmount,
+    required this.name,
   });
 
   Expenditure.fromJson(Map<String, dynamic> json)
       : categoryId = json['categoryId'],
-        date = DateTime.tryParse(json['expDate']),
+        date = DateTime.parse(json['expDate']),
         id = json['id'],
         moneyAmount = json['moneyAmount'],
         name = json['expName'];

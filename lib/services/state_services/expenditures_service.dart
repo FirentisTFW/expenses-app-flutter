@@ -5,7 +5,7 @@ import 'package:Expenses_app/services/functional_services/database_services/api.
 class ExpendituresService {
   final _api = locator<Api>();
 
-  List<Expenditure> _expenditures;
+  List<Expenditure> _expenditures = [];
   List<Expenditure> get expenditures => _expenditures;
 
   Future addExpenditure(Expenditure expenditure) async =>

@@ -4,9 +4,9 @@ class Category {
   final int iconId;
 
   const Category({
-    this.id,
-    this.name,
-    this.iconId,
+    required this.id,
+    required this.name,
+    required this.iconId,
   });
 
   Category.fromJson(Map<String, dynamic> json)

@@ -12,7 +12,9 @@ abstract class Api {
 
   Future<void> addExpenditure(Expenditure expenditure);
 
-  Future<List<Expenditure>> getLastExpenditures({int howMany});
+  Future<List<Expenditure>> getLastExpenditures({
+    required int howMany,
+  });
 
   Future<void> deleteExpenditureById(int id);
 
@@ -21,10 +23,14 @@ abstract class Api {
   // TOTAL EXPENSES
 
   Future<List<TotalMonthlyExpenses>> getTotalMonthlyExpensesInTimeSpan(
-      DateTime start, DateTime end);
+    DateTime start,
+    DateTime end,
+  );
 
   Future<List<TotalCategoryExpenses>> getTotalCategoryExpensesInTimeSpan(
-      DateTime start, DateTime end);
+    DateTime start,
+    DateTime end,
+  );
 
   // END - TOTAL EXPENSES
 

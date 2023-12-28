@@ -1,7 +1,8 @@
 import 'package:Expenses_app/app/locator.dart';
 import 'package:Expenses_app/services/state_services/categories_service.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
+
+// FIXME Find new icons (flutter_icons is abandoned)
 
 class IconsService {
   static const numberOfIcons = 19;
