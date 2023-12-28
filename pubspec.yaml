@@ -31,7 +31,6 @@ dependencies:
   # ui
   animations: any
   charts_flutter: any
-  flutter_datetime_picker: any
   multi_select_flutter: any
 
   # other

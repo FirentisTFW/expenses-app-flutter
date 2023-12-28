@@ -1,6 +1,5 @@
 import 'package:Expenses_app/ui/dialogs/smart_dialogs/date_filter_dialog_viewmodel.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -76,20 +75,23 @@ class DateFilterDialog extends StatelessWidget {
   void _showDatePickerAndChooseDate(
       BuildContext context, DateFilterDialogViewModel model,
       {bool isFirst = false}) {
-    DatePicker.showDatePicker(
-      context,
-      currentTime: DateTime.now().subtract(Duration(days: 60)),
-      maxTime: DateTime.now(),
-      // FIXME Look into this, there is no DatePickerTheme
-      // theme: DatePickerTheme(
-      //   backgroundColor: Theme.of(context).primaryColor,
-      //   itemHeight: 40,
-      //   itemStyle: TextStyle(color: Colors.white),
-      //   cancelStyle: TextStyle(color: Colors.grey[400], fontSize: 22),
-      //   doneStyle: TextStyle(color: Colors.red[400], fontSize: 22),
-      // ),
-      onConfirm: isFirst ? model.setStartDate : model.setEndDate,
-    );
+    // FIXME Look into this, there is no DatePicker
+
+    throw UnimplementedError('DatePicker is abandonded');
+    // DatePickerDialog(firstDate: firstDate, lastDate: lastDate)
+    // DatePicker.showDatePicker(
+    //   context,
+    //   currentTime: DateTime.now().subtract(Duration(days: 60)),
+    //   maxTime: DateTime.now(),
+    // theme: DatePickerTheme(
+    //   backgroundColor: Theme.of(context).primaryColor,
+    //   itemHeight: 40,
+    //   itemStyle: TextStyle(color: Colors.white),
+    //   cancelStyle: TextStyle(color: Colors.grey[400], fontSize: 22),
+    //   doneStyle: TextStyle(color: Colors.red[400], fontSize: 22),
+    // ),
+    //   onConfirm: isFirst ? model.setStartDate : model.setEndDate,
+    // );
   }
 
   Widget _buildConfirmationButton({
