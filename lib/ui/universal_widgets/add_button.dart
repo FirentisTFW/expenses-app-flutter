@@ -4,7 +4,7 @@ class AddButton extends StatelessWidget {
   final Function onPressed;
   final String text;
 
-  const AddButton({@required this.onPressed, @required this.text});
+  const AddButton({required this.onPressed, required this.text});
 
   @override
   Widget build(BuildContext context) {

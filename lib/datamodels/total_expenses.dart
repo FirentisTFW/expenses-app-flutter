@@ -6,8 +6,8 @@ abstract class TotalExpenses extends Equatable {
   final double totalMoneyAmount;
 
   const TotalExpenses({
-    @required this.name,
-    @required this.totalMoneyAmount,
+    required this.name,
+    required this.totalMoneyAmount,
   });
 
   TotalExpenses.fromJson(Map<String, dynamic> json)
@@ -25,24 +25,26 @@ abstract class TotalExpenses extends Equatable {
 
 class TotalCategoryExpenses extends TotalExpenses {
   const TotalCategoryExpenses({
-    @required String name,
-    @required double totalMoneyAmount,
+    required String name,
+    required double totalMoneyAmount,
   }) : super(
           name: name,
           totalMoneyAmount: totalMoneyAmount,
         );
 
-  TotalCategoryExpenses.fromJson(Map<String, dynamic> json) : super.fromJson(json);
+  TotalCategoryExpenses.fromJson(Map<String, dynamic> json)
+      : super.fromJson(json);
 }
 
 class TotalMonthlyExpenses extends TotalExpenses {
   const TotalMonthlyExpenses({
-    @required String name,
-    @required double totalMoneyAmount,
+    required String name,
+    required double totalMoneyAmount,
   }) : super(
           name: name,
           totalMoneyAmount: totalMoneyAmount,
         );
 
-  TotalMonthlyExpenses.fromJson(Map<String, dynamic> json) : super.fromJson(json);
+  TotalMonthlyExpenses.fromJson(Map<String, dynamic> json)
+      : super.fromJson(json);
 }

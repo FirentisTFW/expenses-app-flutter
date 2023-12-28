@@ -8,9 +8,9 @@ class ExpenditureItem extends StatelessWidget {
 
   const ExpenditureItem({
     Key key,
-    @required this.title,
-    @required this.value,
-    @required this.categoryId,
+    required this.title,
+    required this.value,
+    required this.categoryId,
   }) : super(key: key);
 
   @override

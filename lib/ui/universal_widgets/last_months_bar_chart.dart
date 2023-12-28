@@ -6,7 +6,7 @@ class LastMonthsBarChart extends StatelessWidget {
   final bool animate;
   final List<charts.Series> seriesList;
 
-  LastMonthsBarChart({Key key, this.animate = true, @required this.seriesList})
+  LastMonthsBarChart({Key key, this.animate = true, required this.seriesList})
       : super(key: key);
 
   @override
