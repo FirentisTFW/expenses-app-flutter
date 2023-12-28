@@ -4,10 +4,13 @@ import 'package:flutter/material.dart';
 
 class LastMonthsBarChart extends StatelessWidget {
   final bool animate;
-  final List<charts.Series> seriesList;
+  final List<charts.Series<TotalExpenses, String>> seriesList;
 
-  LastMonthsBarChart({Key key, this.animate = true, required this.seriesList})
-      : super(key: key);
+  LastMonthsBarChart({
+    super.key,
+    this.animate = true,
+    required this.seriesList,
+  });
 
   @override
   Widget build(BuildContext context) => Container(
@@ -22,8 +25,10 @@ class LastMonthsBarChart extends StatelessWidget {
         ),
       );
 
-  factory LastMonthsBarChart.buildFromData(
-      {List<TotalExpenses> initialData, bool animate = true}) {
+  factory LastMonthsBarChart.buildFromData({
+    required List<TotalExpenses> initialData,
+    bool animate = true,
+  }) {
     return LastMonthsBarChart(
       seriesList: _tranformDataToSeriesList(initialData),
       animate: animate,
@@ -45,16 +50,16 @@ class LastMonthsBarChart extends StatelessWidget {
   }
 
   static List<charts.Series<TotalExpenses, String>> _tranformDataToSeriesList(
-      List<TotalExpenses> initialData) {
+    List<TotalExpenses> initialData,
+  ) {
     return [
       charts.Series(
         id: 'Expenses',
         data: initialData,
-        domainFn: (TotalExpenses expenses, _) => expenses.name,
-        measureFn: (TotalExpenses expenses, _) => expenses.totalMoneyAmount,
-        // styling
+        domainFn: (expenses, _) => expenses.name,
+        measureFn: (expenses, _) => expenses.totalMoneyAmount,
         colorFn: (_, __) => charts.MaterialPalette.red.shadeDefault,
-        labelAccessorFn: (TotalExpenses expenses, _) =>
+        labelAccessorFn: (expenses, _) =>
             expenses.totalMoneyAmount.round().toString(),
         insideLabelStyleAccessorFn: (_, __) => charts.TextStyleSpec(
           fontSize: 14,

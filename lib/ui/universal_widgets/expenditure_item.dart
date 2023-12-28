@@ -7,11 +7,11 @@ class ExpenditureItem extends StatelessWidget {
   final int categoryId;
 
   const ExpenditureItem({
-    Key key,
+    super.key,
     required this.title,
     required this.value,
     required this.categoryId,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

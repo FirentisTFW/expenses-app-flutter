@@ -8,16 +8,18 @@ import 'package:stacked_services/stacked_services.dart';
 class ShortListOfExpensesViewModel extends BaseViewModel {
   final _expendituresService = locator<ExpendituresService>();
   final _navigationService = locator<NavigationService>();
-  List<Expenditure> data;
+  List<Expenditure> data = [];
 
-  Future fetchData() async {
+  Future<void> fetchData() async {
     setBusy(true);
     data = await _expendituresService.getLastExpenditures(7);
     setBusy(false);
   }
 
-  Future goToListOfExpensesView() async => await _navigationService
-      .navigateTo(Routes.listOfExpendituresView)
-      .then((_) async => await fetchData());
-  // fecth data after because some expenditures might just have been deleted
+  Future<void> goToListOfExpensesView() async {
+    await _navigationService.navigateTo(Routes.listOfExpendituresView);
+
+    // fecth data after because some expenditures might just have been deleted
+    await fetchData();
+  }
 }

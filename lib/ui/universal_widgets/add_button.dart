@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 
 class AddButton extends StatelessWidget {
-  final Function onPressed;
+  final VoidCallback onPressed;
   final String text;
 
-  const AddButton({required this.onPressed, required this.text});
+  const AddButton({
+    required this.onPressed,
+    required this.text,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 10),
-      child: RaisedButton(
+      child: MaterialButton(
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
         color: Colors.red[400],

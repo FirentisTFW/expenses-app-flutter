@@ -22,7 +22,8 @@ class ShortListOfExpenses extends StatelessWidget {
                     : !model.hasError
                         ? model.data.length > 0
                             ? ListView(
-                                padding: const EdgeInsets.symmetric(vertical: 6),
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 6),
                                 children: model.data
                                     .map((item) => ExpenditureItem(
                                           categoryId: item.categoryId,
@@ -38,7 +39,7 @@ class ShortListOfExpenses extends StatelessWidget {
           ),
         ),
       ),
-      onModelReady: (model) => model.fetchData(),
+      onViewModelReady: (model) => model.fetchData(),
       viewModelBuilder: () => ShortListOfExpensesViewModel(),
     );
   }
@@ -53,13 +54,13 @@ class ShortListOfExpenses extends StatelessWidget {
 }
 
 class _ShowAllButton extends ViewModelWidget<ShortListOfExpensesViewModel> {
-  _ShowAllButton({Key key}) : super(key: key, reactive: false);
+  _ShowAllButton() : super(reactive: false);
 
   Widget build(BuildContext context, ShortListOfExpensesViewModel model) {
     return Container(
       width: double.infinity,
       height: 44,
-      child: RaisedButton(
+      child: MaterialButton(
         shape: _roundedBottomCorners,
         color: Colors.red[400],
         child: Text(

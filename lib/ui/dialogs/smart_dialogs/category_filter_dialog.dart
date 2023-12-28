@@ -9,7 +9,11 @@ class CategoryFilterDialog extends StatelessWidget {
   final DialogRequest dialogRequest;
   final Function(DialogResponse) completer;
 
-  const CategoryFilterDialog({Key key, this.dialogRequest, this.completer}) : super(key: key);
+  const CategoryFilterDialog({
+    super.key,
+    required this.dialogRequest,
+    required this.completer,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +25,12 @@ class CategoryFilterDialog extends StatelessWidget {
               ? LoadingSpinner()
               : !model.hasError
                   ? MultiSelectDialogField(
-                      items: model.data.map((c) => MultiSelectItem(c.id, c.name)).toList(),
+                      items: (model.data ?? [])
+                          .map((c) => MultiSelectItem(c.id, c.name))
+                          .toList(),
                       onConfirm: (values) {
-                        completer(DialogResponse(confirmed: true, responseData: values));
+                        completer(DialogResponse(
+                            confirmed: true, responseData: values));
                       },
                       listType: MultiSelectListType.LIST,
                       buttonText: Text('Wybierz kategorie'),

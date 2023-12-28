@@ -5,7 +5,7 @@ class ChartColorGenerator {
 
   ChartColorGenerator(this._colors);
 
-  charts.Color getColorForChartSlice(dynamic _, int index) => _colors[index];
+  charts.Color getColorForChartSlice(int? index) => _colors[index ?? 0];
 
   factory ChartColorGenerator.buildWithSampleColors() {
     return ChartColorGenerator([

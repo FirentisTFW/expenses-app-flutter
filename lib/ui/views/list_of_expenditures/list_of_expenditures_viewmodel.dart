@@ -10,7 +10,7 @@ class ListOfExpendituresViewModel extends BaseViewModel {
   final _expendituresService = locator<ExpendituresService>();
   final _snackbarService = locator<SnackbarService>();
   final _dialogService = locator<DialogService>();
-  List<Expenditure> _expenditures;
+  List<Expenditure> _expenditures = [];
 
   List<Expenditure> get expenditures => _expenditures;
 
@@ -109,9 +109,9 @@ class ListOfExpendituresViewModel extends BaseViewModel {
       barrierDismissible: true,
     );
 
-    if (response?.responseData != null) {
-      DateTime startDate = response.responseData['startDate'] ?? null;
-      DateTime endDate = response.responseData['endDate'] ?? null;
+    if (response?.responseData case final responseData?) {
+      final startDate = responseData['startDate'] ?? null;
+      final endDate = responseData['endDate'] ?? null;
 
       if (startDate != null && endDate != null) {
         _expenditures =

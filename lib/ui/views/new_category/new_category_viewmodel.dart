@@ -11,19 +11,19 @@ class NewCategoryViewModel extends BaseViewModel {
   var _snackbarService = locator<SnackbarService>();
 
   final formKey = GlobalKey<FormState>();
-  String _categoryName;
+  String? _categoryName;
   int _iconId = 0;
 
-  void setCategoryName(String name) => _categoryName = name;
+  void setCategoryName(String? name) => _categoryName = name;
 
   void setIconId(int id) => _iconId = id;
 
   Future<void> validateAndAddCategory() async {
     setBusy(true);
-    var isValid = formKey.currentState.validate();
+    var isValid = formKey.currentState?.validate() ?? false;
 
     if (isValid) {
-      formKey.currentState.save();
+      formKey.currentState?.save();
       await addCategoryAndShowSnackbar();
     }
     setBusy(false);
@@ -41,8 +41,12 @@ class NewCategoryViewModel extends BaseViewModel {
   }
 
   Future<bool> addCategory() async {
+    final categoryName = _categoryName;
+    if (categoryName == null) throw Exception('Category name must not be null');
+
     var newCategory = Category(
-      name: _categoryName,
+      id: DateTime.now().millisecondsSinceEpoch,
+      name: categoryName,
       iconId: _iconId,
     );
 

@@ -1,18 +1,18 @@
 import 'package:stacked/stacked.dart';
 
 class DateFilterDialogViewModel extends BaseViewModel {
-  DateTime _startDate;
-  DateTime _endDate;
+  DateTime? _startDate;
+  DateTime? _endDate;
 
-  DateTime get startDate => _startDate;
-  DateTime get endDate => _endDate;
+  DateTime? get startDate => _startDate;
+  DateTime? get endDate => _endDate;
 
-  void setStartDate(value) {
+  void setStartDate(DateTime value) {
     _startDate = value;
     notifyListeners();
   }
 
-  void setEndDate(value) {
+  void setEndDate(DateTime value) {
     _endDate = value;
     notifyListeners();
   }

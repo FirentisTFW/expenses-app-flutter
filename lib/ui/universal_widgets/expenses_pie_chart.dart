@@ -8,8 +8,12 @@ class ExpensesPieChart extends StatelessWidget {
   final bool animate;
   final bool legend;
 
-  ExpensesPieChart({Key key, this.animate, this.seriesList, this.legend})
-      : super(key: key);
+  ExpensesPieChart({
+    super.key,
+    required this.animate,
+    required this.seriesList,
+    required this.legend,
+  });
 
   @override
   Widget build(BuildContext context) => Container(
@@ -23,10 +27,11 @@ class ExpensesPieChart extends StatelessWidget {
         ),
       );
 
-  factory ExpensesPieChart.buildFromData(
-      {List<TotalCategoryExpenses> initialData,
-      bool animate = true,
-      legend = false}) {
+  factory ExpensesPieChart.buildFromData({
+    required List<TotalCategoryExpenses> initialData,
+    bool animate = true,
+    legend = false,
+  }) {
     return ExpensesPieChart(
       seriesList: _tranformDataToSeriesList(initialData),
       animate: animate,
@@ -43,7 +48,7 @@ class ExpensesPieChart extends StatelessWidget {
         data: initialData,
         domainFn: (TotalExpenses expenses, _) => expenses.name,
         measureFn: (TotalExpenses expenses, _) => expenses.totalMoneyAmount,
-        colorFn: colorGenerator.getColorForChartSlice,
+        colorFn: (_, index) => colorGenerator.getColorForChartSlice(index),
         outsideLabelStyleAccessorFn: (_, __) =>
             charts.TextStyleSpec(color: charts.MaterialPalette.white),
         insideLabelStyleAccessorFn: (_, __) =>
@@ -64,7 +69,7 @@ class ExpensesPieChart extends StatelessWidget {
           cellPadding: EdgeInsets.only(right: 4.0, bottom: 4.0),
           showMeasures: true,
           legendDefaultMeasure: charts.LegendDefaultMeasure.firstValue,
-          measureFormatter: (num value) =>
+          measureFormatter: (value) =>
               value == null ? '-' : '-   ' + value.toStringAsFixed(2),
         ),
       ];

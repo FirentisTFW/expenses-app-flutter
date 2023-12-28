@@ -1,15 +1,15 @@
 import 'package:Expenses_app/ui/universal_widgets/loading_spinner.dart';
+import 'package:Expenses_app/ui/views/last_expenditures/last_expenditures_view.dart';
+import 'package:Expenses_app/ui/views/this_month_chart/this_month_chart_view.dart';
 import 'package:Expenses_app/ui/views/trends/trends_view.dart';
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
-import 'package:Expenses_app/ui/views/last_expenditures/last_expenditures_view.dart';
-import 'package:Expenses_app/ui/views/this_month_chart/this_month_chart_view.dart';
 import 'home_viewmodel.dart';
 
 class HomeView extends StatelessWidget {
-  const HomeView({Key key}) : super(key: key);
+  const HomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +55,7 @@ class HomeView extends StatelessWidget {
           ],
         ),
       ),
-      onModelReady: (model) => model.initialise(),
+      onViewModelReady: (model) => model.initialise(),
       viewModelBuilder: () => HomeViewModel(),
     );
   }

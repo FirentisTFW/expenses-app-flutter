@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
 class NewExpenditureButton extends ViewModelWidget<ThisMonthChartViewModel> {
-  NewExpenditureButton({Key key}) : super(reactive: false);
+  NewExpenditureButton({super.key}) : super(reactive: false);
 
   @override
   Widget build(BuildContext context, ThisMonthChartViewModel model) {
@@ -12,7 +12,8 @@ class NewExpenditureButton extends ViewModelWidget<ThisMonthChartViewModel> {
       padding: const EdgeInsets.symmetric(horizontal: 30),
       margin: const EdgeInsets.only(top: 30),
       child: RaisedButton(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
         color: Colors.red[400],
         child: const Text(
           'Nowy wydatek',

@@ -7,14 +7,18 @@ class PriceFilterDialog extends HookWidget {
   final DialogRequest dialogRequest;
   final Function(DialogResponse) completer;
 
-  const PriceFilterDialog({Key key, this.dialogRequest, this.completer})
-      : super(key: key);
+  const PriceFilterDialog({
+    super.key,
+    required this.dialogRequest,
+    required this.completer,
+  });
 
   @override
   Widget build(BuildContext context) {
     var controllerMin = useTextEditingController();
     var controllerMax = useTextEditingController();
     final _formKey = GlobalKey<FormState>();
+
     return Dialog(
       child: Container(
         padding: const EdgeInsets.all(20),
@@ -26,7 +30,7 @@ class PriceFilterDialog extends HookWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              dialogRequest.title,
+              dialogRequest.title ?? '',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 24,
@@ -51,11 +55,16 @@ class PriceFilterDialog extends HookWidget {
                   ),
                   SizedBox(height: 20),
                   _buildConfirmationButton(onTap: () {
-                    if (_formKey.currentState.validate()) {
-                      completer(DialogResponse(confirmed: true, responseData: {
-                        'min': controllerMin.text,
-                        'max': controllerMax.text,
-                      }));
+                    if (_formKey.currentState?.validate() ?? false) {
+                      completer(
+                        DialogResponse(
+                          confirmed: true,
+                          responseData: {
+                            'min': controllerMin.text,
+                            'max': controllerMax.text,
+                          },
+                        ),
+                      );
                     }
                   }),
                 ],
@@ -78,13 +87,16 @@ class PriceFilterDialog extends HookWidget {
         ),
       );
 
-  Widget _buildConfirmationButton({Function onTap}) => GestureDetector(
+  Widget _buildConfirmationButton({
+    required VoidCallback onTap,
+  }) =>
+      GestureDetector(
         onTap: onTap,
         child: Container(
-          child: dialogRequest.showIconInMainButton
+          child: dialogRequest.showIconInMainButton ?? false
               ? Icon(Icons.check_circle)
               : Text(
-                  dialogRequest.mainButtonTitle,
+                  dialogRequest.mainButtonTitle ?? '',
                   style: TextStyle(
                     fontSize: 20,
                   ),

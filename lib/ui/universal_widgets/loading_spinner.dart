@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 
 class LoadingSpinner extends StatelessWidget {
-  final EdgeInsets padding;
+  final EdgeInsets? padding;
 
-  const LoadingSpinner({this.padding});
+  const LoadingSpinner({
+    this.padding,
+  });
 
   @override
   Widget build(BuildContext context) {
-    if (padding != null) {
+    if (padding case final padding?) {
       return Padding(
         padding: padding,
         child: Center(child: CircularProgressIndicator()),

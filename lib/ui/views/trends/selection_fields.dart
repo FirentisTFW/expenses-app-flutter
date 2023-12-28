@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:stacked/stacked.dart';
 
 class SelectionFields extends ViewModelWidget<TrendsViewModel> {
-  SelectionFields({Key key}) : super(key: key, reactive: false);
+  SelectionFields({super.key}) : super(key: key, reactive: false);
 
   @override
   Widget build(BuildContext context, TrendsViewModel model) {
@@ -31,7 +31,7 @@ class SelectionFields extends ViewModelWidget<TrendsViewModel> {
 }
 
 class _GroupingSelectionField extends ViewModelWidget<TrendsViewModel> {
-  _GroupingSelectionField({Key key}) : super(key: key, reactive: false);
+  _GroupingSelectionField({super.key}) : super(key: key, reactive: false);
 
   @override
   Widget build(BuildContext context, TrendsViewModel model) {
@@ -58,7 +58,7 @@ class _GroupingSelectionField extends ViewModelWidget<TrendsViewModel> {
 
 class _DateSelectionFields extends ViewModelWidget<TrendsViewModel> {
   _DateSelectionFields({
-    Key key,
+    super.key,
   }) : super(key: key, reactive: false);
 
   @override
@@ -97,7 +97,7 @@ class _DateSelectionFields extends ViewModelWidget<TrendsViewModel> {
 
 class _ShowChartButton extends ViewModelWidget<TrendsViewModel> {
   const _ShowChartButton({
-    Key key,
+    super.key,
   }) : super(key: key, reactive: false);
 
   @override

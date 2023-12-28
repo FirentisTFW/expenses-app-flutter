@@ -20,7 +20,7 @@ class LastMonthsExpensesChart extends StatelessWidget {
                   children: [
                     title,
                     LastMonthsBarChart.buildFromData(
-                      initialData: model.data,
+                      initialData: model.data ?? [],
                     ),
                   ],
                 )
