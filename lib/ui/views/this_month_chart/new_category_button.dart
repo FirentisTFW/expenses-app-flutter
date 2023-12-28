@@ -11,7 +11,7 @@ class NewCategoryButton extends ViewModelWidget<ThisMonthChartViewModel> {
       height: 50,
       padding: const EdgeInsets.symmetric(horizontal: 40),
       margin: const EdgeInsets.symmetric(vertical: 30),
-      child: RaisedButton(
+      child: MaterialButton(
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
         color: Colors.red[400],

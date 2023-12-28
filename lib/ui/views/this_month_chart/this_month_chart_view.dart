@@ -14,7 +14,7 @@ class ThisMonthChartView extends StatelessWidget {
     return ViewModelBuilder<ThisMonthChartViewModel>.reactive(
       disposeViewModel: false,
       initialiseSpecialViewModelsOnce: true,
-      onModelReady: (model) => model.fetchData(),
+      onViewModelReady: (model) => model.fetchData(),
       builder: (context, model, child) => Scaffold(
         body: model.isBusy
             ? LoadingSpinner()
@@ -39,7 +39,7 @@ class ThisMonthChartView extends StatelessWidget {
 }
 
 class _ThisMonthExpensesChart extends ViewModelWidget<ThisMonthChartViewModel> {
-  _ThisMonthExpensesChart({super.key}) : super(key: key);
+  const _ThisMonthExpensesChart();
 
   @override
   Widget build(BuildContext context, ThisMonthChartViewModel model) {
@@ -61,7 +61,7 @@ class _ThisMonthExpensesChart extends ViewModelWidget<ThisMonthChartViewModel> {
 
 class _ThisMonthTotalExpensesInfo
     extends ViewModelWidget<ThisMonthChartViewModel> {
-  _ThisMonthTotalExpensesInfo({super.key}) : super(key: key);
+  const _ThisMonthTotalExpensesInfo();
 
   @override
   Widget build(BuildContext context, ThisMonthChartViewModel model) {

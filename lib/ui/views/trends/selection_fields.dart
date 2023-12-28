@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:stacked/stacked.dart';
 
 class SelectionFields extends ViewModelWidget<TrendsViewModel> {
-  SelectionFields({super.key}) : super(key: key, reactive: false);
+  SelectionFields({super.key}) : super(reactive: false);
 
   @override
   Widget build(BuildContext context, TrendsViewModel model) {
@@ -31,14 +31,14 @@ class SelectionFields extends ViewModelWidget<TrendsViewModel> {
 }
 
 class _GroupingSelectionField extends ViewModelWidget<TrendsViewModel> {
-  _GroupingSelectionField({super.key}) : super(key: key, reactive: false);
+  _GroupingSelectionField() : super(reactive: false);
 
   @override
   Widget build(BuildContext context, TrendsViewModel model) {
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
       child: DropdownButtonFormField(
-        value: GroupingMethod.ByCategories,
+        value: model.groupingMethod,
         items: [
           const DropdownMenuItem(
             value: GroupingMethod.ByCategories,
@@ -57,9 +57,7 @@ class _GroupingSelectionField extends ViewModelWidget<TrendsViewModel> {
 }
 
 class _DateSelectionFields extends ViewModelWidget<TrendsViewModel> {
-  _DateSelectionFields({
-    super.key,
-  }) : super(key: key, reactive: false);
+  _DateSelectionFields() : super(reactive: false);
 
   @override
   Widget build(BuildContext context, TrendsViewModel model) {
@@ -72,7 +70,10 @@ class _DateSelectionFields extends ViewModelWidget<TrendsViewModel> {
     );
   }
 
-  buildMonthsList(TrendsViewModel model, {bool firstDate}) {
+  buildMonthsList(
+    TrendsViewModel model, {
+    required bool firstDate,
+  }) {
     final monthsList = model.getMonthsForList();
     final initialValue = firstDate ? monthsList[0] : monthsList[5];
 
@@ -96,9 +97,7 @@ class _DateSelectionFields extends ViewModelWidget<TrendsViewModel> {
 }
 
 class _ShowChartButton extends ViewModelWidget<TrendsViewModel> {
-  const _ShowChartButton({
-    super.key,
-  }) : super(key: key, reactive: false);
+  const _ShowChartButton() : super(reactive: false);
 
   @override
   Widget build(BuildContext context, TrendsViewModel model) {
@@ -107,7 +106,7 @@ class _ShowChartButton extends ViewModelWidget<TrendsViewModel> {
       child: Container(
         height: 40,
         width: double.infinity,
-        child: FlatButton(
+        child: MaterialButton(
           color: Colors.grey[600],
           child: const Text('Pokaż wykres'),
           onPressed: model.saveForm,

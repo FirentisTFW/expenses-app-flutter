@@ -28,7 +28,7 @@ class ExpensesPieChart extends StatelessWidget {
       );
 
   factory ExpensesPieChart.buildFromData({
-    required List<TotalCategoryExpenses> initialData,
+    required List<TotalExpenses> initialData,
     bool animate = true,
     legend = false,
   }) {

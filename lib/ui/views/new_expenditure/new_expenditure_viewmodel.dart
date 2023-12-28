@@ -11,18 +11,18 @@ class NewExpenditureViewModel extends BaseViewModel {
   var _snackbarService = locator<SnackbarService>();
 
   var formKey = GlobalKey<FormState>();
-  String _expenditureName;
-  double _moneyAmount;
-  int _categoryId;
+  String? _expenditureName;
+  double? _moneyAmount;
+  int? _categoryId;
   var _expenditureDate = DateTime.now();
 
   DateTime get expenditureDate => _expenditureDate;
 
   Future<void> validateAndAddExpenditure() async {
     setBusy(true);
-    var isValid = formKey.currentState.validate();
+    var isValid = formKey.currentState?.validate() ?? false;
     if (isValid) {
-      formKey.currentState.save();
+      formKey.currentState?.save();
       await addExpenditureAndShowSnackbar();
     }
     setBusy(false);
@@ -40,11 +40,13 @@ class NewExpenditureViewModel extends BaseViewModel {
   }
 
   Future<bool> addExpenditure() async {
+    // FIXME Do not use forced null checks
     final newExpenditure = Expenditure(
-      name: _expenditureName,
-      categoryId: _categoryId,
+      id: DateTime.now().millisecondsSinceEpoch,
+      name: _expenditureName!,
+      categoryId: _categoryId!,
       date: _expenditureDate,
-      moneyAmount: _moneyAmount,
+      moneyAmount: _moneyAmount!,
     );
 
     try {
@@ -63,7 +65,7 @@ class NewExpenditureViewModel extends BaseViewModel {
   void showSnackbarWithErrorMessage() => _snackbarService.showSnackbar(
       message: modelError.toString(), duration: Duration(seconds: 2));
 
-  void setExpenditureName(String name) => _expenditureName = name;
+  void setExpenditureName(String? name) => _expenditureName = name;
 
   void setMoneyAmount(double amount) => _moneyAmount = amount;
 

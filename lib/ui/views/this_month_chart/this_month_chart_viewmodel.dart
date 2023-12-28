@@ -8,7 +8,7 @@ import 'package:stacked_services/stacked_services.dart';
 class ThisMonthChartViewModel extends BaseViewModel {
   final _totalExpensesService = locator<TotalExpensesService>();
   final _navigationService = locator<NavigationService>();
-  List<TotalCategoryExpenses> data;
+  List<TotalCategoryExpenses> data = [];
 
   Future fetchData() async {
     setBusy(true);
@@ -19,10 +19,12 @@ class ThisMonthChartViewModel extends BaseViewModel {
   String getThisMonthTotalSpending() =>
       _totalExpensesService.getThisMonthTotalSpending().toStringAsFixed(2);
 
-  Future goToNewExpenditureView() async => await _navigationService
-      .navigateTo(Routes.newExpenditureView)
-      .then((_) async => await fetchData());
-  // fecth data after because new expenditure might have just been added
+  Future<void> goToNewExpenditureView() async {
+    await _navigationService.navigateTo(Routes.newExpenditureView);
+
+    // fecth data after because new expenditure might have just been added
+    await fetchData();
+  }
 
   Future goToNewCategoryView() async =>
       await _navigationService.navigateTo(Routes.newCategoryView);

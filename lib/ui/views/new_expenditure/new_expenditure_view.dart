@@ -67,14 +67,19 @@ class _AmountInput extends ViewModelWidget<NewExpenditureViewModel> {
         keyboardType: TextInputType.number,
         validator: Validator.vaidateForNonNegativeDouble,
         textInputAction: TextInputAction.next,
-        onSaved: (value) => model.setMoneyAmount(double.parse(value)),
+        onSaved: (value) {
+          final parsedValue = double.tryParse(value ?? '');
+          if (parsedValue == null) return;
+
+          model.setMoneyAmount(parsedValue);
+        },
       ),
     );
   }
 }
 
 class _CategorySelection extends StatelessWidget {
-  final Function(int) onSaved;
+  final void Function(int) onSaved;
 
   _CategorySelection(this.onSaved);
 
@@ -86,8 +91,8 @@ class _CategorySelection extends StatelessWidget {
         child: model.isBusy
             ? LoadingSpinner()
             : DropdownButtonFormField(
-                value: model.data.first.id,
-                items: model.data
+                value: model.data!.first.id,
+                items: model.data!
                     .map(
                       (category) => DropdownMenuItem(
                         value: category.id,
@@ -100,7 +105,10 @@ class _CategorySelection extends StatelessWidget {
                       milliseconds: 300,
                     ),
                     () => FocusScope.of(context).unfocus()),
-                onSaved: onSaved,
+                onSaved: (id) {
+                  if (id == null) return;
+                  onSaved(id);
+                },
               ),
       ),
       viewModelBuilder: () => CategoriesViewModel(),
@@ -113,19 +121,21 @@ class _DateSelection extends ViewModelWidget<NewExpenditureViewModel> {
   Widget build(BuildContext context, NewExpenditureViewModel model) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 20),
-      child: FlatButton(
-        child: Text('Data: ' + DateFormat('yMd').format(model.expenditureDate), style: TextStyle(fontSize: 20)),
+      child: MaterialButton(
+        child: Text('Data: ' + DateFormat('yMd').format(model.expenditureDate),
+            style: TextStyle(fontSize: 20)),
         onPressed: () => DatePicker.showDatePicker(
           context,
           currentTime: model.expenditureDate ?? DateTime.now(),
           maxTime: DateTime.now(),
-          theme: DatePickerTheme(
-            backgroundColor: Theme.of(context).primaryColor,
-            itemHeight: 40,
-            itemStyle: TextStyle(color: Colors.white),
-            cancelStyle: TextStyle(color: Colors.grey[400], fontSize: 22),
-            doneStyle: TextStyle(color: Colors.red[400], fontSize: 22),
-          ),
+          // FIXME Find a new way to apply this
+          // theme: DatePickerTheme(
+          //   backgroundColor: Theme.of(context).primaryColor,
+          //   itemHeight: 40,
+          //   itemStyle: TextStyle(color: Colors.white),
+          //   cancelStyle: TextStyle(color: Colors.grey[400], fontSize: 22),
+          //   doneStyle: TextStyle(color: Colors.red[400], fontSize: 22),
+          // ),
           onConfirm: model.setExpenditureDate,
         ),
       ),

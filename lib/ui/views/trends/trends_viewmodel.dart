@@ -9,15 +9,16 @@ import 'package:stacked/stacked.dart';
 class TrendsViewModel extends BaseViewModel {
   final _totalExpensesService = locator<TotalExpensesService>();
 
-  List<TotalExpenses> _data;
+  List<TotalExpenses> _data = [];
   double _totalDataAmount = 0.0;
 
   final formKey = GlobalKey<FormState>();
-  GroupingMethod _groupingMethod;
-  DateTime _firstDate;
-  DateTime _secondDate;
+  GroupingMethod _groupingMethod = GroupingMethod.ByCategories;
+  late DateTime _firstDate = getMonthsForList()[0];
+  late DateTime _secondDate = getMonthsForList()[5];
 
-  bool get isDataFetched => _data != null;
+  // FIXME Verify this
+  bool get isDataFetched => _data.isNotEmpty;
   List<TotalExpenses> get data => _data;
   List<TotalExpenses> get dataSortedByAmout {
     final data = _data;
@@ -32,7 +33,7 @@ class TrendsViewModel extends BaseViewModel {
   List<DateTime> getMonthsForList() => DateService.getMonthsWithYearsFrom(2019);
 
   Future saveForm() async {
-    formKey.currentState.save();
+    formKey.currentState?.save();
     _swapDatesIfNeeded();
     _setSecondDateToLastDayOfMonth();
     await _setBusyAndFetchData();
@@ -58,8 +59,12 @@ class TrendsViewModel extends BaseViewModel {
 
   Future<void> _fetchMonthlyExpenses() async {
     try {
-      _data = await _totalExpensesService.getTotalMonthlyExpensesInTimeSpan(_firstDate, _secondDate);
-      _totalDataAmount = _data.map((element) => element.totalMoneyAmount).toList().fold(0, (p, e) => p + e);
+      _data = await _totalExpensesService.getTotalMonthlyExpensesInTimeSpan(
+          _firstDate, _secondDate);
+      _totalDataAmount = _data
+          .map((element) => element.totalMoneyAmount)
+          .toList()
+          .fold(0, (p, e) => p + e);
     } catch (err) {
       setError(err);
     }
@@ -67,8 +72,12 @@ class TrendsViewModel extends BaseViewModel {
 
   Future<void> _fetchCategoryExpenses() async {
     try {
-      _data = await _totalExpensesService.getTotalCategoryExpensesInTimeSpan(_firstDate, _secondDate);
-      _totalDataAmount = _data.map((element) => element.totalMoneyAmount).toList().fold(0, (p, e) => p + e);
+      _data = await _totalExpensesService.getTotalCategoryExpensesInTimeSpan(
+          _firstDate, _secondDate);
+      _totalDataAmount = _data
+          .map((element) => element.totalMoneyAmount)
+          .toList()
+          .fold(0, (p, e) => p + e);
     } catch (err) {
       setError(err);
     }
@@ -88,5 +97,6 @@ class TrendsViewModel extends BaseViewModel {
     }
   }
 
-  void _setSecondDateToLastDayOfMonth() => _secondDate = DateService.getLastDayAndSecondOfTheMonth(_secondDate);
+  void _setSecondDateToLastDayOfMonth() =>
+      _secondDate = DateService.getLastDayAndSecondOfTheMonth(_secondDate);
 }
