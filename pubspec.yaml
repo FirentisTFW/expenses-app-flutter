@@ -11,6 +11,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
 
   # icons
   cupertino_icons: any
@@ -30,7 +32,7 @@ dependencies:
 
   # ui
   animations: any
-  charts_flutter: any
+  community_charts_flutter: ^1.0.2
   multi_select_flutter: any
 
   # other

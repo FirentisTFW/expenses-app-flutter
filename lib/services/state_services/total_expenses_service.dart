@@ -18,7 +18,7 @@ class TotalExpensesService {
     DateTime endDate = DateTime.now();
     // set startDate to last day and last second $howMany months before
     DateTime startDate = DateService.getLastDayAndSecondOfTheMonth(
-      Jiffy(endDate).subtract(months: howMany).dateTime,
+      Jiffy.parseFromDateTime(endDate).subtract(months: howMany).dateTime,
     );
     // set startDate to first day and first second of next month so you have $howMany full months
     startDate = startDate.add(Duration(milliseconds: 1));

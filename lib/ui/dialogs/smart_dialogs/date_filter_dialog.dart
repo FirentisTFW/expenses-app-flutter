@@ -73,8 +73,10 @@ class DateFilterDialog extends StatelessWidget {
       );
 
   void _showDatePickerAndChooseDate(
-      BuildContext context, DateFilterDialogViewModel model,
-      {bool isFirst = false}) {
+    BuildContext context,
+    DateFilterDialogViewModel model, {
+    bool isFirst = false,
+  }) {
     // FIXME Look into this, there is no DatePicker
 
     throw UnimplementedError('DatePicker is abandonded');
