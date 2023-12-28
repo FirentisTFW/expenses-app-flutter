@@ -66,9 +66,9 @@ class _ThisMonthTotalExpensesInfo
   @override
   Widget build(BuildContext context, ThisMonthChartViewModel model) {
     return Container(
-      height: 80,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisSize: MainAxisSize.min,
         children: [
           Text(
             model.getThisMonthTotalSpending(),
