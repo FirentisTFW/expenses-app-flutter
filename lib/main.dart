@@ -1,7 +1,7 @@
 import 'package:Expenses_app/app/locator.dart';
 import 'package:Expenses_app/app/routing.dart';
 import 'package:Expenses_app/app/supported_locales.dart';
-import 'package:Expenses_app/src/l10n/output/app_localizations.dart';
+import 'package:Expenses_app/l10n/output/app_localizations.dart';
 import 'package:Expenses_app/ui/setup/custom_dialog_setup.dart';
 import 'package:Expenses_app/ui/setup/themes_setup.dart';
 import 'package:flutter/material.dart';
