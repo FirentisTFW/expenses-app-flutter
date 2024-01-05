@@ -29,8 +29,12 @@ class CategoryFilterDialog extends StatelessWidget {
                           .map((c) => MultiSelectItem(c.id, c.name))
                           .toList(),
                       onConfirm: (values) {
-                        completer(DialogResponse(
-                            confirmed: true, responseData: values));
+                        completer(
+                          DialogResponse(
+                            confirmed: true,
+                            data: values,
+                          ),
+                        );
                       },
                       listType: MultiSelectListType.LIST,
                       buttonText: Text('Wybierz kategorie'),

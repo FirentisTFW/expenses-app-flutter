@@ -1,4 +1,6 @@
+import 'package:Expenses_app/ui/dialogs/dialog_utils.dart';
 import 'package:Expenses_app/ui/dialogs/smart_dialogs/date_filter_dialog_viewmodel.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:stacked/stacked.dart';
@@ -35,12 +37,15 @@ class DateFilterDialog extends StatelessWidget {
                 ),
               ),
               _buildConfirmationButton(
-                onTap: () => completer(DialogResponse(
+                onTap: () => completer(
+                  DialogResponse(
                     confirmed: true,
-                    responseData: {
+                    data: {
                       'startDate': model.startDate,
                       'endDate': model.endDate
-                    })),
+                    },
+                  ),
+                ),
               ),
             ],
           ),
@@ -77,23 +82,19 @@ class DateFilterDialog extends StatelessWidget {
     DateFilterDialogViewModel model, {
     bool isFirst = false,
   }) {
-    // FIXME Look into this, there is no DatePicker
+    final currentDate = DateTime.now();
 
-    throw UnimplementedError('DatePicker is abandonded');
-    // DatePickerDialog(firstDate: firstDate, lastDate: lastDate)
-    // DatePicker.showDatePicker(
-    //   context,
-    //   currentTime: DateTime.now().subtract(Duration(days: 60)),
-    //   maxTime: DateTime.now(),
-    // theme: DatePickerTheme(
-    //   backgroundColor: Theme.of(context).primaryColor,
-    //   itemHeight: 40,
-    //   itemStyle: TextStyle(color: Colors.white),
-    //   cancelStyle: TextStyle(color: Colors.grey[400], fontSize: 22),
-    //   doneStyle: TextStyle(color: Colors.red[400], fontSize: 22),
-    // ),
-    //   onConfirm: isFirst ? model.setStartDate : model.setEndDate,
-    // );
+    DialogUtils.showModalPopup(
+      context,
+      CupertinoDatePicker(
+        initialDateTime: currentDate,
+        maximumDate: currentDate,
+        maximumYear: currentDate.year,
+        mode: CupertinoDatePickerMode.date,
+        showDayOfWeek: true,
+        onDateTimeChanged: isFirst ? model.setStartDate : model.setEndDate,
+      ),
+    );
   }
 
   Widget _buildConfirmationButton({

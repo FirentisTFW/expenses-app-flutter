@@ -59,7 +59,7 @@ class PriceFilterDialog extends HookWidget {
                       completer(
                         DialogResponse(
                           confirmed: true,
-                          responseData: {
+                          data: {
                             'min': controllerMin.text,
                             'max': controllerMax.text,
                           },

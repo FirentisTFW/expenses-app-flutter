@@ -79,8 +79,8 @@ class ListOfExpendituresViewModel extends BaseViewModel {
     );
 
     if (response != null && response.confirmed) {
-      double minPrice = double.parse(response.responseData['min']);
-      double maxPrice = double.parse(response.responseData['max']);
+      double minPrice = double.parse(response.data['min']);
+      double maxPrice = double.parse(response.data['max']);
 
       _expenditures =
           _expendituresService.getExpendituresByPrice(minPrice, maxPrice);
@@ -96,8 +96,8 @@ class ListOfExpendituresViewModel extends BaseViewModel {
     );
 
     if (response != null && response.confirmed) {
-      _expenditures = _expendituresService
-          .getExpendituresByCategories(response.responseData);
+      _expenditures =
+          _expendituresService.getExpendituresByCategories(response.data);
     }
   }
 
@@ -109,7 +109,7 @@ class ListOfExpendituresViewModel extends BaseViewModel {
       barrierDismissible: true,
     );
 
-    if (response?.responseData case final responseData?) {
+    if (response?.data case final responseData?) {
       final startDate = responseData['startDate'] ?? null;
       final endDate = responseData['endDate'] ?? null;
 
