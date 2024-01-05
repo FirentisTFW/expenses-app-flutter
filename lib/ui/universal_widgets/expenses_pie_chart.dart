@@ -5,7 +5,7 @@ import 'package:community_charts_flutter/community_charts_flutter.dart'
 import 'package:flutter/material.dart';
 
 class ExpensesPieChart extends StatelessWidget {
-  final List<charts.Series> seriesList;
+  final List<charts.Series<TotalExpenses, String>> seriesList;
   final bool animate;
   final bool legend;
 
@@ -20,7 +20,7 @@ class ExpensesPieChart extends StatelessWidget {
   Widget build(BuildContext context) => Container(
         height: _getHeight(),
         padding: const EdgeInsets.all(20),
-        child: charts.PieChart(
+        child: charts.PieChart<String>(
           seriesList,
           animate: animate,
           defaultRenderer: legend ? null : _defaultRenderer,
@@ -64,7 +64,7 @@ class ExpensesPieChart extends StatelessWidget {
       legend ? 350.0 + seriesList[0].data.length * 20.0 : 350.0;
 
   _showLegend() => [
-        charts.DatumLegend(
+        charts.DatumLegend<String>(
           position: charts.BehaviorPosition.bottom,
           horizontalFirst: false,
           cellPadding: EdgeInsets.only(right: 4.0, bottom: 4.0),
@@ -75,7 +75,8 @@ class ExpensesPieChart extends StatelessWidget {
         ),
       ];
 
-  final _defaultRenderer = charts.ArcRendererConfig(arcRendererDecorators: [
-    charts.ArcLabelDecorator(labelPosition: charts.ArcLabelPosition.auto)
-  ]);
+  final _defaultRenderer = charts.ArcRendererConfig<String>(
+      arcRendererDecorators: [
+        charts.ArcLabelDecorator(labelPosition: charts.ArcLabelPosition.auto)
+      ]);
 }
