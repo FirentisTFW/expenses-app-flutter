@@ -65,7 +65,10 @@ class _IconSelection extends ViewModelWidget<NewCategoryViewModel> {
                   child: CircleAvatar(
                     maxRadius: 20,
                     backgroundColor: Colors.yellow[400],
-                    child: IconsService.getIconForId(i),
+                    child: Icon(
+                      IconsService.getIconForId(i),
+                      color: Colors.black,
+                    ),
                   )),
             }.toList()
         ],
