@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Expenses',
       theme: CustomTheme.getTheme(),
-      navigatorKey: locator<NavigationService>().navigatorKey,
+      navigatorKey: StackedService.navigatorKey,
       initialRoute: Routing.home,
       localizationsDelegates: L10n.localizationsDelegates,
       supportedLocales: AppLocales.supportedLocales,

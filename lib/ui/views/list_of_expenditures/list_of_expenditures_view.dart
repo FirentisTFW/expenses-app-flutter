@@ -34,7 +34,7 @@ class ListOfExpendituresView extends StatelessWidget {
                   : ErrorInfo(model.modelError.toString()),
         ),
       ),
-      onModelReady: (model) => model.fetchData(),
+      onViewModelReady: (model) => model.fetchData(),
       viewModelBuilder: () => ListOfExpendituresViewModel(),
     );
   }

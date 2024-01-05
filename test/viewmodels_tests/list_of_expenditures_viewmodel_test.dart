@@ -47,11 +47,10 @@ void main() {
           mainButtonTitle: 'Filter',
           variant: DialogType.PriceFilter,
           barrierDismissible: true,
-        )).thenAnswer(
-            (_) async => DialogResponse(confirmed: true, responseData: {
-                  'min': '10.00',
-                  'max': '50.00',
-                }));
+        )).thenAnswer((_) async => DialogResponse(confirmed: true, data: {
+              'min': '10.00',
+              'max': '50.00',
+            }));
 
         await model.showPriceFilterDialog();
         verify(_expendituresService.getExpendituresByPrice(10.00, 50.00));
@@ -88,8 +87,8 @@ void main() {
           mainButtonTitle: 'Filter',
           variant: DialogType.CategoryFilter,
           barrierDismissible: true,
-        )).thenAnswer((_) async =>
-            DialogResponse(confirmed: true, responseData: [1, 2, 3]));
+        )).thenAnswer(
+            (_) async => DialogResponse(confirmed: true, data: [1, 2, 3]));
 
         await model.showCategoryFilterDialog();
         verify(_expendituresService.getExpendituresByCategories([1, 2, 3]));
@@ -126,11 +125,10 @@ void main() {
           mainButtonTitle: 'Filter',
           variant: DialogType.DateFilter,
           barrierDismissible: true,
-        )).thenAnswer(
-            (_) async => DialogResponse(confirmed: true, responseData: {
-                  'startDate': DateTime(2020, 10, 10),
-                  'endDate': DateTime(2020, 12, 10),
-                }));
+        )).thenAnswer((_) async => DialogResponse(confirmed: true, data: {
+              'startDate': DateTime(2020, 10, 10),
+              'endDate': DateTime(2020, 12, 10),
+            }));
 
         await model.showDateFilterDialog();
         verify(_expendituresService.getExpendituresByDate(

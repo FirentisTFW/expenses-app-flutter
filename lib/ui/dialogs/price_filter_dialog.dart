@@ -23,7 +23,7 @@ class PriceFilterDialog extends HookWidget {
       child: Container(
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
-          color: Theme.of(context).backgroundColor,
+          color: Theme.of(context).colorScheme.background,
           borderRadius: BorderRadius.circular(10),
         ),
         child: Column(
