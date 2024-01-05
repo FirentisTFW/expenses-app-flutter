@@ -1,15 +1,14 @@
 import 'package:Expenses_app/services/functional_services/validator.dart';
+import 'package:Expenses_app/ui/dialogs/dialog_utils.dart';
 import 'package:Expenses_app/ui/universal_viewmodels/category_filter_dialog_viewmodel.dart';
 import 'package:Expenses_app/ui/universal_widgets/add_button.dart';
 import 'package:Expenses_app/ui/universal_widgets/loading_spinner.dart';
 import 'package:Expenses_app/ui/views/new_expenditure/new_expenditure_viewmodel.dart';
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:stacked/stacked.dart';
 
-@RoutePage()
 class NewExpenditureView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -127,14 +126,15 @@ class _DateSelection extends ViewModelWidget<NewExpenditureViewModel> {
         child: Text('Data: ' + DateFormat('yMd').format(model.expenditureDate),
             style: TextStyle(fontSize: 20)),
         onPressed: () {
-          // FIXME Refactor this
+          final currentDate = DateTime.now();
 
-          _showDialog(
+          DialogUtils.showModalPopup(
             context,
             CupertinoDatePicker(
-              initialDateTime: DateTime.now(),
+              initialDateTime: currentDate,
+              maximumDate: currentDate,
+              maximumYear: currentDate.year,
               mode: CupertinoDatePickerMode.date,
-              use24hFormat: true,
               showDayOfWeek: true,
               onDateTimeChanged: model.setExpenditureDate,
             ),
@@ -143,30 +143,6 @@ class _DateSelection extends ViewModelWidget<NewExpenditureViewModel> {
       ),
     );
   }
-}
-
-// This function displays a CupertinoModalPopup with a reasonable fixed height
-// which hosts CupertinoDatePicker.
-void _showDialog(BuildContext context, Widget child) {
-  showCupertinoModalPopup<void>(
-    context: context,
-    builder: (BuildContext context) => Container(
-      height: 216,
-      padding: const EdgeInsets.only(top: 6.0),
-      // The Bottom margin is provided to align the popup above the system
-      // navigation bar.
-      margin: EdgeInsets.only(
-        bottom: MediaQuery.of(context).viewInsets.bottom,
-      ),
-      // Provide a background color for the popup.
-      color: CupertinoColors.systemBackground.resolveFrom(context),
-      // Use a SafeArea widget to avoid system overlaps.
-      child: SafeArea(
-        top: false,
-        child: child,
-      ),
-    ),
-  );
 }
 
 class _AddExpenditureButton extends ViewModelWidget<NewExpenditureViewModel> {

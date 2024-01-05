@@ -36,14 +36,12 @@ dependencies:
   multi_select_flutter: any
 
   # other
-  auto_route: any
   intl: any
   jiffy: any
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  auto_route_generator: null
   build_runner: null
   mockito: null
 

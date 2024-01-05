@@ -5,11 +5,9 @@ import 'package:Expenses_app/ui/universal_widgets/last_months_bar_chart.dart';
 import 'package:Expenses_app/ui/universal_widgets/loading_spinner.dart';
 import 'package:Expenses_app/ui/views/trends/selection_fields.dart';
 import 'package:Expenses_app/ui/views/trends/trends_viewmodel.dart';
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
-@RoutePage()
 class TrendsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -49,23 +47,16 @@ class TrendsChart extends ViewModelWidget<TrendsViewModel> {
   }
 
   Widget _buildChart(TrendsViewModel model) {
-    Widget child;
-
-    switch (model.groupingMethod) {
-      case GroupingMethod.ByMonths:
-        child = LastMonthsBarChart.buildFromData(
+    final child = switch (model.groupingMethod) {
+      GroupingMethod.ByMonths => LastMonthsBarChart.buildFromData(
           initialData: model.data,
-        );
-        break;
-      case GroupingMethod.ByCategories:
-        child = ExpensesPieChart.buildFromData(
+        ),
+      GroupingMethod.ByCategories => ExpensesPieChart.buildFromData(
           initialData: model.dataSortedByAmout,
           legend: true,
-        );
-        break;
-      default:
-        child = const SizedBox.shrink();
-    }
+        ),
+    };
+
     return SingleChildScrollView(
       child: Column(
         children: [

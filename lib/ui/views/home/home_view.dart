@@ -3,13 +3,11 @@ import 'package:Expenses_app/ui/views/last_expenditures/last_expenditures_view.d
 import 'package:Expenses_app/ui/views/this_month_chart/this_month_chart_view.dart';
 import 'package:Expenses_app/ui/views/trends/trends_view.dart';
 import 'package:animations/animations.dart';
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
 import 'home_viewmodel.dart';
 
-@RoutePage()
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
 
